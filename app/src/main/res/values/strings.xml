@@ -1,8 +1,20 @@
 <resources>
-    <string name="app_name">EMT_AD</string>
+    <string name="app_name">Eres mi tipo</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_name_prompt">Name:</string>
+    <string name="about">Acerca de</string>
+    <string name="logout">Logout</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="about_headline">Company History</string>
+    <string name="about_text">In 2006, H+ Sport founder Henry Twill set out to create supplements and nutritional products made from the purest ingredients and backed by scientific and performance data – to provide a strong basis of trust and accountability. His quest began while training for his first 5K marathon, after recovering from a lengthy injury that left him with residual aches, pains, and decreased athletic performance. He was disheartened by the vast array of supplements and nutritional products on the market that subsisted of lofty claims, and little proof of those claims. He yearned for simple and natural ingredients, in their purest form, instead of labels with lengthy chemical names and disclaimers. He also cared immensely for the environment, and wanted to find products that were responsibly sourced. When no products lived up to his strict requirements, Henry set his sights on creating products that catered to his own vision. Today that vision has become H+ Sport…offering a variety of supplements, energy bars, rehydration solutions, and active wear that complement active lifestyles. At the foundation of H+ Sports are products backed by scientific and performance data, that have been created using natural and renewable resources. H+ Sport is dedicated to creating eco-friendly, high-quality, nutrient-rich, nutritional products that enhance active lifestyles. In addition, our H+ Sport Active clothing line is made to be functional, stylish, comfortable, and durable, using all natural and organic fibers.</string>
+    <string name="title_activity_about">Acerca de</string>
+    <string name="title_activity_arequirements">Requisitos</string>
+    <string name="section_requirements_format">Para donar necesitas: %1$d</string>
+    <string name="reqDescription1">Tener entre 18 y 65 años</string>
+    <string name="reqDescription2">Identificación oficial reciente con fotografía</string>
+    <string name="reqDescription3">Hacer ayuno mayor a 4 hrs y menor a 12 hrs</string>
+    <string name="title_activity_informacion">Informacion</string>
+    <string name="title_activity_nac_test">NacTest</string>
+    <string name="title_activity_nacimiento_test">NacimientoTest</string>
+    <string name="hello_blank_fragment">Hello Blank Fragment</string>
 </resources>
