@@ -1,5 +1,7 @@
 package mx.iteso.sergio.emt_ad;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -81,18 +83,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_profile:
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                return true;
+            case R.id.action_info:
+                Intent intent = new Intent(this, InfoActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_map:
+
+                return true;
+            case R.id.action_about:
+                Intent intent2 = new Intent(this, InfoActivity.class);
+                startActivity(intent2);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public void noClicked(View view) {
         // Kabloey
