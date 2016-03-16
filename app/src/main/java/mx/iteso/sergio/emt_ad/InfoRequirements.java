@@ -64,6 +64,7 @@ public class InfoRequirements extends AppCompatActivity {
 
     }
 
+/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,6 +87,7 @@ public class InfoRequirements extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+*/
 
 
 
@@ -103,26 +105,50 @@ public class InfoRequirements extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return new Req1();
+
+            switch (position){
+                case 0:
+                    return new Req1();
+                case 1:
+                    return new Req2();
+                case 2:
+                    return new Req3();
+                case 3:
+                    return new Req4();
+                case 4:
+                    return new Req5();
+                case 5:
+                    return new Req6();
+                default:
+                    return new Req1();
+            }
+
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 6;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
+            return "Para donar necesitas";
+            /*switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Para donar necesitas";
                 case 1:
-                    return "SECTION 2";
+                    return "Para donar necesitas";
                 case 2:
-                    return "SECTION 3";
-            }
-            return null;
+                    return "Para donar necesitas";
+                case 3:
+                    return "Para donar necesitas";
+                case 4:
+                    return "Para donar necesitas";
+                case 5:
+                    return "Para donar necesitas";
+            }*/
+            //return null;
         }
     }
 }
