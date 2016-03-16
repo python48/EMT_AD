@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.action_about:
-                Intent intent2 = new Intent(this, InfoActivity.class);
+                Intent intent2 = new Intent(this, AboutActivity.class);
                 startActivity(intent2);
                 return true;
         }
@@ -328,11 +328,11 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Perfil";
                 case 1:
-                    return "SECTION 2";
+                    return "Test";
                 case 2:
-                    return "SECTION 3";
+                    return "Análisis";
             }
             return null;
         }

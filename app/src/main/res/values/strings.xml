@@ -18,10 +18,10 @@
     <string name="reqDescription2">Identificación oficial reciente con fotografía</string>
     <string name="reqDescription3">Hacer ayuno mayor a 4 hrs y menor a 12 hrs</string>
     <string name="title_activity_informacion">Informacion</string>
-    <string name="title_activity_nac_test">NacTest</string>
-    <string name="title_activity_nacimiento_test">NacimientoTest</string>
+    <string name="title_activity_nac_test">Fecha de nacimiento</string>
+    <string name="title_activity_nacimiento_test">Fecha de nacimiento</string>
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
-    <string name="title_activity_info">InfoActivity</string>
-    <string name="title_activity_requirements">RequirementsActivity</string>
+    <string name="title_activity_info">Información</string>
+    <string name="title_activity_requirements">Requisitos</string>
     <string name="section_format">Hello World from section: %1$d</string>
 </resources>

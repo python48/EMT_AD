@@ -10,12 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class InfoActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
+        setContentView(R.layout.activity_about);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -30,13 +30,14 @@ public class InfoActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -64,18 +65,4 @@ public class InfoActivity extends AppCompatActivity {
 
 
 
-
-    public void req_click(View view) {
-        Intent intent1 = new Intent(this, InfoRequirements.class);
-        startActivity(intent1);
-    }
-
-    public void res_click(View view) {
-    }
-
-    public void proc_click(View view) {
-    }
-
-    public void benef_click(View view) {
-    }
 }
