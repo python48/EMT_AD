@@ -24,4 +24,5 @@
     <string name="title_activity_info">Información</string>
     <string name="title_activity_requirements">Requisitos</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_maps">Busca tu centro más cercano</string>
 </resources>

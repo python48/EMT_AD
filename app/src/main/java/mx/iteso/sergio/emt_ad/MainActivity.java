@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_map:
-
+                Intent intent3 = new Intent(this, MapsActivity.class);
+                startActivity(intent3);
                 return true;
             case R.id.action_about:
                 Intent intent2 = new Intent(this, AboutActivity.class);
