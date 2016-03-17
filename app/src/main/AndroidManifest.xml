@@ -57,7 +57,16 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".InfoRestrictions"
+            android:label="@string/title_activity_info_restrictions"
+            android:parentActivityName=".InfoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mx.iteso.sergio.emt_ad.InfoActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package mx.iteso.sergio.emt_ad;
 
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class InfoRequirements extends AppCompatActivity {
+public class InfoRestrictions extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -39,7 +38,7 @@ public class InfoRequirements extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requirements);
+        setContentView(R.layout.activity_info_restrictions);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,12 +63,11 @@ public class InfoRequirements extends AppCompatActivity {
 
     }
 
-/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_requirements, menu);
+        getMenuInflater().inflate(R.menu.menu_info_restrictions, menu);
         return true;
     }
 
@@ -87,9 +85,6 @@ public class InfoRequirements extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-*/
-
-
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -133,7 +128,7 @@ public class InfoRequirements extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Para donar necesitas";
+            return "No donar si...";
             /*switch (position) {
                 case 0:
                     return "Para donar necesitas";

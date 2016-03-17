@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     public void noClicked(View view) {
         // Kabloey
         switch (currentState) {

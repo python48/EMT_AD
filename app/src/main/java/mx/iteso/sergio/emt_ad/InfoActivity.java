@@ -72,6 +72,8 @@ public class InfoActivity extends AppCompatActivity {
     }
 
     public void res_click(View view) {
+        Intent intent = new Intent(this, InfoRestrictions.class);
+        startActivity(intent);
     }
 
     public void proc_click(View view) {
