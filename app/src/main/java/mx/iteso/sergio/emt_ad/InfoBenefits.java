@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class InfoRestrictions extends AppCompatActivity {
+public class InfoBenefits extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -38,11 +38,10 @@ public class InfoRestrictions extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_restrictions);
+        setContentView(R.layout.activity_info_benefits);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -64,27 +63,6 @@ public class InfoRestrictions extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_info_restrictions, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -103,46 +81,31 @@ public class InfoRestrictions extends AppCompatActivity {
 
             switch (position){
                 case 0:
-                    return new Res1();
+                    return new Ben1();
                 case 1:
-                    return new Res2();
+                    return new Req2();
                 case 2:
-                    return new Res3();
+                    return new Req3();
                 case 3:
-                    return new Res4();
+                    return new Req4();
                 case 4:
-                    return new Res5();
+                    return new Req5();
+
                 default:
-                    return new Res1();
+                    return new Req1();
             }
 
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 5 total pages.
             return 5;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "No donar si...";
-            /*switch (position) {
-                case 0:
-                    return "Para donar necesitas";
-                case 1:
-                    return "Para donar necesitas";
-                case 2:
-                    return "Para donar necesitas";
-                case 3:
-                    return "Para donar necesitas";
-                case 4:
-                    return "Para donar necesitas";
-                case 5:
-                    return "Para donar necesitas";
-            }*/
-            //return null;
+            return "Beneficios";
         }
-
     }
 }

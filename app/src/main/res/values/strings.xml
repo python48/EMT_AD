@@ -26,4 +26,5 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_maps">Busca tu centro más cercano</string>
     <string name="title_activity_info_restrictions">InfoRestrictions</string>
+    <string name="title_activity_info_benefits">InfoBenefits</string>
 </resources>

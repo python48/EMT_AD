@@ -77,6 +77,8 @@ public class InfoActivity extends AppCompatActivity {
     }
 
     public void proc_click(View view) {
+        Intent intent = new Intent(this, InfoBenefits.class);
+        startActivity(intent);
     }
 
     public void benef_click(View view) {
