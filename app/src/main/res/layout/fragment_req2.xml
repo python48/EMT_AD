@@ -2,14 +2,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/resFondo"
     tools:context="mx.iteso.sergio.emt_ad.Req2">
 
+
     <ImageView
-        android:layout_width="382dp"
-        android:layout_height="match_parent"
         android:id="@+id/imageView2"
+        android:layout_width="257dp"
+        android:layout_height="341dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:adjustViewBounds="true"
+        android:src="@drawable/res_bola_1" />
+    ola_req_1
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/appbar_padding_top"
+        android:text="@string/Res_title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/resTitulo"
+        android:textSize="35dp" />
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="343dp"
+        android:layout_height="340dp"
         android:layout_gravity="center"
-        android:background="@color/requsFondo"
-        android:src="@drawable/req2"/>
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/appbar_padding_top"
+        android:text="@string/Restricciones_body_1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/requsBody"
+        android:textSize="25dp" />
 
 </FrameLayout>

@@ -6,6 +6,8 @@
 
     <color name="requsFondo">#afd3bd</color>
     <color name="requsTitulo">#3da661</color>
+    <color name="requsBody">#686a69</color>
 
     <color name="resFondo">#e9bcba</color>
+    <color name="resTitulo">#c1361d</color>
 </resources>

@@ -5,13 +5,5 @@
     tools:context="mx.iteso.sergio.emt_ad.Ben1">
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:background="@color/resFondo"
-        android:src="@drawable/ben1" />
 
 </FrameLayout>

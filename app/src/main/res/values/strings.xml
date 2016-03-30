@@ -29,4 +29,6 @@
     <string name="title_activity_info_benefits">InfoBenefits</string>
     <string name="Requisitos_title">Para donar necesitas</string>
     <string name="Requisitos_body_1">Tener entre 18 y 65 años</string>
+    <string name="Res_title">No dones</string>
+    <string name="Restricciones_body_1">Si tomaste aspirinas las últimas 72 horas o algún otro medicamento</string>
 </resources>
