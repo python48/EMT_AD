@@ -6,13 +6,31 @@
 
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="257dp"
+        android:layout_height="341dp"
         android:adjustViewBounds="true"
         android:id="@+id/imageView2"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal|bottom"
         android:background="@color/requsFondo"
-        android:src="@drawable/req1"
+        android:src="@drawable/bola_req_1"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="284dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Requisitos_body_1"
+        android:id="@+id/textView5"
+        android:layout_gravity="center"
+        android:textColor="#686a69" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Requisitos_title"
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal|top" />
+
 
 </FrameLayout>

@@ -27,4 +27,6 @@
     <string name="title_activity_maps">Busca tu centro más cercano</string>
     <string name="title_activity_info_restrictions">InfoRestrictions</string>
     <string name="title_activity_info_benefits">InfoBenefits</string>
+    <string name="Requisitos_title">Para donar necesitas</string>
+    <string name="Requisitos_body_1">Tener entre 18 y 65 años</string>
 </resources>
