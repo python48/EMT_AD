@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/resFondo"
+    android:background="@color/requsFondo"
     tools:context="mx.iteso.sergio.emt_ad.Req2">
 
 
@@ -12,8 +12,9 @@
         android:layout_height="341dp"
         android:layout_gravity="center_horizontal|bottom"
         android:adjustViewBounds="true"
-        android:src="@drawable/res_bola_1" />
-    ola_req_1
+        android:background="@color/requsFondo"
+        android:src="@drawable/bola_req_2" />
+
 
     <TextView
         android:id="@+id/textView4"
@@ -22,7 +23,7 @@
         android:layout_gravity="center_horizontal|top"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/appbar_padding_top"
-        android:text="@string/Res_title"
+        android:text="@string/Requisitos_title"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/resTitulo"
         android:textSize="35dp" />
@@ -36,7 +37,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/appbar_padding_top"
-        android:text="@string/Restricciones_body_1"
+        android:text="@string/Requisitos_body_2"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/requsBody"
         android:textSize="25dp" />

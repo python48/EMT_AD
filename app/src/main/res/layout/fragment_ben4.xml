@@ -1,12 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/resFondo"
     android:layout_height="match_parent"
-    tools:context="mx.iteso.sergio.emt_ad.Res1">
-
-
-
+    android:background="@color/benFondo"
+    tools:context="mx.iteso.sergio.emt_ad.Ben4">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -14,7 +11,7 @@
         android:layout_height="341dp"
         android:layout_gravity="center_horizontal|bottom"
         android:adjustViewBounds="true"
-        android:src="@drawable/res_bola_1" />
+        android:src="@drawable/bola_ben_5" />
 
 
     <TextView
@@ -24,7 +21,7 @@
         android:layout_gravity="center_horizontal|top"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/appbar_padding_top"
-        android:text="@string/Res_title"
+        android:text="@string/Ben_title"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/resTitulo"
         android:textSize="35dp" />
@@ -38,7 +35,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/appbar_padding_top"
-        android:text="@string/Restricciones_body_1"
+        android:text="@string/Beneficios_body_4"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/requsBody"
         android:textSize="25dp" />

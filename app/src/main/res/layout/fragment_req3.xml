@@ -2,8 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/requsFondo"
     tools:context="mx.iteso.sergio.emt_ad.Req3">
 
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="257dp"
+        android:layout_height="341dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:adjustViewBounds="true"
+        android:background="@color/requsFondo"
+        android:src="@drawable/bola_req_3" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/appbar_padding_top"
+        android:text="@string/Requisitos_title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/resTitulo"
+        android:textSize="35dp" />
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="343dp"
+        android:layout_height="340dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/appbar_padding_top"
+        android:text="@string/Requisitos_body_3"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/requsBody"
+        android:textSize="25dp" />
 
 </FrameLayout>

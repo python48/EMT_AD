@@ -83,16 +83,16 @@ public class InfoBenefits extends AppCompatActivity {
                 case 0:
                     return new Ben1();
                 case 1:
-                    return new Req2();
+                    return new Ben2();
                 case 2:
-                    return new Req3();
+                    return new Ben3();
                 case 3:
-                    return new Req4();
+                    return new Ben4();
                 case 4:
-                    return new Req5();
+                    return new Ben5();
 
                 default:
-                    return new Req1();
+                    return new Ben1();
             }
 
         }
