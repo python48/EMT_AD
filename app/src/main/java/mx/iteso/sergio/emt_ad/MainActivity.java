@@ -1,5 +1,6 @@
 package mx.iteso.sergio.emt_ad;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
@@ -22,8 +23,37 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.GoogleMap;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    GoogleMap mMap;
+    private static final int ERROR_DIALOG_REQUEST = 9001;
+
+    public boolean servicesOK()
+    {
+        int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+
+        if (isAvailable == ConnectionResult.SUCCESS)
+        {
+            return true;
+        }else if(GooglePlayServicesUtil.isUserRecoverableError(isAvailable))
+        {
+            Dialog dialog =
+                    GooglePlayServicesUtil.getErrorDialog(isAvailable, this, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }else
+        {
+            Toast.makeText(this,"No podemos conectarnos con el servicio de mapa",Toast.LENGTH_SHORT);
+        }
+
+        return false;
+    }
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -71,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Iniciar la maquina de estados.
         currentState =  states.INITIAL;
+
+        if (servicesOK())
+        {
+
+        }
     }
 
 
