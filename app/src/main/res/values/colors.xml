@@ -11,6 +11,6 @@
     <color name="resFondo">#e9bcba</color>
     <color name="resTitulo">#c1361d</color>
 
-    <color name="benFondo">#eda7bf</color>
+    <color name="benFondo">#e9bcba</color>
     <color name="benTitulo">#fa4484</color>
 </resources>
