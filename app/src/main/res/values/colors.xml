@@ -13,4 +13,10 @@
 
     <color name="benFondo">#e9bcba</color>
     <color name="benTitulo">#fa4484</color>
+
+    <color name="procFondo">#c2d4ed</color>
+    <color name="procTitulo">#8ebef1</color>
+
+
+    <color name="aboutFondo">#ffffff</color>
 </resources>

@@ -46,4 +46,11 @@
     <string name="Beneficios_body_3">Puedes donar hasta 4 veces en un año o 3 si eres mujer</string>
     <string name="Beneficios_body_5">Toda tu información es confidencial</string>
     <string name="Beneficios_body_4">Tu cuerpo recupera la sangre después de 2 meses puedes donar de nuevo</string>
+    <string name="proc_body_1">Nos aseguramos de que no tengas anemiao alguna otra infección</string>
+    <string name="proc_body_2">Obtener el nombre completo del paciente a quien vas a donar y en qué hospital se encuentra</string>
+    <string name="proc_titulo">Proceso</string>
+    <string name="proc_body_3">tomar 450 +- 10ml de sangre con equipo est[eril y desechable</string>
+    <string name="proc_body_4">en este punto debes comunicar cualquier molestia para ser atendido oportunamente</string>
+    <string name="proc_body_5">después de donar permanecerás en reposo y se te dará un refrigerio</string>
+    <string name="title_activity_info_proceso">Proceso</string>
 </resources>
