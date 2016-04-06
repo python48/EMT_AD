@@ -97,7 +97,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(Marker marker) {
 
-                String uri = "waze://?ll=40.761043, -73.980545&navigate=yes";
+                LatLng latlng = marker.getPosition();
+                float lat = (float) latlng.latitude;
+                float lng = (float) latlng.longitude;
+
+                String uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
                 startActivity(new Intent(android.content.Intent.ACTION_VIEW,
                         Uri.parse(uri)));
 

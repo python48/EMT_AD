@@ -77,7 +77,7 @@ public class InfoActivity extends AppCompatActivity {
     }
 
     public void proc_click(View view) {
-        Intent intent = new Intent(this, InfoBenefits.class);
+        Intent intent = new Intent(this, InfoProceso.class);
         startActivity(intent);
     }
 
