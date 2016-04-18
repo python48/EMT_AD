@@ -1,8 +1,12 @@
 package mx.iteso.sergio.emt_ad;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,21 +39,17 @@ public class MainActivity extends AppCompatActivity {
     GoogleMap mMap;
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
-    public boolean servicesOK()
-    {
+    public boolean servicesOK() {
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 
-        if (isAvailable == ConnectionResult.SUCCESS)
-        {
+        if (isAvailable == ConnectionResult.SUCCESS) {
             return true;
-        }else if(GooglePlayServicesUtil.isUserRecoverableError(isAvailable))
-        {
+        } else if (GooglePlayServicesUtil.isUserRecoverableError(isAvailable)) {
             Dialog dialog =
                     GooglePlayServicesUtil.getErrorDialog(isAvailable, this, ERROR_DIALOG_REQUEST);
             dialog.show();
-        }else
-        {
-            Toast.makeText(this,"No podemos conectarnos con el servicio de mapa",Toast.LENGTH_SHORT);
+        } else {
+            Toast.makeText(this, "No podemos conectarnos con el servicio de mapa", Toast.LENGTH_SHORT);
         }
 
         return false;
@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    enum states {INITIAL,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,FINAL,ERROR};
+    enum states {INITIAL, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, FINAL, ERROR}
+
+    ;
     states currentState;
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -94,18 +96,24 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (isOnline())
+                    requestData();
+                else
+                    Toast.makeText(MainActivity.this, "Red no está dispobible", Toast.LENGTH_SHORT).show();
             }
         });
 
         //Iniciar la maquina de estados.
-        currentState =  states.INITIAL;
+        currentState = states.INITIAL;
 
-        if (servicesOK())
-        {
+        if (servicesOK()) {
 
         }
+    }
+
+    private void requestData() {
+        MyTask task = new MyTask();
+        task.execute("Param 1", "Param 2", "Param 3");
     }
 
 
@@ -158,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv = (TextView) findViewById(R.id.questionText);
                 tv.setText("¿Estás embarazada o lo tuviste en los últimos seis meses?");
-                currentState =  states.ONE;
+                currentState = states.ONE;
                 break;
             case ONE:
                 ImageView image1 = (ImageView) findViewById(R.id.imagenDeArriba);
@@ -166,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv1 = (TextView) findViewById(R.id.questionText);
                 tv1.setText("¿Tú o tu pareja se han hecho algún tatuaje, piercing o acupuntura en los últimos 12 meses?");
-                currentState =  states.TWO;
+                currentState = states.TWO;
                 break;
             case TWO:
                 ImageView image2 = (ImageView) findViewById(R.id.imagenDeArriba);
@@ -174,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv2 = (TextView) findViewById(R.id.questionText);
                 tv2.setText("¿Has padecido algún problema hemorrágico o enfermedad de la sangre como anemia o exceso de glóbulos rojos?");
-                currentState =  states.THREE;
+                currentState = states.THREE;
                 break;
             case THREE:
                 ImageView image3 = (ImageView) findViewById(R.id.imagenDeArriba);
@@ -182,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv3 = (TextView) findViewById(R.id.questionText);
                 tv3.setText("¿Tienes alguna enfermedad grave o crónica de pulmones, corazón, cerebro, riñones, tiroides, o aparato digestivo?");
-                currentState =  states.FOUR;
+                currentState = states.FOUR;
                 break;
             case FOUR:
                 ImageView image4 = (ImageView) findViewById(R.id.imagenDeArriba);
@@ -190,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv4 = (TextView) findViewById(R.id.questionText);
                 tv4.setText("¿Has tenido Hepatitis B después de los diez años de edad?");
-                currentState =  states.FIVE;
+                currentState = states.FIVE;
                 break;
             case FIVE:
                 ImageView image5 = (ImageView) findViewById(R.id.imagenDeArriba);
@@ -198,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv5 = (TextView) findViewById(R.id.questionText);
                 tv5.setText("¿Has tenido Hepatitis C?");
-                currentState =  states.SIX;
+                currentState = states.SIX;
                 break;
             case SIX:
                 ImageView image6 = (ImageView) findViewById(R.id.imagenDeArriba);
@@ -206,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv6 = (TextView) findViewById(R.id.questionText);
                 tv6.setText("¿Estás bajo tratamiento médico actualmente?");
-                currentState =  states.SEVEN;
+                currentState = states.SEVEN;
                 break;
             case SEVEN:
                 ImageView image7 = (ImageView) findViewById(R.id.imagenDeArriba);
@@ -214,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv7 = (TextView) findViewById(R.id.questionText);
                 tv7.setText("¿Tienes diabetes que requiera insulina como tratamiento?");
-                currentState =  states.EIGHT;
+                currentState = states.EIGHT;
                 break;
             case EIGHT:
                 ImageView image8 = (ImageView) findViewById(R.id.imagenDeArriba);
@@ -222,11 +230,11 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv8 = (TextView) findViewById(R.id.questionText);
                 tv8.setText("¿Te consideras sano?");
-                currentState =  states.FINAL;
+                currentState = states.FINAL;
                 break;
             case FINAL:
                 // mandarlo a la goma.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
 
 
@@ -248,43 +256,43 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView tv = (TextView) findViewById(R.id.questionText);
                 tv.setText("¿Tú o tu pareja se han hecho algún tatuaje, piercing o acupuntura en los últimos 12 meses?");
-                currentState =  states.TWO;
+                currentState = states.TWO;
                 break;
             case ONE:
                 // a la burguer.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
             case TWO:
                 //a la burguer.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
             case THREE:
                 //a la burguer.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
             case FOUR:
                 //a la burguer.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
             case FIVE:
                 //a la burguer.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
             case SIX:
                 //a la burguer.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
             case SEVEN:
                 //a la burguer.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
             case EIGHT:
                 //a la burguer.
-                currentState =  states.ERROR;
+                currentState = states.ERROR;
                 break;
             case FINAL:
                 //Mandarlo a la pantalla de TEST APROBADO.
-                currentState =  states.FINAL;
+                currentState = states.FINAL;
                 break;
 
 
@@ -296,18 +304,18 @@ public class MainActivity extends AppCompatActivity {
      *//*
     public static class PlaceholderFragment extends Fragment {
         *//**
-         * The fragment argument representing the section number for this
-         * fragment.
-         *//*
+     * The fragment argument representing the section number for this
+     * fragment.
+     *//*
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
         }
 
         *//**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         *//*
+     * Returns a new instance of this fragment for the given section
+     * number.
+     *//*
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -326,6 +334,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }*/
 
+
+
+    protected boolean isOnline(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting())
+            return true;
+        else
+            return false;
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -341,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return PlaceholderFragment.newInstance(position + 1);
-            switch (position){
+            switch (position) {
                 case 0:
                     return new Perfil();
                 case 1:
@@ -370,6 +389,34 @@ public class MainActivity extends AppCompatActivity {
                     return "Análisis";
             }
             return null;
+        }
+    }
+
+    //<Params, Progress, Result>
+    private class MyTask extends AsyncTask<String, String, String>{
+
+
+        @Override
+        protected void onPreExecute() {
+            System.out.println("Starting task...");
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            for (int i = 0; i<params.length; i++){
+                publishProgress("Working with" + params[i]);
+            }
+            return "task completed";
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            System.out.println(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            System.out.println(result);
         }
     }
 }
