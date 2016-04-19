@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -29,15 +31,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
 
     GoogleMap mMap;
     private static final int ERROR_DIALOG_REQUEST = 9001;
+    private List<Donator> donatorList;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     public boolean servicesOK() {
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -56,14 +69,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * The {@link PagerAdapter} that will provide
      * fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     * {@link FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://mx.iteso.sergio.emt_ad/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://mx.iteso.sergio.emt_ad/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 
     enum states {INITIAL, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, FINAL, ERROR}
 
@@ -96,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isOnline())
-                    requestData();
+                if (isOnline())//http://services.hanselandpetal.com/feeds/flowers.json
+                    requestData("http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion");
                 else
                     Toast.makeText(MainActivity.this, "Red no está dispobible", Toast.LENGTH_SHORT).show();
             }
@@ -109,11 +162,18 @@ public class MainActivity extends AppCompatActivity {
         if (servicesOK()) {
 
         }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    private void requestData() {
+    private void requestData(String uri) {
+
         MyTask task = new MyTask();
-        task.execute("Param 1", "Param 2", "Param 3");
+        task.execute(uri);
+
+        /*MyTask task = new MyTask();
+        task.execute("Param 1", "Param 2", "Param 3");*/
     }
 
 
@@ -312,7 +372,9 @@ public class MainActivity extends AppCompatActivity {
         public PlaceholderFragment() {
         }
 
-        *//**
+        */
+
+    /**
      * Returns a new instance of this fragment for the given section
      * number.
      *//*
@@ -333,10 +395,7 @@ public class MainActivity extends AppCompatActivity {
             return rootView;
         }
     }*/
-
-
-
-    protected boolean isOnline(){
+    protected boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnectedOrConnecting())
@@ -393,8 +452,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //<Params, Progress, Result>
-    private class MyTask extends AsyncTask<String, String, String>{
-
+    private class MyTask extends AsyncTask<String, String, String> {
 
         @Override
         protected void onPreExecute() {
@@ -403,20 +461,31 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            for (int i = 0; i<params.length; i++){
+
+            String content = HttpManager.getData(params[0]);
+            return content;
+
+            /*for (int i = 0; i<params.length; i++){
                 publishProgress("Working with" + params[i]);
             }
-            return "task completed";
+            return "task completed";*/
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
-            System.out.println(values[0]);
+            System.out.println("Working with --> " + values[0]);
         }
 
         @Override
         protected void onPostExecute(String result) {
-            System.out.println(result);
+            donatorList = JSONParser.parseFeed(result);
+
+            assert donatorList != null;
+            for (Donator don : donatorList
+                    ) {
+                System.out.println(don.getName());
+            }
+            //System.out.println(result);
         }
     }
 }
