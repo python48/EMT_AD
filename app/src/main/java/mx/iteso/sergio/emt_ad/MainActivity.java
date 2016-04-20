@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isOnline())//http://services.hanselandpetal.com/feeds/flowers.json
-                    requestData("http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion");
+                    requestData("http://services.hanselandpetal.com/restful.php");//http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion
                 else
                     Toast.makeText(MainActivity.this, "Red no está dispobible", Toast.LENGTH_SHORT).show();
             }
@@ -169,8 +169,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void requestData(String uri) {
 
+        RequestPackage p = new RequestPackage();
+        p.setMethod("GET");
+        p.setUri(uri);
+        p.setParam("param1","Value 1");
+        p.setParam("param2","Value 2");
+        p.setParam("param3","Value 3");
+
         MyTask task = new MyTask();
-        task.execute(uri);
+        task.execute(p);
 
         /*MyTask task = new MyTask();
         task.execute("Param 1", "Param 2", "Param 3");*/
@@ -452,7 +459,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //<Params, Progress, Result>
-    private class MyTask extends AsyncTask<String, String, String> {
+    private class MyTask extends AsyncTask<RequestPackage, String, String> {
 
         @Override
         protected void onPreExecute() {
@@ -460,7 +467,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(RequestPackage... params) {
 
             String content = HttpManager.getData(params[0]);
             return content;
