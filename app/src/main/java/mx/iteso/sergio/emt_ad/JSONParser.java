@@ -16,7 +16,7 @@ public class JSONParser {
 
         try {
             JSONArray ar = new JSONArray(content);
-            List<Donator> donatorList = new ArrayList<Donator>();
+            List<Donator> donatorList = new ArrayList<>();
 
             for (int i = 0; i < ar.length(); i++){
                 JSONObject obj = ar.getJSONObject(i);
@@ -30,7 +30,6 @@ public class JSONParser {
             e.printStackTrace();
             return null;
         }
-
 
     }
 

@@ -149,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isOnline())//http://services.hanselandpetal.com/feeds/flowers.json
-                    requestData("http://services.hanselandpetal.com/restful.php");//http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion
+                if (isOnline())//http://services.hanselandpetal.com/feeds/flowers.json      //http://services.hanselandpetal.com/restful.php
+                    requestData("http://services.hanselandpetal.com/restfuljson.php");//http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion
                 else
                     Toast.makeText(MainActivity.this, "Red no está dispobible", Toast.LENGTH_SHORT).show();
             }
@@ -170,11 +170,10 @@ public class MainActivity extends AppCompatActivity {
     private void requestData(String uri) {
 
         RequestPackage p = new RequestPackage();
-        p.setMethod("GET");
+        p.setMethod("POST");
         p.setUri(uri);
-        p.setParam("param1","Value 1");
-        p.setParam("param2","Value 2");
-        p.setParam("param3","Value 3");
+        p.setParam("name", "Rosa");
+        p.setParam("price", "13.95");
 
         MyTask task = new MyTask();
         task.execute(p);
@@ -182,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         /*MyTask task = new MyTask();
         task.execute("Param 1", "Param 2", "Param 3");*/
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -9,6 +9,7 @@ import java.util.Map;
  * Created by SergioAdán on 4/19/2016.
  */
 public class RequestPackage {
+
     private String uri;
     private String method = "GET";
     private Map<String, String> params = new HashMap<>();
@@ -37,24 +38,24 @@ public class RequestPackage {
         this.params = params;
     }
 
-    public void setParam(String key, String value){
-        params.put(key,value);
+    public void setParam(String key, String value) {
+        params.put(key, value);
     }
 
-    public String getEncodedParams(){
+    public String getEncodedParams() {
         StringBuilder sb = new StringBuilder();
-        String value = null;
-        for (String key: params.keySet()){
+        for (String key : params.keySet()) {
+            String value = null;
             try {
-                value = URLEncoder.encode(params.get(key),"UTF-8");
+                value = URLEncoder.encode(params.get(key), "UTF-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
 
-            if (sb.length()>0){
+            if (sb.length() > 0) {
                 sb.append("&");
             }
-            sb.append(key + "=");
+            sb.append(key + "=" + value);
         }
         return sb.toString();
     }

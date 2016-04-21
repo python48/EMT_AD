@@ -1,8 +1,11 @@
 package mx.iteso.sergio.emt_ad;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -11,11 +14,11 @@ import java.net.URL;
  */
 public class HttpManager {
 
-    public static String getData(RequestPackage p){
+    public static String getData(RequestPackage p) {
 
         BufferedReader reader = null;
         String uri = p.getUri();
-        if (p.getMethod().equals("GET")){
+        if (p.getMethod().equals("GET")) {
             uri += "?" + p.getEncodedParams();
         }
 
@@ -24,30 +27,40 @@ public class HttpManager {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod(p.getMethod());
 
+            JSONObject json = new JSONObject(p.getParams());
+            String params = "params=" + json.toString();
+
+            if (p.getMethod().equals("POST")) {
+                con.setDoOutput(true);
+                OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream());
+                writer.write(params);
+                writer.flush();
+            }
+
             StringBuilder sb = new StringBuilder();
             reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
             String line;
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
+
             return sb.toString();
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }finally {
-            if (reader != null)
+        } finally {
+            if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                     return null;
                 }
+            }
         }
 
-
-
     }
+
 }
