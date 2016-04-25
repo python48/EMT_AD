@@ -38,7 +38,7 @@ public class HttpManager {
             }
 
             StringBuilder sb = new StringBuilder();
-            reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            reader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 
             String line;
             while ((line = reader.readLine()) != null) {

@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isOnline())//http://services.hanselandpetal.com/feeds/flowers.json      //http://services.hanselandpetal.com/restful.php
-                    requestData("http://services.hanselandpetal.com/restfuljson.php");//http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion
+                    requestData("http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion");//http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion
                 else
                     Toast.makeText(MainActivity.this, "Red no está dispobible", Toast.LENGTH_SHORT).show();
             }
