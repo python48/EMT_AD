@@ -54,4 +54,5 @@
     <string name="proc_body_5">después de donar permanecerás en reposo y se te dará un refrigerio</string>
     <string name="title_activity_info_proceso">Proceso</string>
     <string name="title_activity_new_map">Mapa</string>
+    <string name="title_activity_main2">TestNewActivity</string>
 </resources>

@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +18,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,11 +35,10 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 
-import org.json.JSONObject;
-
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
+import kriyatma.Event;
+import kriyatma.IEventHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private static boolean mibandera = false;
     //private String token;
 
     public boolean servicesOK() {
@@ -123,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
         client.disconnect();
     }
 
+
+
     enum states {INITIAL, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, FINAL, ERROR}
 
     ;
@@ -170,6 +169,19 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+
+        MyCustomClass myCustomClass = MyCustomClass.getInstance();
+        myCustomClass.addEventListener(Event.COMPLETE, new IEventHandler() {
+            @Override
+            public void callback(Event event) {
+                Log.d("Event callback", "i am in callback " + event.getStrType() + " :: param = " + event.getParams());
+            }
+        });
+        Log.d("Event callback","i am going to call");
+        myCustomClass.myCallback();
+
     }
 
     static int randData = 0;
@@ -181,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         //p.setUri("http://requestb.in/1kp9q0p1");
 
         //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
-        String userName = "user16", pass = "user16", email = "user16@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
+        String userName = "furfag2004", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
 
         String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", userName, pass);
 
@@ -214,7 +226,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_map:
-                Intent intent3 = new Intent(this, NewMapActivity.class);
+                //Intent intent3 = new Intent(this, NewMapActivity.class);
+                Intent intent3 = new Intent(this, MapsActivity.class);
                 startActivity(intent3);
                 return true;
             case R.id.action_about:
@@ -224,6 +237,74 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    //login
+    public void iniciarSesionClick(View view) {
+
+        String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        //p.setUri("http://requestb.in/1kp9q0p1");
+
+        //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
+        //String userName = "", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
+
+        String userName="norisab", pass="123";
+        String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", userName, pass);
+
+        //String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
+        p.setParam("Info", json);
+        p.setParam("Junk", Integer.toString(randData++));
+
+        ApiConnector.getInstance().execute(p);
+
+        mibandera = true;
+
+        //GO TO PERFIL
+        Intent intent1 = new Intent(this, MainActivity.class);
+        startActivity(intent1);
+
+    }
+
+    public void goToPerfil(){
+        Intent intent1 = new Intent(this, Perfil.class);
+        startActivity(intent1);
+    }
+
+
+    public void doRegister(View view, String userName, String pass, String email, String name, String firstName, String lastName ) {
+        String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        //p.setUri("http://requestb.in/1kp9q0p1");
+
+        //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
+        //String userName = "", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
+
+        //String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", userName, pass);
+
+        String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
+        p.setParam("Info", json);
+        p.setParam("Junk", Integer.toString(randData++));
+
+        ApiConnector.getInstance().execute(p);
+    }
+
+
+
+    public void registroClick(View view) {
+        //mandarlo a la ventana de hacer nuevo registro. main2 es el test activity.
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
+    }
+
+    void aLaGoma(){
+        Intent intent = new Intent(this, TestReprobado.class);
+        startActivity(intent);
     }
 
     public void noClicked(View view) {
@@ -310,6 +391,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case FINAL:
                 // mandarlo a la goma.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
 
@@ -336,38 +418,48 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case ONE:
                 // a la burguer.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
             case TWO:
                 //a la burguer.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
             case THREE:
                 //a la burguer.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
             case FOUR:
                 //a la burguer.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
             case FIVE:
                 //a la burguer.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
             case SIX:
                 //a la burguer.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
             case SEVEN:
                 //a la burguer.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
             case EIGHT:
                 //a la burguer.
+                aLaGoma();
                 currentState = states.ERROR;
                 break;
             case FINAL:
                 //Mandarlo a la pantalla de TEST APROBADO.
+                Intent intent = new Intent(this, TestAprobado.class);
+                startActivity(intent);
                 currentState = states.FINAL;
                 break;
 
@@ -437,9 +529,13 @@ public class MainActivity extends AppCompatActivity {
             //return PlaceholderFragment.newInstance(position + 1);
             switch (position) {
                 case 0:
-                    return new Perfil();
+                    if (mibandera)
+                        return new Perfil();
+                    else
+                        return new Login();
                 case 1:
-                    return new Test();
+                    return new TestAprobado();
+                    //return new Test();
                 case 2:
                     return new Analisis();
                 default:
@@ -466,7 +562,7 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
+/*
     //<Params, Progress, Result>
     private class MyTask extends AsyncTask<RequestPackage, String, String> {
 
@@ -483,10 +579,10 @@ public class MainActivity extends AppCompatActivity {
             String content = HttpManager.getData(params[0]);
             return content;
 
-            /*for (int i = 0; i<params.length; i++){
+            *//*for (int i = 0; i<params.length; i++){
                 publishProgress("Working with" + params[i]);
             }
-            return "task completed";*/
+            return "task completed";*//*
         }
 
         @Override
@@ -537,7 +633,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-           /* if (JsonDe.respuesta == "0")
+           *//* if (JsonDe.respuesta == "0")
             {
                 //LoginFailed
             }
@@ -550,7 +646,7 @@ public class MainActivity extends AppCompatActivity {
                     //SetLocalStorage()
                 }
 
-            }*/
+            }*//*
 
             //donatorList = JSONParser.parseFeed(result);
 
@@ -561,5 +657,5 @@ public class MainActivity extends AppCompatActivity {
             //}
             //System.out.println(result);
         }
-    }
+    }*/
 }
