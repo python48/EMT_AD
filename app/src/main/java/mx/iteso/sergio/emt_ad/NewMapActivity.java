@@ -10,26 +10,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class AboutActivity extends AppCompatActivity {
+public class NewMapActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_new_map);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarm);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);*/
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-    }
 
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,7 +44,7 @@ public class AboutActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_map:
-                Intent intent3 = new Intent(this, MapsActivity.class);
+                Intent intent3 = new Intent(this, NewMapActivity.class);
                 startActivity(intent3);
                 return true;
             case R.id.action_about:
@@ -63,7 +55,6 @@ public class AboutActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

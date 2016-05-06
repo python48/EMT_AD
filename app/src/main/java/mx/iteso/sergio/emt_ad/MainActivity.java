@@ -38,7 +38,11 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 
+import org.json.JSONObject;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    //private String token;
 
     public boolean servicesOK() {
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -176,25 +181,16 @@ public class MainActivity extends AppCompatActivity {
         //p.setUri("http://requestb.in/1kp9q0p1");
 
         //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
-        String userName = "user13", pass = "user13", email = "user13@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
+        String userName = "user16", pass = "user16", email = "user16@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
 
-        String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
+        String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", userName, pass);
+
+        //String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
         p.setParam("Info", json);
         p.setParam("Junk", Integer.toString(randData++));
 
-        //p.setParam("name", "Rosa");
-        //p.setParam("price", "13.95");
+        ApiConnector.getInstance().execute(p);
 
-        //var result = await client.ExecuteTaskAsync(r);
-
-        MyTask task = new MyTask();
-        task.execute(p);
-
-
-
-
-        /*MyTask task = new MyTask();
-        task.execute("Param 1", "Param 2", "Param 3");*/
     }
 
     @Override
@@ -218,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_map:
-                Intent intent3 = new Intent(this, MapsActivity.class);
+                Intent intent3 = new Intent(this, NewMapActivity.class);
                 startActivity(intent3);
                 return true;
             case R.id.action_about:
@@ -474,6 +470,8 @@ public class MainActivity extends AppCompatActivity {
     //<Params, Progress, Result>
     private class MyTask extends AsyncTask<RequestPackage, String, String> {
 
+        private  String token;
+
         @Override
         protected void onPreExecute() {
             System.out.println("Starting task...");
@@ -505,9 +503,54 @@ public class MainActivity extends AppCompatActivity {
             InJson = res.substring(res.indexOf(">{") + 1, res.indexOf("}<")+1);
 
             //JSONDeserializer
+            String inputJSONString = InJson; // Your string JSON here
+            try {
+                JSONObject jObject = new JSONObject(inputJSONString);
+                Iterator<String> keys = jObject.keys();
 
-            System.out.println(InJson);
 
+
+                while( keys.hasNext() ) {
+                    String key = keys.next();
+                    String value = jObject.getString(key);
+                    if (key.equals("respuesta")) {
+                        if (value.equals("0"))
+                            //login failed ;
+                            System.err.println("Login failed");
+                        else if (value.equals("1"))
+                        {
+                            //token = JsonDe.codigo;
+                            //loggedIn = true;
+                            //SetLocalStorage()
+                        }
+                    }if (key.equals("codigo")) {
+                        token = value;
+                        //token = JsonDe.codigo;
+                        //loggedIn = true;
+                        //SetLocalStorage()
+                    }
+
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+           /* if (JsonDe.respuesta == "0")
+            {
+                //LoginFailed
+            }
+            else
+            {
+                if (JsonDe.respuesta == "1")
+                {
+                    token = JsonDe.codigo;
+                    loggedIn = true;
+                    //SetLocalStorage()
+                }
+
+            }*/
 
             //donatorList = JSONParser.parseFeed(result);
 

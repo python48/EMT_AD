@@ -96,6 +96,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mx.iteso.sergio.emt_ad.InfoActivity" />
         </activity>
+        <activity
+            android:name=".NewMapActivity"
+            android:label="@string/title_activity_new_map"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
