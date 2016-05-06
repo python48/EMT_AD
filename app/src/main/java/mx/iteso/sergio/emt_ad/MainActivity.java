@@ -167,16 +167,31 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    static int randData = 0;
     private void requestData(String uri) {
 
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
         p.setUri(uri);
-        p.setParam("name", "Rosa");
-        p.setParam("price", "13.95");
+        //p.setUri("http://requestb.in/1kp9q0p1");
+
+        //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
+        String userName = "user13", pass = "user13", email = "user13@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
+
+        String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
+        p.setParam("Info", json);
+        p.setParam("Junk", Integer.toString(randData++));
+
+        //p.setParam("name", "Rosa");
+        //p.setParam("price", "13.95");
+
+        //var result = await client.ExecuteTaskAsync(r);
 
         MyTask task = new MyTask();
         task.execute(p);
+
+
+
 
         /*MyTask task = new MyTask();
         task.execute("Param 1", "Param 2", "Param 3");*/
@@ -478,18 +493,29 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(String... values) {
-            System.out.println("Working with --> " + values[0]);
+            System.out.println("Working with dis sh!t --> " + values[0]);
         }
 
         @Override
         protected void onPostExecute(String result) {
-            donatorList = JSONParser.parseFeed(result);
 
-            assert donatorList != null;
-            for (Donator don : donatorList
-                    ) {
-                System.out.println(don.getName());
-            }
+            //System.out.println(result);
+
+            String InJson = "", res = result;
+            InJson = res.substring(res.indexOf(">{") + 1, res.indexOf("}<")+1);
+
+            //JSONDeserializer
+
+            System.out.println(InJson);
+
+
+            //donatorList = JSONParser.parseFeed(result);
+
+            //assert donatorList != null;
+            //for (Donator don : donatorList
+            //        ) {
+            //    System.out.println(don.getName());
+            //}
             //System.out.println(result);
         }
     }
