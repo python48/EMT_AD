@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -52,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private GoogleApiClient client;
     private static boolean mibandera = false;
+    private static boolean mibandera2 = false;
+
+    public static void setbandera(boolean value){
+        mibandera = value;
+    }
     //private String token;
 
     public boolean servicesOK() {
@@ -171,16 +177,17 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
 
-
+/*
         MyCustomClass myCustomClass = MyCustomClass.getInstance();
         myCustomClass.addEventListener(Event.COMPLETE, new IEventHandler() {
             @Override
             public void callback(Event event) {
                 Log.d("Event callback", "i am in callback " + event.getStrType() + " :: param = " + event.getParams());
+                requestData("http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion");
             }
         });
         Log.d("Event callback","i am going to call");
-        myCustomClass.myCallback();
+        myCustomClass.myCallback();*/
 
     }
 
@@ -240,10 +247,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //login
+    // login button event.
     public void iniciarSesionClick(View view) {
+        //Aqui poner el cuadro de dialogo pidiendo las pinches putas credenciales!!!!. y luego que haga el login.
+        refreshPage();
+        mibandera2 = true;
+    }
 
-        String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+    // login prom button event.
+    public void iniciarSesionClick1(View view) {
+        login();
+    }
+
+    public void login(){
+        final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
         p.setUri(uri);
@@ -252,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
         //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
         //String userName = "", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
 
-        String userName="norisab", pass="123";
+        String userName="user1", pass="user1";
         String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", userName, pass);
 
         //String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
@@ -261,17 +278,57 @@ public class MainActivity extends AppCompatActivity {
 
         ApiConnector.getInstance().execute(p);
 
-        mibandera = true;
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("DELAYED MESSAGE:", "I've waited for two hole seconds to show this!");
+                if (mibandera) {
+                    String token = ApiConnector.getInstance().getToken();
+                    String json = String.format("{\"funcion\":\"obten\", \"codigo\":\"%s\"} ", token);
+                    RequestPackage r = new RequestPackage();
+                    r.setMethod("POST");
+                    r.setUri(uri);
+                    r.setParam("Info", json);
 
-        //GO TO PERFIL
-        Intent intent1 = new Intent(this, MainActivity.class);
-        startActivity(intent1);
+                    ApiConnector a = new ApiConnector();
+                    a.execute(r);
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.i("DELAYED MESSAGE:", "I've waited for two hole seconds to show this!");
+                            refreshPage();
+                        }
+                    }, 2000);
+
+                } else
+                    toastThis("No se pudo inicar la sesión :( ");
+
+            }
+        }, 2000);
+
 
     }
 
-    public void goToPerfil(){
-        Intent intent1 = new Intent(this, Perfil.class);
+    private void toastThis(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT);
+    }
+
+    void refreshPage(){
+        Intent intent1 = new Intent(this, MainActivity.class);
         startActivity(intent1);
+    }
+
+    static MainActivity Instance;
+    public static MainActivity getInstance()
+    {
+        if(Instance == null) {
+            Instance = new MainActivity();
+        }
+        return Instance;
+
     }
 
 
@@ -529,10 +586,14 @@ public class MainActivity extends AppCompatActivity {
             //return PlaceholderFragment.newInstance(position + 1);
             switch (position) {
                 case 0:
-                    if (mibandera)
-                        return new Perfil();
+                    if (!mibandera){
+                        if (mibandera2)
+                            return new LoginProm();
+                        else
+                            return new Login();
+                    }
                     else
-                        return new Login();
+                        return new Perfil();
                 case 1:
                     return new TestAprobado();
                     //return new Test();

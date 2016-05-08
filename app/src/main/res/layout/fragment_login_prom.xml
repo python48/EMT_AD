@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginProm">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--<TextView
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:text="Iniciar Sesión"
+        android:id="@+id/textView6" />-->
+
+    <Button
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:onClick="iniciarSesionClick1"
+        android:text="Iniciar"
+        android:id="@+id/button2"
+        android:layout_x="77dp"
+        android:layout_y="364dp"
+        android:nestedScrollingEnabled="false"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignStart="@+id/editText3"
+        android:layout_marginBottom="29dp"
+        android:layout_centerVertical="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_marginBottom="41dp"
+        android:layout_above="@+id/editText3"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignStart="@+id/editText3" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editText3"
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp" />
+
+</RelativeLayout>
