@@ -103,6 +103,10 @@
         <activity
             android:name=".TestActivityN"
             android:label="@string/title_activity_test_activity_n"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RegisterUserActivity"
+            android:label="@string/title_activity_register_user"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

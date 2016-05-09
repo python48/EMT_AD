@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     public static void setbandera(boolean value){
         mibandera = value;
     }
-    //private String token;
 
     public boolean servicesOK() {
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -130,12 +129,9 @@ public class MainActivity extends AppCompatActivity {
         client.disconnect();
     }
 
-
-
     enum states {INITIAL, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, FINAL, ERROR}
-
-    ;
     states currentState;
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
