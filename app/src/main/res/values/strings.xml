@@ -55,4 +55,5 @@
     <string name="title_activity_info_proceso">Proceso</string>
     <string name="title_activity_new_map">Mapa</string>
     <string name="title_activity_main2">TestNewActivity</string>
+    <string name="title_activity_test_activity_n">TestActivityN</string>
 </resources>

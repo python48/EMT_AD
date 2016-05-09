@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class Main2ActivityFragment extends Fragment {
+public class TestActivityNFragment extends Fragment {
 
-    public Main2ActivityFragment() {
+    public TestActivityNFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main2, container, false);
+        return inflater.inflate(R.layout.fragment_test_activity_n, container, false);
     }
 }

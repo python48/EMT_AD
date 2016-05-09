@@ -109,7 +109,8 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
 
                 if (key.equals("error")) {
                     System.out.println(value);
-                    return;
+                    throw new Exception();
+
                     //token = JsonDe.codigo;
                     //loggedIn = true;
                     //SetLocalStorage()

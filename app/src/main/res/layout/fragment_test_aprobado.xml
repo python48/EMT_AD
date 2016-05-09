@@ -11,13 +11,13 @@
         android:layout_height="match_parent"
         android:textAlignment="center"
         android:textSize="30dp"
-        android:text="Test Aprobado"
+        android:text="¡Has aproabado!"
         android:id="@+id/textView6" />
 
     <ImageView
         android:src="@drawable/aprobadoa"
         android:layout_width="147dp"
-        android:layout_height="246dp"
+        android:layout_height="200dp"
         android:id="@+id/imageView4"
         android:layout_gravity="center"
         android:layout_x="112dp"
@@ -29,8 +29,8 @@
     <Button
         android:layout_width="219dp"
         android:layout_height="wrap_content"
-        android:onClick="registroClick"
-        android:text="Registrarse"
+        android:onClick="registroClick2"
+        android:text="Hacer registro"
         android:id="@+id/button"
         android:layout_x="77dp"
         android:layout_y="364dp"

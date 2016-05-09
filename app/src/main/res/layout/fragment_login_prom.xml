@@ -24,29 +24,28 @@
         android:layout_x="77dp"
         android:layout_y="364dp"
         android:nestedScrollingEnabled="false"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3"
-        android:layout_marginBottom="29dp"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/PasswordProm"
+        android:layout_alignEnd="@+id/PasswordProm" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:inputType="text"
+        android:text="Nombre de Usuario"
         android:ems="10"
-        android:id="@+id/editText"
-        android:layout_marginBottom="41dp"
-        android:layout_above="@+id/editText3"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3" />
+        android:id="@+id/UserNameProm"
+        android:layout_above="@+id/PasswordProm"
+        android:layout_alignLeft="@+id/PasswordProm"
+        android:layout_alignStart="@+id/PasswordProm"
+        android:layout_marginBottom="30dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/PasswordProm"
         android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="39dp" />

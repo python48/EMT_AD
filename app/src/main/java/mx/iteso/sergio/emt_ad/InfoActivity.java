@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,15 +20,6 @@ public class InfoActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -63,9 +55,6 @@ public class InfoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
     public void req_click(View view) {
         Intent intent1 = new Intent(this, InfoRequirements.class);
         startActivity(intent1);
@@ -85,4 +74,6 @@ public class InfoActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InfoBenefits.class);
         startActivity(intent);
     }
+
+
 }

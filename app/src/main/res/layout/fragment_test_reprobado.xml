@@ -6,7 +6,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAlignment="center"
@@ -17,14 +17,15 @@
     <ImageView
         android:src="@drawable/reprobado"
         android:layout_width="147dp"
-        android:layout_height="246dp"
+        android:layout_height="250dp"
         android:id="@+id/imageView4"
         android:layout_gravity="center"
         android:layout_x="112dp"
         android:layout_y="52dp"
+        android:layout_below="@id/textView6"
         android:layout_alignTop="@+id/textView6"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp" />
+        android:layout_marginTop="80dp" />
 
     <Button
         android:layout_width="219dp"
