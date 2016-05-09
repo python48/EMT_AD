@@ -25,6 +25,11 @@ public class TestActivityN extends AppCompatActivity {
 
     states currentState;
 
+    public void chingaTuMadre(View view) {
+        Intent intent1 = new Intent(this, Registro2.class);
+        startActivity(intent1);
+    }
+
 
     enum states {INITIAL, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, FINAL, ERROR}
 
@@ -207,7 +212,7 @@ public class TestActivityN extends AppCompatActivity {
     }
 
     //maneja el evento del boton de registro del fragment_test_aprobado.
-    public void registroClick2(View view) {
+    public void chingaTuMadre() {
         Intent intent1 = new Intent(this, MainActivity.class);
         startActivity(intent1);
     }

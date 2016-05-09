@@ -107,7 +107,8 @@
         <activity
             android:name=".RegisterUserActivity"
             android:label="@string/title_activity_register_user"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Registro2"></activity>
     </application>
 
 </manifest>

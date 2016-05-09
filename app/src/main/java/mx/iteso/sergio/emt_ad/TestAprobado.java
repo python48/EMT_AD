@@ -55,5 +55,9 @@ public class TestAprobado extends Fragment {
         startActivity(activityChangeIntent);
     }
 
+    public void chingaTuMadre() {
+        Intent intent1 = new Intent(getActivity(), Registro2.class);
+        startActivity(intent1);
+    }
 
 }
