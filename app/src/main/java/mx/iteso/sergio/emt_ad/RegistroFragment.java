@@ -1,11 +1,18 @@
 package mx.iteso.sergio.emt_ad;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -72,39 +79,134 @@ public class RegistroFragment extends Fragment {
         });
 
         final EditText lastname = (EditText) view.findViewById(R.id.UserLastNameNewReg);
-        passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        lastname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     // code to execute when EditText loses focus
                     LastName = lastname.getText().toString();
-                }
+                }else
+                    lastname.setText("");
             }
         });
 
         final EditText lastname2 = (EditText) view.findViewById(R.id.UserLastName2NewReg);
-        passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        lastname2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     // code to execute when EditText loses focus
                     LastName2 = lastname2.getText().toString();
-                }
+                }else
+                    lastname2.setText("");
             }
         });
 
         final EditText email = (EditText) view.findViewById(R.id.UserEmailNewReg);
-        passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     // code to execute when EditText loses focus
                     Email = email.getText().toString();
-                }
+                }else
+                    email.setText("");
             }
         });
         PassPr = passprom;
+
+        final Button button = (Button) view.findViewById(R.id.okButton);
+        button.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    // code to execute when EditText loses focus
+                    Email = email.getText().toString();
+                }else
+                    email.setText("");
+            }
+
+
+        });
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+                RequestPackage p = new RequestPackage();
+                p.setMethod("POST");
+                p.setUri(uri);
+
+                //String email, userName, pass, name, firstName, lastName;
+                String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", Email, UserName, Secret, Name, LastName, LastName2);
+                p.setParam("Info", json);
+
+                ApiConnector.getInstance().execute(p);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("DELAYED MESSAGE:", "Hemos esperado por");
+                        // Ya stuff Here.
+                        if (Mibandera)
+                        {
+                            printAlert("Registro exitoso.");
+                            RegistroFragment.setbandera(false);
+                            RegisterUserActivity.setbandera(false);
+                            MainActivity.setbandera(false);//para q cargue el perfil en lugar del login.
+                            goToMain();
+                        }else
+                        {
+                            printAlert("No se pudo hacer el registro, intenta de nuevo.");
+                        }
+                    }
+                }, 2000);
+
+            }
+        });
+
+
         return view;
 
     }
+
+    void updatePasPromText(){
+        Secret =
+        PassPr.getText().toString();
+    }
+
+    private void goToMain() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+    }
+
+
+    public static boolean Mibandera = false;
+    //private static boolean changedBandera;
+    public static void setbandera(boolean value) {
+        //changedBandera = true;
+        Mibandera = value;
+    }
+
+    private void printAlert(String message){
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Atención")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })/*
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })*/
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+
 }

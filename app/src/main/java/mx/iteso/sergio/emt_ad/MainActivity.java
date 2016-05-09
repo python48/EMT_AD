@@ -294,7 +294,10 @@ public class MainActivity extends AppCompatActivity {
         p.setParam("Junk", Integer.toString(randData++));
 
         try {
-            ApiConnector.getInstance().execute(p);
+            //ApiConnector.getInstance().execute(p);
+            ApiConnector apicon = new ApiConnector();
+            apicon.execute(p);
+
             Log.i("MESSAGE:", "esperando al token..");
         }catch (Exception e){
             toastThis("Error al iniciar sesión, inténtalo otra vez.");
@@ -326,13 +329,35 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }, 2000);
 
-                } else
-                    toastThis("No se pudo inicar la sesión :( ");
+                } else{
+                    //toastThis("No se pudo inicar la sesión :( ");
+                    printAlert("No se pudo iniciar la sesión, intenta de nuevo");
+
+                }
+
 
             }
         }, 2000);
 
 
+    }
+
+    private void printAlert(String message){
+        new AlertDialog.Builder(this)
+                .setTitle("Atención")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })/*
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })*/
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void toastThis(String message) {

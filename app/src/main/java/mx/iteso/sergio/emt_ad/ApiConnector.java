@@ -121,6 +121,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                     //Attempt to get user data.
                     //GetUserData();
                     //ApiConnector.getInstance().execute(p);
+                    RegistroFragment.setbandera(true);
                     RegisterUserActivity.setbandera(true);
                     MainActivity.setbandera(true);//para q cargue el perfil en lugar del login.
                     //MainActivity.getInstance().goToPerfil();

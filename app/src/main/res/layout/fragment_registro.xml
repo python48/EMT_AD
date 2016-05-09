@@ -88,4 +88,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Registrar"
+        android:id="@+id/okButton"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/imageView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 </LinearLayout>

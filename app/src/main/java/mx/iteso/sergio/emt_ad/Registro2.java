@@ -14,6 +14,7 @@ public class Registro2 extends AppCompatActivity {
 
 //http://stackoverflow.com/questions/19915031/android-how-do-i-start-or-initialize-a-fragment-from-an-activity
 
-        setContentView(R.layout.fragment_registro);
+        setContentView(R.layout.activity_registro2);
+        //setContentView(R.layout.fragment_registro);
     }
 }

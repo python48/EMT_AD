@@ -17,6 +17,7 @@ public class MyCustomClass extends EventDIspatcher {
     }
 
     private MyCustomClass() {
+
     }
 
     public void myCallback(){
