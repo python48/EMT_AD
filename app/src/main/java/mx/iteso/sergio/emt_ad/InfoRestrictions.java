@@ -103,6 +103,10 @@ public class InfoRestrictions extends AppCompatActivity {
                     return new Res4();
                 case 4:
                     return new Res5();
+                case 5:
+                    return new Res6();
+                case 6:
+                    return new Res7();
                 default:
                     return new Res1();
             }
