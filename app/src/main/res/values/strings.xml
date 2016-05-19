@@ -26,7 +26,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_maps">Busca tu centro más cercano</string>
     <string name="title_activity_info_restrictions">Restricciones</string>
-    <string name="title_activity_info_benefits">InfoBenefits</string>
+    <string name="title_activity_info_benefits">Beneficios e infirmación adicional</string>
     <string name="Requisitos_title">Para donar necesitas</string>
     <string name="Requisitos_body_1">Tener entre 18 y 65 años</string>
     <string name="Res_title">No dones</string>
@@ -47,6 +47,10 @@
     <string name="Beneficios_body_2">Puedes llegar a salvar hasta tres vidas incluyendo la tuya</string>
     <string name="Beneficios_body_3">Puedes donar hasta 4 veces en un año o 3 si eres mujer</string>
     <string name="Beneficios_body_5">Toda tu información es confidencial</string>
+    <string name="Beneficios_body_6">No genera incremento ni disminución de peso</string>
+    <string name="Beneficios_body_7">La donación no acorta la vista</string>
+    <string name="Beneficios_body_8">La donación no disminuye las defensas</string>
+    <string name="Beneficios_body_9">No hay riesgo de infección porque los materiales son nuevos y desechables</string>
     <string name="Beneficios_body_4">Tu cuerpo recupera la sangre después de 2 meses puedes donar de nuevo</string>
     <string name="proc_body_1">Nos aseguramos de que no tengas anemiao alguna otra infección</string>
     <string name="proc_body_2">Obtener el nombre completo del paciente a quien vas a donar y en qué hospital se encuentra</string>

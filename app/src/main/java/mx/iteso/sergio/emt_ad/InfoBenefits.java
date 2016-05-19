@@ -90,7 +90,14 @@ public class InfoBenefits extends AppCompatActivity {
                     return new Ben4();
                 case 4:
                     return new Ben5();
-
+                case 5:
+                    return new Ben6();
+                case 6:
+                    return new Ben7();
+                case 7:
+                    return new Ben8();
+                case 8:
+                    return new Ben9();
                 default:
                     return new Ben1();
             }
@@ -100,7 +107,7 @@ public class InfoBenefits extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 5 total pages.
-            return 5;
+            return 9;
         }
 
         @Override

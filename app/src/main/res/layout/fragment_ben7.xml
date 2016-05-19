@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/resFondo"
-    tools:context="mx.iteso.sergio.emt_ad.Res6">
+    android:background="@color/benFondo"
+    tools:context="mx.iteso.sergio.emt_ad.Ben7">
 
 
     <TextView
@@ -18,13 +18,13 @@
         android:layout_marginTop="@dimen/appbar_padding_top"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="@string/Res_title"
+        android:text="@string/Ben_title"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/resTitulo"
+        android:textColor="@color/benTitulo"
         android:textSize="35dp" />
 
-    <TextView
 
+    <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -37,14 +37,13 @@
         android:layout_marginTop="@dimen/appbar_padding_top"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="@string/Restricciones_body_6"
+        android:text="@string/Beneficios_body_7"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/requsBody"
         android:textSize="25dp" />
 
 
     <ImageView
-
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -54,8 +53,6 @@
         android:layout_gravity="center_horizontal|bottom"
         android:adjustViewBounds="true"
         android:background="@color/resFondo"
-        android:src="@drawable/piercing" />
-
-
+        android:src="@drawable/img_ben7" />
 
 </RelativeLayout>
