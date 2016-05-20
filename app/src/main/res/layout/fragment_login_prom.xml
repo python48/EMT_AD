@@ -15,19 +15,6 @@
         android:text="Iniciar Sesión"
         android:id="@+id/textView6" />-->
 
-    <Button
-        android:layout_width="219dp"
-        android:layout_height="wrap_content"
-        android:onClick="iniciarSesionClick1"
-        android:text="Iniciar"
-        android:id="@+id/button2"
-        android:layout_x="77dp"
-        android:layout_y="364dp"
-        android:nestedScrollingEnabled="false"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/PasswordProm"
-        android:layout_alignEnd="@+id/PasswordProm" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +35,21 @@
         android:id="@+id/PasswordProm"
         android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="39dp" />
+        android:layout_marginBottom="39dp"
+        android:text="secreto" />
+
+
+    <Button
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:onClick="iniciarSesionClick1"
+        android:text="Iniciar"
+        android:id="@+id/button2"
+        android:layout_x="77dp"
+        android:layout_y="364dp"
+        android:nestedScrollingEnabled="false"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/PasswordProm"
+        android:layout_alignStart="@+id/PasswordProm" />
 
 </RelativeLayout>

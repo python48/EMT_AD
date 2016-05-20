@@ -9,6 +9,7 @@
     android:orientation="vertical"
     tools:context="mx.iteso.sergio.emt_ad.RegistroFragment" >
 
+<!--
 
     <ImageView
         android:layout_width="wrap_content"
@@ -32,15 +33,7 @@
         android:layout_below="@+id/imageView5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:inputType="text"
-        android:text="Nombre"
-        android:id="@+id/NameNewReg"
-        android:layout_below="@+id/UserNameNewReg"
-        android:layout_alignParentLeft="true" />
+-->
 
     <EditText
         android:layout_width="match_parent"
@@ -51,6 +44,17 @@
         android:layout_below="@+id/imageButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="text"
+        android:text="Nombre"
+        android:id="@+id/NameNewReg"
+        android:layout_below="@+id/UserNameNewReg"
+        android:layout_alignParentLeft="true" />
+
 
     <EditText
         android:layout_width="match_parent"
@@ -81,7 +85,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Contraseña"
+        android:text="secreto"
         android:id="@+id/PassWordNewReg"
         android:inputType="textPassword"
         android:layout_below="@+id/UserEmailNewReg"
@@ -89,7 +93,7 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:text="Registrar"
         android:id="@+id/okButton"

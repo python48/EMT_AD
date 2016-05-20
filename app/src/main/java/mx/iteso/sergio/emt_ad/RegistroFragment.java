@@ -32,6 +32,7 @@ public class RegistroFragment extends Fragment {
     public static String LastName2 = "";
     public static String Email = "";
 
+    String value = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,11 +46,27 @@ public class RegistroFragment extends Fragment {
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
+                value = name.getText().toString();
+                if (hasFocus) {
                     // code to execute when EditText loses focus
-                    Name = name.getText().toString();
+                    //Name = name.getText().toString();
+                    if (value.equals("Nombre"))
+                    {
+                        name.setText("");
+                    }
+                    else
+                    {
+                        name.setText(Name);
+                    }
+
+                //aint got focus.
                 } else {
-                    name.setText("");
+                    //name.setText("");
+                    if (value.length() < 1)
+                    {
+                        name.setText("Nombre");
+                    }
+                    Name = value;
                 }
             }
         });
@@ -58,11 +75,23 @@ public class RegistroFragment extends Fragment {
         username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    // code to execute when EditText loses focus
-                    UserName = username.getText().toString();
+                value = username.getText().toString();
+                if (hasFocus) {
+                    if (value.equals("Nombre de usuario"))
+                    {
+                        username.setText("");
+                    }
+                    else
+                    {
+                        username.setText(UserName);
+                    }
+
                 } else {
-                    username.setText("");
+                    if (value.length() < 1)
+                    {
+                        username.setText("Nombre de usuario");
+                    }
+                    UserName = value;
                 }
             }
         });
@@ -71,9 +100,23 @@ public class RegistroFragment extends Fragment {
         passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    // code to execute when EditText loses focus
-                    Secret = passprom.getText().toString();
+                value = username.getText().toString();
+                if (hasFocus) {
+                    // code to execute when EditText loses focus.
+                    if (value.equals("secreto"))
+                    {
+                        passprom.setText("");
+                    }
+                    else
+                    {
+                        passprom.setText(Secret);
+                    }
+                }else {
+                    if (value.length() < 1)
+                    {
+                        passprom.setText("secreto");
+                    }
+                    Secret = value;
                 }
             }
         });
@@ -82,11 +125,24 @@ public class RegistroFragment extends Fragment {
         lastname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    // code to execute when EditText loses focus
-                    LastName = lastname.getText().toString();
+                value = lastname.getText().toString();
+                if (hasFocus) {
+                    // code to execute when EditText loses focus.
+                    if (value.equals("Apellido paterno"))
+                    {
+                        lastname.setText("");
+                    }
+                    else
+                    {
+                        lastname.setText(LastName);
+                    }
+
                 }else
-                    lastname.setText("");
+                    if (value.length() < 1)
+                    {
+                        lastname.setText("Apellido paterno");
+                    }
+                    LastName = value;
             }
         });
 
@@ -94,11 +150,24 @@ public class RegistroFragment extends Fragment {
         lastname2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
+                value = lastname2.getText().toString();
+                if (hasFocus) {
                     // code to execute when EditText loses focus
-                    LastName2 = lastname2.getText().toString();
+                    if (value.equals("Apellido materno"))
+                    {
+                        lastname2.setText("");
+                    }
+                    else
+                    {
+                        lastname2.setText(LastName2);
+                    }
+
                 }else
-                    lastname2.setText("");
+                    if (value.length() < 1)
+                    {
+                        lastname2.setText("Apellido materno");
+                    }
+                    LastName2 = value;
             }
         });
 
@@ -106,28 +175,31 @@ public class RegistroFragment extends Fragment {
         email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
+                value = email.getText().toString();
+                if (hasFocus) {
                     // code to execute when EditText loses focus
                     Email = email.getText().toString();
+
+                    if (value.equals("Correo electronico"))
+                    {
+                        email.setText("");
+                    }
+                    else
+                    {
+                        email.setText(Email);
+                    }
+
                 }else
-                    email.setText("");
+                    if (value.length() < 1)
+                    {
+                        email.setText("Correo electronico");
+                    }
+                    Email = value;
             }
         });
         PassPr = passprom;
 
         final Button button = (Button) view.findViewById(R.id.okButton);
-        button.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    // code to execute when EditText loses focus
-                    Email = email.getText().toString();
-                }else
-                    email.setText("");
-            }
-
-
-        });
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -151,11 +223,19 @@ public class RegistroFragment extends Fragment {
                         // Ya stuff Here.
                         if (Mibandera)
                         {
-                            printAlert("Registro exitoso.");
+                            printAlertConfirmed("Registro exitoso.");
                             RegistroFragment.setbandera(false);
                             RegisterUserActivity.setbandera(false);
                             MainActivity.setbandera(false);//para q cargue el perfil en lugar del login.
-                            goToMain();
+                            //
+                            final Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.i("DELAYED MESSAGE:", "");
+                                    goToMain();
+                                }
+                            }, 2000);
                         }else
                         {
                             printAlert("No se pudo hacer el registro, intenta de nuevo.");
@@ -197,6 +277,25 @@ public class RegistroFragment extends Fragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
+                    }
+                })/*
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })*/
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    private void printAlertConfirmed(String message){
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Atención")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        goToMain();
                     }
                 })/*
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

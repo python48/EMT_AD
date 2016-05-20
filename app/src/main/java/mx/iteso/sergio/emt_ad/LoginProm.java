@@ -29,6 +29,8 @@ public class LoginProm extends Fragment {
     }
 
 
+    String value = "";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,11 +42,27 @@ public class LoginProm extends Fragment {
         username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
+                value = username.getText().toString();
+                if (hasFocus) {
                     // code to execute when EditText loses focus
-                    LoginProm.UserName = username.getText().toString();
-                } else {
+                    //Name = name.getText().toString();
+                    if (value.equals("Nombre de usuario"))
+                    {
                         username.setText("");
+                    }
+                    else
+                    {
+                        username.setText(UserName);
+                    }
+
+                    //aint got focus.
+                } else {
+                    //name.setText("");
+                    if (value.length() < 1)
+                    {
+                        username.setText("Nombre de usuario");
+                    }
+                    UserName = value;
                 }
             }
         });
@@ -53,10 +71,30 @@ public class LoginProm extends Fragment {
         passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
+                value = passprom.getText().toString();
+                if (hasFocus) {
                     // code to execute when EditText loses focus
-                    LoginProm.Secret = passprom.getText().toString();
+                    //Name = name.getText().toString();
+                    if (value.equals("secreto"))
+                    {
+                        passprom.setText("");
+                    }
+                    else
+                    {
+                        passprom.setText(Secret);
+                    }
+
+                    //aint got focus.
+                } else {
+                    //name.setText("");
+                    if (value.length() < 1)
+                    {
+                        passprom.setText("secreto");
+                    }
+                    Secret = value;
                 }
+
+
             }
         });
         PassPr = passprom;
