@@ -2,6 +2,7 @@ package mx.iteso.sergio.emt_ad;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -425,7 +426,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);*/
     }
 
+
+    public void showTimePickerDialog() {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
+    }
+
+    public void showDatePickerDialog() {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), "datePicker");
+
+    }
+
     private void goToTest() {
+
+        //showDatePickerDialog();
         Intent intent = new Intent(this, TestActivityN.class);
         startActivity(intent);
     }
