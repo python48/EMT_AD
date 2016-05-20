@@ -27,39 +27,58 @@
             android:layout_height="97dp"
             android:layout_column="0"
             android:layout_row="0"
-            android:background="#bde2ca"
+            android:scaleType="fitCenter"
             android:onClick="req_click"
-            android:src="@drawable/req_button" />
+            android:background="#efefef"
+            android:src="@drawable/masrequisitos" />
+
+        <ImageButton
+            android:layout_height="10dp"
+            android:layout_row="1"></ImageButton>
 
         <ImageButton
             android:id="@+id/button_res"
             android:layout_width="match_parent"
             android:layout_height="93dp"
             android:layout_column="0"
-            android:layout_row="1"
-            android:background="#fbccca"
+            android:layout_row="2"
+            android:scaleType="fitCenter"
             android:onClick="res_click"
-            android:src="@drawable/res_button" />
+            android:background="#efefef"
+            android:src="@drawable/masrestricciones" />
+
+        <ImageButton
+            android:layout_height="10dp"
+            android:layout_row="3"></ImageButton>
 
         <ImageButton
             android:id="@+id/button_proc"
             android:layout_width="match_parent"
             android:layout_height="94dp"
             android:layout_column="0"
-            android:layout_row="2"
-            android:background="#d6e6fb"
+            android:layout_row="4"
             android:onClick="proc_click"
-            android:src="@drawable/proc_button" />
+            android:background="#efefef"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pasproceso" />
+
+
+        <ImageButton
+            android:layout_height="10dp"
+            android:layout_row="5"></ImageButton>
 
         <ImageButton
             android:id="@+id/button_benef"
+            android:scaleType="fitCenter"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_column="0"
-            android:layout_row="3"
-            android:background="#fcb3cc"
+            android:layout_row="6"
             android:onClick="benef_click"
-            android:src="@drawable/benef_button" />
+            android:background="#efefef"
+            android:src="@drawable/masinfo2"
+            />
+
     </GridLayout>
 
 
