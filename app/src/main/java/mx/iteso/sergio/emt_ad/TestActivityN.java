@@ -45,7 +45,7 @@ public class TestActivityN extends AppCompatActivity {
                 bt1.setText("No");
 
                 ImageView image = (ImageView) findViewById(R.id.imagenDeArriba);
-                image.setImageResource(R.drawable.test_06);//la imagen es la del embarazo.
+                image.setImageResource(R.drawable.test_06_1);//la imagen es la del embarazo.
 
                 TextView tv = (TextView) findViewById(R.id.questionText);
                 tv.setText("¿Estás embarazada o lo tuviste en los últimos seis meses?");
@@ -53,7 +53,7 @@ public class TestActivityN extends AppCompatActivity {
                 break;
             case ONE:
                 ImageView image1 = (ImageView) findViewById(R.id.imagenDeArriba);
-                image1.setImageResource(R.drawable.test_09);
+                image1.setImageResource(R.drawable.test_09_1);
 
                 TextView tv1 = (TextView) findViewById(R.id.questionText);
                 tv1.setText("¿Tú o tu pareja se han hecho algún tatuaje, piercing o acupuntura en los últimos 12 meses?");
@@ -61,7 +61,7 @@ public class TestActivityN extends AppCompatActivity {
                 break;
             case TWO:
                 ImageView image2 = (ImageView) findViewById(R.id.imagenDeArriba);
-                image2.setImageResource(R.drawable.test_07);//
+                image2.setImageResource(R.drawable.test_07_1);//
 
                 TextView tv2 = (TextView) findViewById(R.id.questionText);
                 tv2.setText("¿Has padecido algún problema hemorrágico o enfermedad de la sangre como anemia o exceso de glóbulos rojos?");
@@ -69,7 +69,7 @@ public class TestActivityN extends AppCompatActivity {
                 break;
             case THREE:
                 ImageView image3 = (ImageView) findViewById(R.id.imagenDeArriba);
-                image3.setImageResource(R.drawable.test_10);//
+                image3.setImageResource(R.drawable.test_10_1);//
 
                 TextView tv3 = (TextView) findViewById(R.id.questionText);
                 tv3.setText("¿Tienes alguna enfermedad grave o crónica de pulmones, corazón, cerebro, riñones, tiroides, o aparato digestivo?");
@@ -77,7 +77,7 @@ public class TestActivityN extends AppCompatActivity {
                 break;
             case FOUR:
                 ImageView image4 = (ImageView) findViewById(R.id.imagenDeArriba);
-                image4.setImageResource(R.drawable.test_08);//
+                image4.setImageResource(R.drawable.test_08_1);//
 
                 TextView tv4 = (TextView) findViewById(R.id.questionText);
                 tv4.setText("¿Has tenido Hepatitis B después de los diez años de edad?");
@@ -85,7 +85,7 @@ public class TestActivityN extends AppCompatActivity {
                 break;
             case FIVE:
                 ImageView image5 = (ImageView) findViewById(R.id.imagenDeArriba);
-                image5.setImageResource(R.drawable.test_04);//
+                image5.setImageResource(R.drawable.test_04_1);//
 
                 TextView tv5 = (TextView) findViewById(R.id.questionText);
                 tv5.setText("¿Has tenido Hepatitis C?");
@@ -93,7 +93,7 @@ public class TestActivityN extends AppCompatActivity {
                 break;
             case SIX:
                 ImageView image6 = (ImageView) findViewById(R.id.imagenDeArriba);
-                image6.setImageResource(R.drawable.test_05);//
+                image6.setImageResource(R.drawable.test_05_1);//
 
                 TextView tv6 = (TextView) findViewById(R.id.questionText);
                 tv6.setText("¿Estás bajo tratamiento médico actualmente?");
@@ -101,7 +101,7 @@ public class TestActivityN extends AppCompatActivity {
                 break;
             case SEVEN:
                 ImageView image7 = (ImageView) findViewById(R.id.imagenDeArriba);
-                image7.setImageResource(R.drawable.test_02);//
+                image7.setImageResource(R.drawable.test_02_1);//
 
                 TextView tv7 = (TextView) findViewById(R.id.questionText);
                 tv7.setText("¿Tienes diabetes que requiera insulina como tratamiento?");
@@ -109,7 +109,7 @@ public class TestActivityN extends AppCompatActivity {
                 break;
             case EIGHT:
                 ImageView image8 = (ImageView) findViewById(R.id.imagenDeArriba);
-                image8.setImageResource(R.drawable.test_03);//
+                image8.setImageResource(R.drawable.test_03_1);//
 
                 TextView tv8 = (TextView) findViewById(R.id.questionText);
                 tv8.setText("¿Te consideras sano?");
@@ -136,7 +136,7 @@ public class TestActivityN extends AppCompatActivity {
                 bt1.setText("No");
 
                 ImageView image = (ImageView) findViewById(R.id.imagenDeArriba);
-                image.setImageResource(R.drawable.test_09);//la imagen es un piercing.
+                image.setImageResource(R.drawable.test_09_1);//la imagen es un piercing.
 
                 TextView tv = (TextView) findViewById(R.id.questionText);
                 tv.setText("¿Tú o tu pareja se han hecho algún tatuaje, piercing o acupuntura en los últimos 12 meses?");

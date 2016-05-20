@@ -38,7 +38,9 @@
         android:layout_y="364dp"
         android:nestedScrollingEnabled="false"
         android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#f14949"
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="219dp"
@@ -51,6 +53,8 @@
         android:nestedScrollingEnabled="false"
         android:layout_below="@+id/imageView4"
         android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        android:layout_alignStart="@+id/button"
+        android:background="#f14949"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

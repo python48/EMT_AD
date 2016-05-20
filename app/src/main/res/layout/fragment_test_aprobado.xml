@@ -37,7 +37,9 @@
         android:layout_below="@+id/imageView4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:nestedScrollingEnabled="false" />
+        android:nestedScrollingEnabled="false"
+        android:background="#f14949"
+        android:textColor="#ffffff" />
 
 
 </RelativeLayout>
