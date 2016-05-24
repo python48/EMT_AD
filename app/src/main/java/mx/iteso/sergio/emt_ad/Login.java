@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import mx.iteso.sergio.emt_ad.R;
 
+import static mx.iteso.sergio.emt_ad.R.layout.fragment_login;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -24,7 +26,7 @@ public class Login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return inflater.inflate(fragment_login, container, false);
     }
 
 }

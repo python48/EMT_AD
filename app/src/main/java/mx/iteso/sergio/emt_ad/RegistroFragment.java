@@ -3,7 +3,13 @@ package mx.iteso.sergio.emt_ad;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.FileDescriptor;
+import java.io.IOException;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -31,6 +42,8 @@ public class RegistroFragment extends Fragment {
     public static String LastName = "";
     public static String LastName2 = "";
     public static String Email = "";
+
+    private static int RESULT_LOAD_IMAGE = 1;
 
     String value = "";
 
@@ -205,6 +218,8 @@ public class RegistroFragment extends Fragment {
             public void onClick(View v) {
 
                 String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+               //String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+
                 RequestPackage p = new RequestPackage();
                 p.setMethod("POST");
                 p.setUri(uri);
@@ -245,11 +260,66 @@ public class RegistroFragment extends Fragment {
 
             }
         });
+        
+/*
+        ImageButton buttonLoadImage = (ImageButton) view.findViewById(R.id.buttonLoadPicture);
+        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
 
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });*/
 
         return view;
-
     }
+
+/*
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            ImageView imageView = (ImageView) view.findViewById(R.id.imgView);
+
+            Bitmap bmp = null;
+            try {
+                bmp = getBitmapFromUri(selectedImage);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            imageView.setImageBitmap(bmp);
+
+        }
+    }
+
+    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptor =
+                getContentResolver().openFileDescriptor(uri, "r");
+        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+        parcelFileDescriptor.close();
+        return image;
+    }
+*/
+
 
     void updatePasPromText(){
         Secret =
