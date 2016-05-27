@@ -28,9 +28,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     private GoogleApiClient client;
     private static boolean mibandera = false;
     private static boolean mibandera2 = false;
+    private Object GlobalView;
+    private ListView GlobalListView;
 
     public static void setbandera(boolean value){
         mibandera = value;
@@ -153,6 +157,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        //GlobalListView = (ListView) findViewById(R.id.listViewAnalisis);
+        //populateListView();
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
@@ -167,18 +174,17 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
 
-/*
-        MyCustomClass myCustomClass = MyCustomClass.getInstance();
-        myCustomClass.addEventListener(Event.COMPLETE, new IEventHandler() {
-            @Override
-            public void callback(Event event) {
-                Log.d("Event callback", "i am in callback " + event.getStrType() + " :: param = " + event.getParams());
-                requestData("http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion");
-            }
-        });
-        Log.d("Event callback","i am going to call");
-        myCustomClass.myCallback();*/
+    }
 
+    private void populateListView() {
+        String [] myItems = {"uno","dos","tres"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this,
+                R.layout.lista_hospital,
+                myItems);
+
+        //ListView list = (ListView) findViewById(R.id.listView);
+        GlobalListView.setAdapter(adapter);
     }
 
     static int randData = 0;

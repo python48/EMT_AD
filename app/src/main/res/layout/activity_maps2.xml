@@ -14,5 +14,12 @@
         tools:context="mx.iteso.sergio.emt_ad.MapsActivity">
     </fragment>
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewHospitales"
+        android:layout_gravity="center"
+        />
+
 
 </LinearLayout>
