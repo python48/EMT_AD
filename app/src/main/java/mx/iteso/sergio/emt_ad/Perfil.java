@@ -1,11 +1,14 @@
 package mx.iteso.sergio.emt_ad;
 
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -14,6 +17,8 @@ import android.widget.TextView;
  */
 public class Perfil extends Fragment {
 
+
+    private ImageView GlobalImage;
 
     public Perfil() {
         // Required empty public constructor
@@ -35,6 +40,9 @@ public class Perfil extends Fragment {
         tv1.setText(user.get_tipo_sangre());
         TextView tv2 = (TextView) view.findViewById(R.id.correoTV);
         tv2.setText(user.getCorreo());
+        String imagepath = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("imagepath", "defaultStringIfNothingFound");
+        GlobalImage = (ImageView) view.findViewById(R.id.imageView5);
+        GlobalImage.setImageURI(Uri.parse(imagepath));
 
         return view;
 

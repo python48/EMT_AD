@@ -277,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }*/
 
+    //aqui va a obtener el token.
     public void login(String un, String ps){
         final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
         RequestPackage p = new RequestPackage();
@@ -326,6 +327,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Log.i("DELAYED MESSAGE:", "Hemos esperado por");
+                            //aqui hace el login correctamente y vuelve a cargar GUI. para cargar con el perfil en lugar de la ventana de login.
                             refreshPage();
                         }
                     }, 2000);

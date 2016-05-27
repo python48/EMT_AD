@@ -1,5 +1,6 @@
 package mx.iteso.sergio.emt_ad;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -29,6 +31,9 @@ import java.io.IOException;
  * A placeholder fragment containing a simple view.
  */
 public class RegistroFragment extends Fragment {
+
+    private static final int PICK_IMAGE = 1;
+    private ImageView GlobalImageView;
 
     public RegistroFragment() {
     }
@@ -260,65 +265,48 @@ public class RegistroFragment extends Fragment {
 
             }
         });
-        
-/*
+
         ImageButton buttonLoadImage = (ImageButton) view.findViewById(R.id.buttonLoadPicture);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
 
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                //intent.setType("image/*");
+                //intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult( i, PICK_IMAGE );
             }
-        });*/
+        });
+
+        GlobalImageView = (ImageView) view.findViewById(R.id.imageView5);
 
         return view;
     }
 
-/*
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            if (data == null) {
+                //Display an error
+                return;
+            }
+            Uri pickedImage = data.getData();
+            String[] filePath = { MediaStore.Images.Media.DATA };
 
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
+            Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
             cursor.moveToFirst();
 
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
+            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            GlobalImageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+
             cursor.close();
 
-            ImageView imageView = (ImageView) view.findViewById(R.id.imgView);
-
-            Bitmap bmp = null;
-            try {
-                bmp = getBitmapFromUri(selectedImage);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            imageView.setImageBitmap(bmp);
+            PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("imagepath", pickedImage.toString()).commit();
 
         }
     }
-
-    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-        parcelFileDescriptor.close();
-        return image;
-    }
-*/
 
 
     void updatePasPromText(){
