@@ -35,29 +35,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
-        //mMap.setMyLocationEnabled(true);
-
-        /*mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-
-                String uri = "waze://?ll=40.761043, -73.980545&navigate=yes";
-                startActivity(new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse(uri)));
-
-                return false;
-            }
-        });*/
         populateListView();
     }
 
     private void populateListView() {
-        String [] myItems = {"Hello, World!","Hello, World!","Hello, World!","Hello, World!"};
+        String [] myItems = {"CETSJ","Hospital Puerto Vallarta","Hospital La Barca","Hospital Autlán","Hospital Cd. Guzmán"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
+                R.layout.simple_sergio_list,
+                R.id.texto_encabezado,
                 myItems);
 
         ListView list = (ListView) findViewById(R.id.listViewHospitales);
