@@ -37,6 +37,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ListView listaHospitales = null;
     private Button btnExpBottomSheet;
     private LinearLayout bottomSheet;
+    private BottomSheetBehavior bsb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         bottomSheet = (LinearLayout) findViewById(R.id.bottomSheet1);
 
-        final BottomSheetBehavior bsb = BottomSheetBehavior.from(bottomSheet);
+        bsb = BottomSheetBehavior.from(bottomSheet);
 
         //bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
         btnExpBottomSheet = (Button)findViewById(R.id.btnExpBottomSheet1);
@@ -96,8 +97,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
+        //bsb.setState(BottomSheetBehavior.STATE_HIDDEN);
+
     }
 
+
+    ///Methods
     private void populateListView() {
         String [] myItems = {"CETSJ, Zapopan","Hospital Reg. Puerto Vallarta","Hospital Reg. La Barca","Hospital Reg. Autlán","Hospital Reg. Ameca","Hospital Reg Cd. Guzmán","Hospital Reg. Lagos de Moreno","Hospital Reg. Tepatitlán"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -199,6 +204,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public boolean onMarkerClick(Marker marker) {
 
+                bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+/*
                 LatLng latlng = marker.getPosition();
                 float lat = (float) latlng.latitude;
                 float lng = (float) latlng.longitude;
@@ -206,6 +214,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 String uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
                 startActivity(new Intent(android.content.Intent.ACTION_VIEW,
                         Uri.parse(uri)));
+*/
 
                 return false;
             }
