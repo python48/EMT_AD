@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +34,9 @@ import static mx.iteso.sergio.emt_ad.R.id.map;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private ListView listaHospitales = null;
+    private Button btnExpBottomSheet;
+    private LinearLayout bottomSheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         listaHospitales.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position)
-                {
+                switch (position) {
                     case 0:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.717713, -103.36971), 15));//lat,long,zoom
                         break;
@@ -79,8 +84,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        bottomSheet = (LinearLayout) findViewById(R.id.bottomSheet1);
 
+        final BottomSheetBehavior bsb = BottomSheetBehavior.from(bottomSheet);
 
+        //bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
+        btnExpBottomSheet = (Button)findViewById(R.id.btnExpBottomSheet1);
+        btnExpBottomSheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
     }
 
     private void populateListView() {
@@ -95,7 +110,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         listaHospitales.setAdapter(adapter);
     }
 
-    private ListView listaHospitales = null;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
