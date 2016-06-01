@@ -8,9 +8,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,7 +25,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import static mx.iteso.sergio.emt_ad.R.id.listViewHospitales;
+import static mx.iteso.sergio.emt_ad.R.id.map;
+
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -30,26 +36,66 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps2);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         populateListView();
+
+        listaHospitales.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position)
+                {
+                    case 0:
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.717713, -103.36971), 15));//lat,long,zoom
+                        break;
+                    case 1:
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.669692, -105.210475), 15));//lat,long,zoom
+                        break;
+                    case 2:
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.281853, -102.548604), 15));//lat,long,zoom
+                        break;
+                    case 3:
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(19.769113, -104.355011), 15));//lat,long,zoom
+                        break;
+                    case 4:
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.533831, -104.03411), 15));//lat,long,zoom
+                        break;
+                    case 5:
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(19.697109, -103.478166), 15));//lat,long,zoom
+                        break;
+                    case 6:
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(21.355804, -101.934184), 15));//lat,long,zoom
+                        break;
+                    case 7:
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.811547, -102.779403), 15));//lat,long,zoom
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+
+
     }
 
     private void populateListView() {
-        String [] myItems = {"CETSJ","Hospital Puerto Vallarta","Hospital La Barca","Hospital Autlán","Hospital Cd. Guzmán"};
+        String [] myItems = {"CETSJ, Zapopan","Hospital Reg. Puerto Vallarta","Hospital Reg. La Barca","Hospital Reg. Autlán","Hospital Reg. Ameca","Hospital Reg Cd. Guzmán","Hospital Reg. Lagos de Moreno","Hospital Reg. Tepatitlán"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 R.layout.simple_sergio_list,
                 R.id.texto_encabezado,
                 myItems);
 
-        ListView list = (ListView) findViewById(R.id.listViewHospitales);
-        list.setAdapter(adapter);
-
+        listaHospitales = (ListView) findViewById(listViewHospitales);
+        listaHospitales.setAdapter(adapter);
     }
+
+    private ListView listaHospitales = null;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
