@@ -5,11 +5,16 @@
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/texto_encabezado"
+        android:text="Dummy text for hospital name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:gravity="right"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall" />
+        android:gravity="left"
+        android:textSize="20dp"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:layout_toRightOf="@+id/texto_cuerpo"
+        android:layout_toEndOf="@+id/texto_cuerpo"
+        android:layout_alignBottom="@+id/texto_cuerpo" />
 
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/texto_cuerpo"
