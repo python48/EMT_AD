@@ -118,7 +118,7 @@ public class RegistroFragment extends Fragment {
         passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                value = username.getText().toString();
+                value = passprom.getText().toString();
                 if (hasFocus) {
                     // code to execute when EditText loses focus.
                     if (value.equals("secreto"))
@@ -217,13 +217,14 @@ public class RegistroFragment extends Fragment {
         });
         PassPr = passprom;
 
+        //Boton para realizar el registro.
         final Button button = (Button) view.findViewById(R.id.okButton);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
                 String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
-               //String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+               //String uri = "http://requestb.in/wyx8r2wy";
 
                 RequestPackage p = new RequestPackage();
                 p.setMethod("POST");
@@ -233,25 +234,27 @@ public class RegistroFragment extends Fragment {
                 String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", Email, UserName, Secret, Name, LastName, LastName2);
                 p.setParam("Info", json);
 
+                //intento de registro
                 ApiConnector.getInstance().execute(p);
 
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Log.i("DELAYED MESSAGE:", "Hemos esperado por");
-                        // Ya stuff Here.
-                        if (Mibandera)
+                        Log.i("DELAYED MESSAGE:", "");
+                        /////// Ya stuff Here.
+                        if (Mibandera)//si el registro fue exitoso
                         {
                             printAlertConfirmed("Registro exitoso.");
                             RegistroFragment.setbandera(false);
                             RegisterUserActivity.setbandera(false);
                             MainActivity.setbandera(false);//para q cargue el perfil en lugar del login.
-                            //
+
                             final Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
+                                    /////// ya stuff Here.
                                     Log.i("DELAYED MESSAGE:", "");
                                     goToMain();
                                 }
@@ -261,7 +264,7 @@ public class RegistroFragment extends Fragment {
                             printAlert("No se pudo hacer el registro, intenta de nuevo.");
                         }
                     }
-                }, 2000);
+                }, 3000);
 
             }
         });

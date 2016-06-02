@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // login button event.
+    // boton que abrira la ventanan de login.
     public void iniciarSesionClick(View view) {
                                         //http://services.hanselandpetal.com/feeds/flowers.json      //http://services.hanselandpetal.com/restful.php
         if (isOnline()){
@@ -286,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
     //aqui va a obtener el token.
     public void login(String un, String ps){
         final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+        //final String uri = "http://requestb.in/wyx8r2wy";
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
         p.setUri(uri);
@@ -316,8 +317,8 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.i("DELAYED MESSAGE:", "se debe ya haber recibido el token..");
                 if (mibandera) {
+                    Log.i("DELAYED MESSAGE:", "se debe ya haber recibido el token");
                     String token = ApiConnector.getInstance().getToken();
                     String json = String.format("{\"funcion\":\"obten\", \"codigo\":\"%s\"} ", token);
                     RequestPackage r = new RequestPackage();
@@ -325,6 +326,7 @@ public class MainActivity extends AppCompatActivity {
                     r.setUri(uri);
                     r.setParam("Info", json);
 
+                    //Intento de Login.
                     ApiConnector a = new ApiConnector();
                     a.execute(r);
 
