@@ -35,6 +35,7 @@ public class RegistroFragment extends Fragment {
     private static final int PICK_IMAGE = 1;
     private ImageView GlobalImageView;
 
+
     public RegistroFragment() {
     }
 
@@ -47,6 +48,8 @@ public class RegistroFragment extends Fragment {
     public static String LastName = "";
     public static String LastName2 = "";
     public static String Email = "";
+    public static String Telefono = "";
+    public static String Sangre = "";
 
     private static int RESULT_LOAD_IMAGE = 1;
 
@@ -208,11 +211,65 @@ public class RegistroFragment extends Fragment {
                     }
 
                 }else
-                    if (value.length() < 1)
+                if (value.length() < 1)
+                {
+                    email.setText("Correo electronico");
+                }
+                Email = value;
+            }
+        });
+
+        final EditText telefono = (EditText) view.findViewById(R.id.telefonoNewReg);
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                value = telefono.getText().toString();
+                if (hasFocus) {
+                    // code to execute when EditText loses focus
+                    Telefono = telefono.getText().toString();
+
+                    if (value.equals("teléfono"))
                     {
-                        email.setText("Correo electronico");
+                        telefono.setText("");
                     }
-                    Email = value;
+                    else
+                    {
+                        telefono.setText(Telefono);
+                    }
+
+                }else
+                if (value.length() < 1)
+                {
+                    telefono.setText("teléfono");
+                }
+                Telefono = value;
+            }
+        });
+
+        final EditText sangre = (EditText) view.findViewById(R.id.sangreNewReg);
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                value = sangre.getText().toString();
+                if (hasFocus) {
+                    // code to execute when EditText loses focus
+                    Sangre = sangre.getText().toString();
+
+                    if (value.equals("tipo de sangre: ej. a+"))
+                    {
+                        sangre.setText("a+");
+                    }
+                    else
+                    {
+                        sangre.setText(Sangre);
+                    }
+
+                }else
+                if (value.length() < 1)
+                {
+                    sangre.setText("tipo de sangre: ej. a+");
+                }
+                Sangre = value;
             }
         });
         PassPr = passprom;

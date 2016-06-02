@@ -91,6 +91,24 @@
         android:layout_below="@+id/UserEmailNewReg"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="teléfono"
+        android:id="@+id/telefonoNewReg"
+        android:inputType="text"
+        android:layout_below="@+id/PassWordNewReg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="tipo de sangre: ej. a+"
+        android:id="@+id/sangreNewReg"
+        android:inputType="text"
+        android:layout_below="@+id/telefonoNewReg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="200dp"
