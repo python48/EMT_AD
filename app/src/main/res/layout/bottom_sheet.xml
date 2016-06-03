@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottomSheet1"
     android:layout_width="match_parent"
@@ -10,23 +10,32 @@
     app:behavior_peekHeight="64dp" >
 
     <TextView
+        android:id="@+id/encabezado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:padding="16dp"
-        android:text="BOTTOM SHIT" />
+        android:text="Busca el hospital más cercano." />
 
     <TextView
+        android:id="@+id/cuerpo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:padding="16dp"
-        android:text="Dummy text for bottom shit :P" />
+        android:text=""
+        android:layout_below="@+id/encabezado"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnExpBottomSheet1"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:text="Click me"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/route_icon_mini"
+        android:text="Click me"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-</LinearLayout>
+</RelativeLayout>

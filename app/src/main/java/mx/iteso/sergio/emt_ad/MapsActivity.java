@@ -11,14 +11,18 @@ import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +32,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import static mx.iteso.sergio.emt_ad.R.id.button;
+import static mx.iteso.sergio.emt_ad.R.id.cuerpo;
+import static mx.iteso.sergio.emt_ad.R.id.encabezado;
 import static mx.iteso.sergio.emt_ad.R.id.listViewHospitales;
 import static mx.iteso.sergio.emt_ad.R.id.map;
 
@@ -35,9 +42,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     private ListView listaHospitales = null;
-    private Button btnExpBottomSheet;
-    private LinearLayout bottomSheet;
+    private ImageButton btnExpBottomSheet;
+    private RelativeLayout bottomSheet;
     private BottomSheetBehavior bsb;
+    private TextView tv_tite;
+    private TextView tv_cuerpo;
+    private int Position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +64,82 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         listaHospitales.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Position = position;
                 switch (position) {
                     case 0:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.717713, -103.36971), 15));//lat,long,zoom
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        tv_tite = (TextView) findViewById(R.id.encabezado);
+                        tv_cuerpo = (TextView) findViewById(R.id.cuerpo);
+                        tv_tite.setText("Ver ruta hacía CETSJ, Zapopan");
+                        //tv_cuerpo.setText("Av.Zoquipan.");
+                        btnExpBottomSheet.setVisibility(View.VISIBLE);
+
                         break;
                     case 1:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.669692, -105.210475), 15));//lat,long,zoom
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        tv_tite = (TextView) findViewById(R.id.encabezado);
+                        tv_cuerpo = (TextView) findViewById(R.id.cuerpo);
+                        tv_tite.setText("Ver ruta hacía Hospital Regional, Puerto Vallarta");
+                        //tv_cuerpo.setText("Av.Zoquipan.");
+                        btnExpBottomSheet.setVisibility(View.VISIBLE);
                         break;
                     case 2:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.281853, -102.548604), 15));//lat,long,zoom
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        tv_tite = (TextView) findViewById(R.id.encabezado);
+                        tv_cuerpo = (TextView) findViewById(R.id.cuerpo);
+                        tv_tite.setText("Ver ruta hacía Hospital Regional, La Barca");
+                        //tv_cuerpo.setText("Av.Zoquipan.");
                         break;
                     case 3:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(19.769113, -104.355011), 15));//lat,long,zoom
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        tv_tite = (TextView) findViewById(R.id.encabezado);
+                        tv_cuerpo = (TextView) findViewById(R.id.cuerpo);
+                        tv_tite.setText("Ver ruta hacía Hospital Regional, Autlán");
+                        //tv_cuerpo.setText("Av.Zoquipan.");
+                        btnExpBottomSheet.setVisibility(View.VISIBLE);
                         break;
                     case 4:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.533831, -104.03411), 15));//lat,long,zoom
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        tv_tite = (TextView) findViewById(R.id.encabezado);
+                        tv_cuerpo = (TextView) findViewById(R.id.cuerpo);
+                        tv_tite.setText("Ver ruta hacía Hospital Regional, Ameca");
+                        //tv_cuerpo.setText("Av.Zoquipan.");
+                        btnExpBottomSheet.setVisibility(View.VISIBLE);
                         break;
                     case 5:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(19.697109, -103.478166), 15));//lat,long,zoom
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        tv_tite = (TextView) findViewById(R.id.encabezado);
+                        tv_cuerpo = (TextView) findViewById(R.id.cuerpo);
+                        tv_tite.setText("Ver ruta hacía Hospital Regional, CD. Guzmán");
+                        //tv_cuerpo.setText("Av.Zoquipan.");
+                        btnExpBottomSheet.setVisibility(View.VISIBLE);
                         break;
                     case 6:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(21.355804, -101.934184), 15));//lat,long,zoom
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        tv_tite = (TextView) findViewById(R.id.encabezado);
+                        tv_cuerpo = (TextView) findViewById(R.id.cuerpo);
+                        tv_tite.setText("Ver ruta hacía Hospital Regional, Lagos de Moreno");
+                        //tv_cuerpo.setText("Av.Zoquipan.");
+                        btnExpBottomSheet.setVisibility(View.VISIBLE);
                         break;
                     case 7:
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.811547, -102.779403), 15));//lat,long,zoom
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        tv_tite = (TextView) findViewById(R.id.encabezado);
+                        tv_cuerpo = (TextView) findViewById(R.id.cuerpo);
+                        tv_tite.setText("Ver ruta hacía Hospital Regional, Tepatitlán");
+                        //tv_cuerpo.setText("Av.Zoquipan.");
+                        btnExpBottomSheet.setVisibility(View.VISIBLE);
                         break;
                     default:
                         break;
@@ -85,20 +147,106 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        bottomSheet = (LinearLayout) findViewById(R.id.bottomSheet1);
-
+        bottomSheet = (RelativeLayout) findViewById(R.id.bottomSheet1);
         bsb = BottomSheetBehavior.from(bottomSheet);
 
-        //bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
-        btnExpBottomSheet = (Button)findViewById(R.id.btnExpBottomSheet1);
+        //Realizar la llamada telefonica.
+        btnExpBottomSheet = (ImageButton)findViewById(R.id.btnExpBottomSheet1);
         btnExpBottomSheet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
+                //realizar llamada telefonica o la ruta para waze.
+
+                LatLng latlng = new LatLng(20.717713,-103.36971);
+                float lat = (float) latlng.latitude;
+                float lng = (float) latlng.longitude;
+                String uri="";
+
+                //int i = listaHospitales.;
+
+                switch (Position)
+                {
+                    case 0:
+                        latlng = new LatLng(20.717713,-103.36971);
+                        lat = (float) latlng.latitude;
+                        lng = (float) latlng.longitude;
+
+                        uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                        break;
+                    case 1:
+                        latlng = new LatLng(20.669692,-105.210475);
+                        lat = (float) latlng.latitude;
+                        lng = (float) latlng.longitude;
+
+                        uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                        break;
+                    case 2:
+                        latlng = new LatLng(20.281853,-102.548604);
+                        lat = (float) latlng.latitude;
+                        lng = (float) latlng.longitude;
+
+                        uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                        break;
+                    case 3:
+                        latlng = new LatLng(19.769113,-104.355011);
+                        lat = (float) latlng.latitude;
+                        lng = (float) latlng.longitude;
+
+                        uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                        break;
+                    case 4:
+                        latlng = new LatLng(20.533831,-104.03411);
+                        lat = (float) latlng.latitude;
+                        lng = (float) latlng.longitude;
+
+                        uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                        break;
+                    case 5:
+                        latlng = new LatLng(19.697109,-103.478166);
+                        lat = (float) latlng.latitude;
+                        lng = (float) latlng.longitude;
+
+                        uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                        break;
+                    case 6:
+                        latlng = new LatLng(21.355804,-101.934184);
+                        lat = (float) latlng.latitude;
+                        lng = (float) latlng.longitude;
+
+                        uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                        break;
+                    case 7:
+                        latlng = new LatLng(20.811547,-102.779403);
+                        lat = (float) latlng.latitude;
+                        lng = (float) latlng.longitude;
+
+                        uri = "waze://?ll="+lat+", "+lng+"&navigate=yes";
+                        startActivity(new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(uri)));
+                        break;
+                    default:
+                        break;
+                }
+
+                //esconder la barra
+                bsb.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });
-        //bsb.setState(BottomSheetBehavior.STATE_HIDDEN);
-
+        btnExpBottomSheet.setVisibility(View.INVISIBLE);
     }
 
 
