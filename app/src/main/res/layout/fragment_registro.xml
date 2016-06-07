@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="mx.iteso.sergio.emt_ad.RegistroFragment" >
+    tools:context="mx.iteso.sergio.emt_ad1.RegistroFragment" >
 
 
 

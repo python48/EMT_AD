@@ -7,10 +7,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="mx.iteso.sergio.emt_ad.Registro2">
+    tools:context="mx.iteso.sergio.emt_ad1.Registro2">
 
 
-    <fragment android:name="mx.iteso.sergio.emt_ad.RegistroFragment"
+    <fragment android:name="mx.iteso.sergio.emt_ad1.RegistroFragment"
         android:id="@+id/headlines_fragment"
         android:layout_weight="1"
         android:layout_width="match_parent"

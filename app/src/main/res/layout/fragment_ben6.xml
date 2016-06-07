@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/benFondo"
-    tools:context="mx.iteso.sergio.emt_ad.Ben6">
+    tools:context="mx.iteso.sergio.emt_ad1.Ben6">
 
     <TextView
         android:id="@+id/textView4"
@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/appbar_padding_top"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="@string/Ben_title"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/benTitulo"
         android:textSize="35dp" />

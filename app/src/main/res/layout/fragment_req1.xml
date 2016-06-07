@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/requsFondo"
     android:orientation="vertical"
-    tools:context="mx.iteso.sergio.emt_ad.Req1">
+    tools:context="mx.iteso.sergio.emt_ad1.Req1">
 
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="@string/Requisitos_title"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/requsTitulo"
         android:textSize="35dp" />

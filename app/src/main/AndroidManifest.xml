@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mx.iteso.sergio.emt_ad">
+    package="mx.iteso.sergio.emt_ad1">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="mx.iteso.sergio.emt_ad1.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,20 +34,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InfoActivity"
+            android:name="mx.iteso.sergio.emt_ad1.InfoActivity"
             android:label="@string/title_activity_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".InfoRequirements"
+            android:name="mx.iteso.sergio.emt_ad1.InfoRequirements"
             android:label="@string/title_activity_requirements"
-            android:parentActivityName=".InfoActivity"
+            android:parentActivityName="mx.iteso.sergio.emt_ad1.InfoActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mx.iteso.sergio.emt_ad.InfoActivity" />
+                android:value="mx.iteso.sergio.emt_ad1.InfoActivity" />
         </activity>
         <activity
-            android:name=".AboutActivity"
+            android:name="mx.iteso.sergio.emt_ad1.AboutActivity"
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
@@ -65,19 +65,19 @@
         -->
 
         <activity
-            android:name=".MapsActivity"
+            android:name="mx.iteso.sergio.emt_ad1.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".InfoRestrictions"
+            android:name="mx.iteso.sergio.emt_ad1.InfoRestrictions"
             android:label="@string/title_activity_info_restrictions"
-            android:parentActivityName=".InfoActivity"
+            android:parentActivityName="mx.iteso.sergio.emt_ad1.InfoActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mx.iteso.sergio.emt_ad.InfoActivity" />
+                android:value="mx.iteso.sergio.emt_ad1.InfoActivity" />
         </activity>
         <activity
-            android:name=".InfoBenefits"
+            android:name="mx.iteso.sergio.emt_ad1.InfoBenefits"
             android:label="@string/title_activity_info_benefits"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -89,27 +89,27 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".InfoProceso"
+            android:name="mx.iteso.sergio.emt_ad1.InfoProceso"
             android:label="@string/title_activity_info_proceso"
-            android:parentActivityName=".InfoActivity"
+            android:parentActivityName="mx.iteso.sergio.emt_ad1.InfoActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mx.iteso.sergio.emt_ad.InfoActivity" />
+                android:value="mx.iteso.sergio.emt_ad1.InfoActivity" />
         </activity>
         <activity
-            android:name=".NewMapActivity"
+            android:name="mx.iteso.sergio.emt_ad1.NewMapActivity"
             android:label="@string/title_activity_new_map"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TestActivityN"
+            android:name="mx.iteso.sergio.emt_ad1.TestActivityN"
             android:label="@string/title_activity_test_activity_n"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RegisterUserActivity"
+            android:name="mx.iteso.sergio.emt_ad1.RegisterUserActivity"
             android:label="@string/title_activity_register_user"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Registro2"></activity>
+        <activity android:name="mx.iteso.sergio.emt_ad1.Registro2"></activity>
     </application>
 
 </manifest>

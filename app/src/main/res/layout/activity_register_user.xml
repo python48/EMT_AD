@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="mx.iteso.sergio.emt_ad.RegisterUserActivity">
+    tools:context="mx.iteso.sergio.emt_ad1.RegisterUserActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

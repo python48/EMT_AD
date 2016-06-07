@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="mx.iteso.sergio.emt_ad.InfoActivity"
+    tools:context="mx.iteso.sergio.emt_ad1.InfoActivity"
     tools:showIn="@layout/activity_info">
 
     <GridLayout

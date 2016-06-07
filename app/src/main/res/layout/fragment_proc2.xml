@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/procFondo"
-    tools:context="mx.iteso.sergio.emt_ad.Proc2">
+    tools:context="mx.iteso.sergio.emt_ad1.Proc2">
 
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_marginTop="@dimen/appbar_padding_top"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="@string/proc_titulo"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/procTitulo"
         android:textSize="35dp" />

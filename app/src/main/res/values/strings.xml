@@ -17,7 +17,7 @@
     <string name="reqDescription1">Tener entre 18 y 65 años</string>
     <string name="reqDescription2">Identificación oficial reciente con fotografía</string>
     <string name="reqDescription3">Hacer ayuno mayor a 4 hrs y menor a 12 hrs</string>
-    <string name="title_activity_informacion">Informacion</string>
+    <string name="title_activity_informacion">Información</string>
     <string name="title_activity_nac_test">Fecha de nacimiento</string>
     <string name="title_activity_nacimiento_test">Fecha de nacimiento</string>
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
@@ -26,7 +26,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_maps">Busca tu centro más cercano</string>
     <string name="title_activity_info_restrictions">Restricciones</string>
-    <string name="title_activity_info_benefits">Beneficios e infirmación adicional</string>
+    <string name="title_activity_info_benefits">Información adicional</string>
     <string name="Requisitos_title">Para donar necesitas</string>
     <string name="Requisitos_body_1">Tener entre 18 y 65 años</string>
     <string name="Res_title">No dones</string>
@@ -52,10 +52,10 @@
     <string name="Beneficios_body_8">La donación no disminuye las defensas</string>
     <string name="Beneficios_body_9">No hay riesgo de infección porque los materiales son nuevos y desechables</string>
     <string name="Beneficios_body_4">Tu cuerpo recupera la sangre después de 2 meses puedes donar de nuevo</string>
-    <string name="proc_body_1">Nos aseguramos de que no tengas anemiao alguna otra infección</string>
+    <string name="proc_body_1">Nos aseguramos de que no tengas anemia o alguna otra infección</string>
     <string name="proc_body_2">Obtener el nombre completo del paciente a quien vas a donar y en qué hospital se encuentra</string>
     <string name="proc_titulo">Proceso</string>
-    <string name="proc_body_3">Tomar 450 +- 10ml de sangre con equipo est[eril y desechable</string>
+    <string name="proc_body_3">Tomar 450 +- 10ml de sangre con equipo estéril y desechable</string>
     <string name="proc_body_4">En este punto debes comunicar cualquier molestia para ser atendido oportunamente</string>
     <string name="proc_body_5">Después de donar permanecerás en reposo y se te dará un refrigerio</string>
     <string name="title_activity_info_proceso">Proceso</string>
@@ -153,4 +153,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_registro">Registro</string>
+    <string name="privacy_link">Aviso de privacidad</string>
 </resources>

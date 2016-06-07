@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="mx.iteso.sergio.emt_ad.InfoBenefits">
+    tools:context="mx.iteso.sergio.emt_ad1.InfoBenefits">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
