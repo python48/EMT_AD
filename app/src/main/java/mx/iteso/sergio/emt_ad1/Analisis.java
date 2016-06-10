@@ -4,6 +4,7 @@ package mx.iteso.sergio.emt_ad1;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,15 +51,23 @@ public class Analisis extends Fragment {
 
         GlobalView = inflater.inflate(R.layout.fragment_analisis, container, false);
 
-        populateListView();
+        //populateListView();
+        /*///// Date Dialog
+        EditText txtDate = (EditText) getView().findViewById(R.id.txtdate);
+        txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
 
-
-
+                }
+            }
+        });*/
 
         return GlobalView;
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_analisis, container, false);
     }
+/*
 
     private void populateListView() {
         String [] myItems = {"Agenda una visita"};
@@ -74,12 +84,6 @@ public class Analisis extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Position = position;
-                final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
-                //final String uri = "http://requestb.in/wyx8r2wy";
-                RequestPackage p = new RequestPackage();
-                p.setMethod("POST");
-                p.setUri(uri);
 
                 //Checar que este logueado el usuario.
                 if (!ApiConnector.getInstance().isLoggedIn()) {
@@ -97,66 +101,31 @@ public class Analisis extends Fragment {
                     return;
                 }
 
+                //Position = position;
+                final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+                RequestPackage p = new RequestPackage();
+                p.setMethod("POST");
+                p.setUri(uri);
 
-                ApiConnector.getInstance().setHaciendoCita(true);
                 String token = ApiConnector.getInstance().getToken();
-
                 //String userName="user1", pass="user1";
                 String json = String.format("{\"funcion\":\"ver_cita\", \"codigo\":\"%s\" }", token);
                 p.setParam("Info", json);
                 //p.setParam("Junk", Integer.toString(randData++));
-
                 ApiConnector.getInstance().execute(p);
+//ApiConnector.getInstance().setHaciendoCita(true);
 
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //ApiConnector.getInstance().setHaciendoCita(false);
-
-                        Button mPickDate = (Button) getView().findViewById(R.id.myDatePicker);
-
-                        mPickDate.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
-
-                            }
-                        });
-
-                        // get the current date
-                        final Calendar c = Calendar.getInstance();
-                        mYear = c.get(Calendar.YEAR);
-                        mMonth = c.get(Calendar.MONTH);
-                        mDay = c.get(Calendar.DAY_OF_MONTH);
-
-                        // display the current date
-                        updateDisplay();
-
+                        //do shit here.
                     }
                 }, 2000);
-
-                //
-
-/*
-//                LocalDateTime appoimentDate = new Date(2016,7,4);
-                android.text.format.DateFormat df = new android.text.format.DateFormat();
-                df.format("yyyy-MM-dd hh:mm:ss", new java.util.Date(2016,7,4));
-                //*/
 
             }
         });
         }
-
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DATE_DIALOG_ID:
-                return new DatePickerDialog(this,
-                        mDateSetListener,
-                        mYear, mMonth, mDay);
-        }
-        return null;
-    }
-
+*/
 
     }

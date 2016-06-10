@@ -3,6 +3,7 @@ package mx.iteso.sergio.emt_ad1;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -166,17 +168,7 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
 
-    }
 
-    private void populateListView() {
-        String [] myItems = {"uno","dos","tres"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,
-                R.layout.lista_hospital,
-                myItems);
-
-        //ListView list = (ListView) findViewById(R.id.listView);
-        GlobalListView.setAdapter(adapter);
     }
 
     static int randData = 0;
@@ -474,10 +466,45 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
-    public void showDatePickerDialog() {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
+    public void showDatePickerDialog(final View view) {
 
+        //Checar que este logueado el usuario.
+        if (!ApiConnector.getInstance().isLoggedIn()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Alerta")
+                    .setMessage("Necesitas iniciar sesión.")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // OK
+                            Intent inte = new Intent(view.getContext(), MainActivity.class);
+                            startActivity(inte);
+                        }
+                    })
+                    .setIcon(android.R.drawable.alert_dark_frame)
+                    .show();
+
+            return;
+        }
+        
+        
+        
+        ///// Date Dialog
+        DatePickerFragment dialog = new DatePickerFragment(view);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        dialog.show(ft,"Agendar visita");
+
+
+        /*
+        txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    DatePickerFragment dialog = new DatePickerFragment(v);
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    dialog.show(ft,"Agendar visita");
+                }
+            }
+        });*/
     }
 
     private void goToTest() {
@@ -591,6 +618,8 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
+
+
 /*
     //<Params, Progress, Result>
     private class MyTask extends AsyncTask<RequestPackage, String, String> {
