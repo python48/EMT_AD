@@ -34,6 +34,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 
@@ -265,6 +266,46 @@ public class MainActivity extends AppCompatActivity {
         LoginProm.updatePass();
         login(LoginProm.UserName, LoginProm.Secret);
     }
+
+
+    // agendar una nueva cita.
+    public void agendarNuevaCita(View view) {
+        final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+        //final String uri = "http://requestb.in/wyx8r2wy";
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        //p.setUri("http://requestb.in/1kp9q0p1");
+
+        //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
+        //String userName = "", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
+
+        if (!ApiConnector.getInstance().isLoggedIn()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Alerta")
+                    .setMessage("Necesitas iniciar sesión.")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // OK
+                        }
+                    })
+                    .setIcon(android.R.drawable.alert_dark_frame)
+                    .show();
+
+            return;
+        }
+        String token = ApiConnector.getInstance().getToken();
+
+        //String userName="user1", pass="user1";
+        String json = String.format("{\"funcion\":\"ver_cita\", \"codigo\":\"{0}\" }",token);
+
+        //String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
+        p.setParam("Info", json);
+        //p.setParam("Junk", Integer.toString(randData++));
+
+        ApiConnector.getInstance().execute(p);
+    }
+
 /*
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_ENTER){

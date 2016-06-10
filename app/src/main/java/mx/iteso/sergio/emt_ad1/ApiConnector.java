@@ -15,7 +15,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
     public String getToken(){
         return token;
     }
-    private static int randData;
+    //private static int randData;
     private static UserData ActiveUser;
     public UserData getActiveUser(){
             return ActiveUser;
@@ -80,6 +80,14 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         System.out.println("Working with dis sh!t --> " + values[0]);
     }
 
+
+    private boolean isHaciendoCita = false;
+    public boolean getHaciendoCita(){
+        return isHaciendoCita;
+    }
+    public void setHaciendoCita(boolean value){
+        isHaciendoCita = value;
+    }
     @Override
     protected void onPostExecute(String result) {
 
@@ -95,11 +103,20 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
             Iterator<String> keys = jObject.keys();
 
 
-
             while( keys.hasNext() ) {
                 String key = keys.next();
                 String value = jObject.getString(key);
 
+                if (isHaciendoCita){
+                    if (key.equals("mensaje")) {
+                        System.out.println(value);
+
+                        //token = JsonDe.codigo;
+                        //loggedIn = true;
+                        //SetLocalStorage()
+                    }
+                    continue;
+                }
 
                 if (key.equals("error")) {
                     System.out.println(value);
