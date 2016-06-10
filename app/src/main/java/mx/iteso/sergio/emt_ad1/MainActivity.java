@@ -468,10 +468,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void showDatePickerDialog(final View view) {
 
-        //Checar que este logueado el usuario.
+        //Checar que este logueado el usuario sino mandarlo a logearse.
         if (!ApiConnector.getInstance().isLoggedIn()) {
             new AlertDialog.Builder(this)
-                    .setTitle("Alerta")
+                    .setTitle("Aviso")
                     .setMessage("Necesitas iniciar sesión.")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
