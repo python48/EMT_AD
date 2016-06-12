@@ -40,6 +40,7 @@ import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -466,6 +467,63 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
+    public static void levantarCita(String msg, View view, final int year,final  int month,final int day){
+
+        //Pedir al usuario que asegure la cita.
+        new AlertDialog.Builder(view.getContext())
+                .setTitle("Atención")
+                .setMessage(msg)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // OK. Hacer cita nueva.
+                        System.out.println("---Aqui deberia hacer una nueva cita");
+                        //hacer el cagadero con el apiconector.
+                        String token = ApiConnector.getInstance().getToken();
+                        String json = String.format("{\"funcion\":\"asigna_cita\", \"codigo\":\"%s\" , \"fecha\":\"%s\"} ", token, Integer.toString(year) + ((month < 10 ? "0" : "") + Integer.toString(month)) + ((day < 10 ? "0" : "") + Integer.toString(day)));
+                        //{"funcion":"asignaCita", "codigo":"A000000001","fecha":"20160529"}
+                        final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+                        //final String uri = "http://requestb.in/wyx8r2wy";
+                        RequestPackage p = new RequestPackage();
+                        p.setMethod("POST");
+                        p.setUri(uri);
+                        p.setParam("Info", json);
+                        //p.setParam("Junk", Integer.toString(randData++));
+
+                        //Intento de levantar cita en el Server.
+                        ApiConnector.getInstance().execute(p);
+
+                        //hacer la mierda esta de esperar la respuesta.. ¬¬
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (true) {
+
+                                }
+                                else {
+                                    //toastThis("No se pudo inicar la sesión :( ");
+                                    //printAlert("No se pudo iniciar la sesión, intenta de nuevo");
+                                }
+                            }
+                        }, 2000);
+
+
+
+
+
+                    }
+                })
+                .setIcon(android.R.drawable.alert_dark_frame)
+                .show();
+
+    }
+
+
+    private static String message = "";
+    public static void setMessage(String value){
+        message=value;
+    }
+
     public void showDatePickerDialog(final View view) {
 
         //Checar que este logueado el usuario sino mandarlo a logearse.
@@ -476,8 +534,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // OK
-                            Intent inte = new Intent(view.getContext(), MainActivity.class);
-                            startActivity(inte);
+                            refreshPage();
                         }
                     })
                     .setIcon(android.R.drawable.alert_dark_frame)
@@ -485,13 +542,12 @@ public class MainActivity extends AppCompatActivity {
 
             return;
         }
-        
-        
-        
-        ///// Date Dialog
+
+        ///// Si si esta logeado entonces mostrar la seleccion de fecha con el picker.
         DatePickerFragment dialog = new DatePickerFragment(view);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        dialog.show(ft,"Agendar visita");
+        dialog.show(ft,"Selecciona la fecha");
+        //el datepickerfragment toma la respuesta en onDateSet.
 
 
         /*

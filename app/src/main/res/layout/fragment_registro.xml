@@ -7,6 +7,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/my_linear_layout"
     tools:context="mx.iteso.sergio.emt_ad1.RegistroFragment" >
 
 
@@ -77,9 +80,9 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:inputType="text"
-        android:text="Correo electronico"
-        android:id="@+id/UserEmailNewReg"
+        android:inputType="textEmailAddress"
+        android:text="Correo electrónico"
+        android:id="@+id/UserEmailNewRegReg2"
         android:layout_below="@+id/UserLastName2NewReg"
         android:layout_alignParentLeft="true" />
     <EditText
@@ -88,7 +91,7 @@
         android:text="secreto"
         android:id="@+id/PassWordNewReg"
         android:inputType="textPassword"
-        android:layout_below="@+id/UserEmailNewReg"
+        android:layout_below="@+id/UserEmailNewRegReg2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <EditText
@@ -119,6 +122,7 @@
         android:layout_below="@+id/imageView5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
 
 
 </LinearLayout>

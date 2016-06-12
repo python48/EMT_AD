@@ -34,7 +34,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
-
+        day++;//no se puede agendar el mismo día. :(
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
@@ -44,22 +44,22 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         String date = day + "-" + (month+1) + "-" + year ;
         txtDate.setText(date);
         String msg = "Vas a agendar una visita el día: "+ date;
+        MainActivity.levantarCita(msg,view, year, month, day);
 
+        /*
         //Pedir al usuario que asegure la cita.
-        if (!ApiConnector.getInstance().isLoggedIn()) {
-            new AlertDialog.Builder(view.getContext())
-                    .setTitle("Atención")
-                    .setMessage("")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // OK. Hacer cita nueva.
-                            System.out.println("---Aqui deberia hacer nua nueva cita");
-                        }
-                    })
-                    .setIcon(android.R.drawable.alert_dark_frame)
-                    .show();
+        new AlertDialog.Builder(view.getContext())
+                .setTitle("Atención")
+                .setMessage(msg)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // OK. Hacer cita nueva.
+                        System.out.println("---Aqui deberia hacer nua nueva cita");//hacer el cagadero con el apiconector.
+                    }
+                })
+                .setIcon(android.R.drawable.alert_dark_frame)
+                .show();
+*/
 
-            return;
-        }
     }
 }

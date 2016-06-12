@@ -16,10 +16,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -55,7 +58,7 @@ public class RegistroFragment extends Fragment {
        //return inflater.inflate(R.layout.fragment_registro, container, false);
 
 
-        View view = inflater.inflate(R.layout.fragment_registro, container, false);
+        final View view = inflater.inflate(R.layout.fragment_registro, container, false);
 
         final EditText name = (EditText) view.findViewById(R.id.NameNewReg);
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -186,16 +189,17 @@ public class RegistroFragment extends Fragment {
             }
         });
 
-        final EditText email = (EditText) view.findViewById(R.id.UserEmailNewReg);
+
+        final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg2);
         email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 value = email.getText().toString();
                 if (hasFocus) {
                     // code to execute when EditText loses focus
-                    Email = email.getText().toString();
+                    //Email = email.getText().toString();
 
-                    if (value.equals("Correo electronico"))
+                    if (value.equals("Correo electrónico"))
                     {
                         email.setText("");
                     }
@@ -207,7 +211,7 @@ public class RegistroFragment extends Fragment {
                 }else
                 if (value.length() < 1)
                 {
-                    email.setText("Correo electronico");
+                    email.setText("Correo electrónico");
                 }
                 Email = value;
             }
@@ -281,6 +285,9 @@ public class RegistroFragment extends Fragment {
                 p.setMethod("POST");
                 p.setUri(uri);
 
+                Email = email.getText().toString();
+                email.requestFocus();
+
                 //String email, userName, pass, name, firstName, lastName;
                 String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", Email, UserName, Secret, Name, LastName, LastName2);
                 p.setParam("Info", json);
@@ -288,6 +295,7 @@ public class RegistroFragment extends Fragment {
                 //intento de registro
                 ApiConnector.getInstance().execute(p);
 
+                //esperar 3 segundos.
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -306,13 +314,24 @@ public class RegistroFragment extends Fragment {
                                 @Override
                                 public void run() {
                                     /////// ya stuff Here.
-                                    Log.i("DELAYED MESSAGE:", "");
+                                    Log.i("DELAYED MESSAGE:", "se hizo un nuevo registro");
                                     goToMain();
                                 }
                             }, 2000);
                         }else
                         {
-                            printAlert("No se pudo hacer el registro, intenta de nuevo.");
+                            //printAlert(message);
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Atención")
+                                    .setMessage(message + " intenta de nuevo.")
+                                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // continue with delete
+                                            refresh();
+                                        }
+                                    })
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
                         }
                     }
                 }, 3000);
@@ -336,6 +355,7 @@ public class RegistroFragment extends Fragment {
 
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -371,6 +391,9 @@ public class RegistroFragment extends Fragment {
     private void goToMain() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+    }private void refresh() {
+        Intent intent = new Intent(getActivity(), Registro2.class);
+        startActivity(intent);
     }
 
 
@@ -400,6 +423,10 @@ public class RegistroFragment extends Fragment {
                 .show();
     }
 
+    private static String message = "";
+    public static void setMessage(String value){
+        message = value;
+    }
     private void printAlertConfirmed(String message){
 
         new AlertDialog.Builder(getContext())

@@ -69,8 +69,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:inputType="text"
-        android:text="Correo electronico"
-        android:id="@+id/UserEmailNewReg"
+        android:text="Correo electrónico"
+        android:id="@+id/UserEmailNewRegReg"
         android:layout_below="@+id/UserLastName2NewReg"
         android:layout_alignParentLeft="true" />
     <EditText
@@ -80,7 +80,7 @@
         android:id="@+id/PassWordNewReg"
         android:inputType="textPassword"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/UserEmailNewReg"
+        android:layout_below="@+id/UserEmailNewRegReg"
         android:layout_alignParentLeft="true" />
 
 </android.support.v4.widget.NestedScrollView>

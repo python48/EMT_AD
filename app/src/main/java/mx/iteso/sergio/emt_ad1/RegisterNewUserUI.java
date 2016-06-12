@@ -98,7 +98,7 @@ public class RegisterNewUserUI extends Fragment {
             }
         });
 
-        final EditText email = (EditText) view.findViewById(R.id.UserEmailNewReg);
+        final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg);
         passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
