@@ -46,20 +46,5 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         String msg = "Vas a agendar una visita el día: "+ date;
         MainActivity.levantarCita(msg,view, year, month, day);
 
-        /*
-        //Pedir al usuario que asegure la cita.
-        new AlertDialog.Builder(view.getContext())
-                .setTitle("Atención")
-                .setMessage(msg)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // OK. Hacer cita nueva.
-                        System.out.println("---Aqui deberia hacer nua nueva cita");//hacer el cagadero con el apiconector.
-                    }
-                })
-                .setIcon(android.R.drawable.alert_dark_frame)
-                .show();
-*/
-
     }
 }

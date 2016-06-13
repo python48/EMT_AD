@@ -1,6 +1,7 @@
 package mx.iteso.sergio.emt_ad1;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -12,6 +13,8 @@ import java.util.Iterator;
 public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
 
     private static String token;
+    private boolean sinCita = false;
+
     public String getToken(){
         return token;
     }
@@ -107,10 +110,35 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                 String key = keys.next();
                 String value = jObject.getString(key);
 
+                if (sinCita){
+                    if (key.equals("mensaje")){
+                        MainActivity.setMessage(value);
+                        sinCita=false;
+                    }
+                }
+
+
                 if (isHaciendoCita){
                     if (key.equals("mensaje")) {
-                        System.out.println(value);
+                        if (value.equals("No hay cita agendada"))
+                        {
+                            Log.i("ApiConnector: ",value);
+                            MainActivity.setMessage(value);
+                            MainActivity.setHayCita(false);
+                            isHaciendoCita=false;
+                        }else{
+                            Log.i("ApiConnector: ",value);
+                            MainActivity.setMessage(value);
+                        }
+                    }
+                    continue;
+                }
 
+                if (MainActivity.getHayCita()){
+                    if (key.equals("mensaje")) {
+                        Log.i("ApiConnector: ", value);
+                        MainActivity.setMessage(value);
+                        //MainActivity.setHayCita(false);
                         //token = JsonDe.codigo;
                         //loggedIn = true;
                         //SetLocalStorage()
@@ -161,13 +189,34 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                     ActiveUser.setCorreo(value);
                     continue;
                 }if (key.equals("respuesta")) {
+                    if (value.equals("sinCita")){
+                        sinCita=true;
+                        continue;
+                    }
+
                     if (value.equals("0"))
                         //login failed ;
                         System.err.println("Login failed");
-                    else if (value.equals("1"))
+                    if (value.equals("1"))
                     {
                         //token = JsonDe.codigo;
                         //SetLocalStorage()
+                    }
+                    if (value.equals("error"))
+                    {
+                        //MainActivity.setMessage("Algo salió mal, intenta de nuevo");
+                        continue;
+                    }
+
+                    if (value.equals("exito")){
+                        //MainActivity.setMessage(value);
+                        //MainActivity.setHayCita(true);
+                        continue;
+                    }if (value.equals("exitoso")){
+                        MainActivity.setMessage(value);
+                    }else if (key.equals("mensaje")) {
+                        MainActivity.setMessage(value);
+                        RegistroFragment.setMessage(value);
                     }
                 }
 

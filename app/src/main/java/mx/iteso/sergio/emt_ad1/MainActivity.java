@@ -261,44 +261,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // agendar una nueva cita.
-    public void agendarNuevaCita(View view) {
-        final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
-        //final String uri = "http://requestb.in/wyx8r2wy";
-        RequestPackage p = new RequestPackage();
-        p.setMethod("POST");
-        p.setUri(uri);
-        //p.setUri("http://requestb.in/1kp9q0p1");
-
-        //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
-        //String userName = "", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
-
-        if (!ApiConnector.getInstance().isLoggedIn()) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Alerta")
-                    .setMessage("Necesitas iniciar sesión.")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // OK
-                        }
-                    })
-                    .setIcon(android.R.drawable.alert_dark_frame)
-                    .show();
-
-            return;
-        }
-        String token = ApiConnector.getInstance().getToken();
-
-        //String userName="user1", pass="user1";
-        String json = String.format("{\"funcion\":\"ver_cita\", \"codigo\":\"{0}\" }",token);
-
-        //String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
-        p.setParam("Info", json);
-        //p.setParam("Junk", Integer.toString(randData++));
-
-        ApiConnector.getInstance().execute(p);
-    }
-
 /*
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_ENTER){
@@ -308,9 +270,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }*/
 
-    //aqui va a obtener el token.
+    //aqui va a obtener el token. iniciar la sesion.
     public void login(String un, String ps){
-        final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+        //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas
+        final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
         //final String uri = "http://requestb.in/wyx8r2wy";
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
@@ -415,28 +378,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    public void doRegister(View view, String userName, String pass, String email, String name, String firstName, String lastName ) {
-        String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
-        RequestPackage p = new RequestPackage();
-        p.setMethod("POST");
-        p.setUri(uri);
-        //p.setUri("http://requestb.in/1kp9q0p1");
-
-        //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
-        //String userName = "", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
-
-        //String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", userName, pass);
-
-        String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
-        p.setParam("Info", json);
-        p.setParam("Junk", Integer.toString(randData++));
-
-        ApiConnector.getInstance().execute(p);
-    }
-
-
-
     public void registroClick(View view) {
         //mandarlo a la ventana de hacer nuevo registro. main2 es el test activity.
 
@@ -467,8 +408,54 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
-    public static void levantarCita(String msg, View view, final int year,final  int month,final int day){
 
+
+
+
+
+    private static boolean hayCita = false;
+    public static void setHayCita(boolean value){ hayCita=value; }
+    public static boolean getHayCita(){return hayCita;}
+
+    public void verSiHayCita(final View view){
+        hayCita = false;
+        String token = ApiConnector.getInstance().getToken();
+        //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas.
+        final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
+        //final String uri = "http://requestb.in/wyx8r2wy";
+        String json = String.format("{\"funcion\":\"ver_cita\", \"codigo\":\"%s\" } ", token);
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        p.setParam("Info", json);
+        //p.setParam("Junk", Integer.toString(randData++));
+
+        //Intento de ver una cita.
+        ApiConnector.getInstance().execute(p);
+        //this sheet is going to refresh the hayCita.
+        //esperar poqiuto.
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Log.i("DELAYED MESSAGE:", message);
+                //printAlert(message);
+                if (hayCita) {
+                    //// si hay alguna cita preguntar si desea cancelarla.
+                    preguntarSiQuiereCancelarCita();
+                } else {
+                    //// sino mostrar luego el dialogo de seleccion de fecha.
+                    DatePickerFragment dialog = new DatePickerFragment(view);
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    dialog.show(ft, "Selecciona la fecha");
+                    //el datepickerfragment toma la respuesta en onDateSet.
+                }
+
+            }
+        }, 3000);
+    }
+
+    public static void levantarCita(String msg, final View view, final int year,final  int month,final int day){
         //Pedir al usuario que asegure la cita.
         new AlertDialog.Builder(view.getContext())
                 .setTitle("Atención")
@@ -476,12 +463,12 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // OK. Hacer cita nueva.
-                        System.out.println("---Aqui deberia hacer una nueva cita");
                         //hacer el cagadero con el apiconector.
                         String token = ApiConnector.getInstance().getToken();
                         String json = String.format("{\"funcion\":\"asigna_cita\", \"codigo\":\"%s\" , \"fecha\":\"%s\"} ", token, Integer.toString(year) + ((month < 10 ? "0" : "") + Integer.toString(month)) + ((day < 10 ? "0" : "") + Integer.toString(day)));
                         //{"funcion":"asignaCita", "codigo":"A000000001","fecha":"20160529"}
-                        final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+                        //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas.
+                        final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
                         //final String uri = "http://requestb.in/wyx8r2wy";
                         RequestPackage p = new RequestPackage();
                         p.setMethod("POST");
@@ -490,27 +477,36 @@ public class MainActivity extends AppCompatActivity {
                         //p.setParam("Junk", Integer.toString(randData++));
 
                         //Intento de levantar cita en el Server.
-                        ApiConnector.getInstance().execute(p);
-
+                        ApiConnector ap = new ApiConnector();
+                        ap.setHaciendoCita(true);
+                        ap.execute(p);
                         //hacer la mierda esta de esperar la respuesta.. ¬¬
                         final Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                if (true) {
-
+                                if (message.equals("Cita Agendada")) {
+                                    new AlertDialog.Builder(view.getContext())
+                                            .setTitle("Muy bien")
+                                            .setMessage(message);
+                                    ApiConnector.getInstance().setHaciendoCita(false);
                                 }
                                 else {
-                                    //toastThis("No se pudo inicar la sesión :( ");
-                                    //printAlert("No se pudo iniciar la sesión, intenta de nuevo");
+                                    new AlertDialog.Builder(view.getContext())
+                                            .setTitle("Atención")
+                                            .setMessage(message + " intenta nuevamente más tarde");
+                                    ApiConnector.getInstance().setHaciendoCita(false);
                                 }
                             }
                         }, 2000);
 
 
-
-
-
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Cancelar. No hacer nada.
                     }
                 })
                 .setIcon(android.R.drawable.alert_dark_frame)
@@ -524,10 +520,11 @@ public class MainActivity extends AppCompatActivity {
         message=value;
     }
 
+    //dialogo de fecha.
     public void showDatePickerDialog(final View view) {
-
         //Checar que este logueado el usuario sino mandarlo a logearse.
-        if (!ApiConnector.getInstance().isLoggedIn()) {
+        if (!ApiConnector.getInstance().isLoggedIn())
+        {
             new AlertDialog.Builder(this)
                     .setTitle("Aviso")
                     .setMessage("Necesitas iniciar sesión.")
@@ -539,16 +536,11 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .setIcon(android.R.drawable.alert_dark_frame)
                     .show();
-
             return;
         }
 
-        ///// Si si esta logeado entonces mostrar la seleccion de fecha con el picker.
-        DatePickerFragment dialog = new DatePickerFragment(view);
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        dialog.show(ft,"Selecciona la fecha");
-        //el datepickerfragment toma la respuesta en onDateSet.
-
+        ///// Si si esta logeado entonces ver si tiene ya citas.callback
+        verSiHayCita(view);
 
         /*
         txtDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -561,6 +553,57 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });*/
+    }
+
+    private void preguntarSiQuiereCancelarCita() {
+        new AlertDialog.Builder(this)
+                .setTitle("Ya hay cita agendada")
+                .setMessage("¿Quieres cancelar tu cita? " + message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // OK. quiere cancelar la cita a la chingada.
+                        cancelarCita();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Cancel. no quiere cancelar la cita.
+
+                    }
+                })
+                .setIcon(android.R.drawable.alert_dark_frame)
+                .show();
+    }
+
+    private void cancelarCita() {
+        String token = ApiConnector.getInstance().getToken();
+        String json = String.format("{\"funcion\":\"cancelar_cita\", \"codigo\":\"%s\" } ", token);
+        //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas
+        final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
+        //final String uri = "http://requestb.in/wyx8r2wy";
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        p.setParam("Info", json);
+        //p.setParam("Junk", Integer.toString(randData++));
+        //Intento de cancelar una cita.
+        ApiConnector ap = new ApiConnector();
+        ap.execute(p);
+
+        //esperar la respuesta.
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("DELAYED MESSAGE:", message);
+                printAlert(message);
+                if (message.equals("Cita cancelada")){
+                    hayCita = false;
+                }
+            }
+        }, 2000);
+
+
     }
 
     private void goToTest() {

@@ -278,7 +278,8 @@ public class RegistroFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";
+                //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas.
+                final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
                //String uri = "http://requestb.in/wyx8r2wy";
 
                 RequestPackage p = new RequestPackage();
