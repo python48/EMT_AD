@@ -39,12 +39,16 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
+    int coun=0;
     public void onDateSet(DatePicker view, int year, int month, int day) {
+        if (coun++>0)
+            return;
         // Do something with the date chosen by the user
-        String date = day + "-" + (month+1) + "-" + year ;
+        String date = day + "-" + (++month) + "-" + year ;
         txtDate.setText(date);
         String msg = "Vas a agendar una visita el día: "+ date;
         MainActivity.levantarCita(msg,view, year, month, day);
-
+        if (coun>1)
+            coun=0;
     }
 }

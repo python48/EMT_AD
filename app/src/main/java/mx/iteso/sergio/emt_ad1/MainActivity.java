@@ -442,7 +442,7 @@ public class MainActivity extends AppCompatActivity {
                 //printAlert(message);
                 if (hayCita) {
                     //// si hay alguna cita preguntar si desea cancelarla.
-                    preguntarSiQuiereCancelarCita();
+                    preguntarSiQuiereCancelarCita(view);
                 } else {
                     //// sino mostrar luego el dialogo de seleccion de fecha.
                     DatePickerFragment dialog = new DatePickerFragment(view);
@@ -458,7 +458,7 @@ public class MainActivity extends AppCompatActivity {
     public static void levantarCita(String msg, final View view, final int year,final  int month,final int day){
         //Pedir al usuario que asegure la cita.
         new AlertDialog.Builder(view.getContext())
-                .setTitle("Atención")
+                .setTitle("Espera")
                 .setMessage(msg)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -488,14 +488,25 @@ public class MainActivity extends AppCompatActivity {
                                 if (message.equals("Cita Agendada")) {
                                     new AlertDialog.Builder(view.getContext())
                                             .setTitle("Muy bien")
-                                            .setMessage(message);
-                                    ApiConnector.getInstance().setHaciendoCita(false);
+                                            .setMessage(message)
+                                            .show();
+                                    //ApiConnector.getInstance().setHaciendoCita(false);
                                 }
                                 else {
                                     new AlertDialog.Builder(view.getContext())
-                                            .setTitle("Atención")
-                                            .setMessage(message + " intenta nuevamente más tarde");
-                                    ApiConnector.getInstance().setHaciendoCita(false);
+                                            .setTitle("Aviso")
+                                            .setMessage(message + " ¿Quiere cancelar esa cita?")
+                                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    // OK. cancelar la cita a la chingada.
+                                                    cancelarCita(view);
+                                                }
+                                            })
+                                            .setIcon(android.R.drawable.alert_dark_frame)
+                                            .show();
+
+
+                                    //ApiConnector.getInstance().setHaciendoCita(false);
                                 }
                             }
                         }, 2000);
@@ -555,27 +566,27 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
-    private void preguntarSiQuiereCancelarCita() {
-        new AlertDialog.Builder(this)
-                .setTitle("Ya hay cita agendada")
-                .setMessage("¿Quieres cancelar tu cita? " + message)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // OK. quiere cancelar la cita a la chingada.
-                        cancelarCita();
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel,new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Cancel. no quiere cancelar la cita.
+    private void preguntarSiQuiereCancelarCita(final View v) {
+        new AlertDialog.Builder(this).setTitle("Ya hay cita agendada");
+        new AlertDialog.Builder(this).setMessage("¿Quieres cancelar tu cita? " + message);
+        new AlertDialog.Builder(this).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // OK. quiere cancelar la cita a la chingada.
+                cancelarCita(v);
+            }
+        });
+        new AlertDialog.Builder(this).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Cancel. no quiere cancelar la cita.
 
-                    }
-                })
-                .setIcon(android.R.drawable.alert_dark_frame)
-                .show();
+            }
+        });
+        new AlertDialog.Builder(this).setIcon(android.R.drawable.alert_dark_frame);
+        new AlertDialog.Builder(this).show();
     }
 
-    private void cancelarCita() {
+    private static void cancelarCita(final View view) {
+        cancelar = true;
         String token = ApiConnector.getInstance().getToken();
         String json = String.format("{\"funcion\":\"cancelar_cita\", \"codigo\":\"%s\" } ", token);
         //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas
@@ -596,7 +607,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Log.i("DELAYED MESSAGE:", message);
-                printAlert(message);
+                //printAlert(message);
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle("Espera")
+                        .setMessage(message)
+                        .setIcon(android.R.drawable.alert_dark_frame)
+                        .show();
+
                 if (message.equals("Cita cancelada")){
                     hayCita = false;
                 }
@@ -605,6 +622,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public static boolean cancelar=false;
 
     private void goToTest() {
 

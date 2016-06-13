@@ -110,16 +110,35 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                 String key = keys.next();
                 String value = jObject.getString(key);
 
-                if (sinCita){
-                    if (key.equals("mensaje")){
+
+                if (MainActivity.cancelar){
+                    if (key.equals("mensaje"))
+                    {
                         MainActivity.setMessage(value);
-                        sinCita=false;
+                        MainActivity.cancelar = false;
+                        break;
+                    }
+                    if (key.equals("respuesta")){
+                        if (value.equals("exitoso"))
+                            ;
+                        else
+                            MainActivity.setMessage("No se pudo cancelar la cita");
+                            break;
                     }
                 }
 
-
                 if (isHaciendoCita){
-                    if (key.equals("mensaje")) {
+                    if (key.equals("respuesta")){
+                        if (value.equals("SinCita"))
+                        {
+                            continue;/*
+                            Log.i("ApiConnector: ", value);
+                            MainActivity.setMessage(value);
+                            MainActivity.setHayCita(false);*/
+                            //isHaciendoCita=false;
+                        }
+                    }
+                    else if (key.equals("mensaje")) {
                         if (value.equals("No hay cita agendada"))
                         {
                             Log.i("ApiConnector: ",value);
@@ -129,6 +148,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                         }else{
                             Log.i("ApiConnector: ",value);
                             MainActivity.setMessage(value);
+                            isHaciendoCita=false;
                         }
                     }
                     continue;
@@ -189,10 +209,10 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                     ActiveUser.setCorreo(value);
                     continue;
                 }if (key.equals("respuesta")) {
-                    if (value.equals("sinCita")){
+                   /* if (value.equals("SinCita")){
                         sinCita=true;
                         continue;
-                    }
+                    }*/
 
                     if (value.equals("0"))
                         //login failed ;
