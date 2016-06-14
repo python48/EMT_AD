@@ -52,6 +52,8 @@
         android:layout_alignLeft="@+id/PasswordProm"
         android:layout_alignStart="@+id/PasswordProm"
         android:background="#f14949"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:layout_alignRight="@+id/PasswordProm"
+        android:layout_alignEnd="@+id/PasswordProm" />
 
 </RelativeLayout>

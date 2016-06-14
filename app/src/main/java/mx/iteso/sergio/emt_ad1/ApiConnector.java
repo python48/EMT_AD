@@ -110,6 +110,25 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                 String key = keys.next();
                 String value = jObject.getString(key);
 
+                if (RegistroFragment.RegistroBand)
+                {
+                    if (key.equals("codigo"))
+                    {
+                        token = value;
+                        RegistroFragment.RegistroBand = false;
+                        RegistroFragment.setbandera(true);
+                        RegisterUserActivity.setbandera(true);
+                        MainActivity.setbandera(true);//para q cargue el perfil en lugar del login.
+                        break;
+                    }
+                    if (key.equals("error"))
+                    {
+                        RegistroFragment.setMessage(value);
+                        RegistroFragment.RegistroBand = false;
+                        break;
+                    }
+                continue;
+                }
 
                 if (MainActivity.cancelar){
                     if (key.equals("mensaje"))
@@ -146,6 +165,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                             MainActivity.setHayCita(false);
                             isHaciendoCita=false;
                         }else{
+                            MainActivity.setHayCita(true);
                             Log.i("ApiConnector: ",value);
                             MainActivity.setMessage(value);
                             isHaciendoCita=false;
@@ -244,6 +264,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         }
         catch (Exception e){
             e.printStackTrace();
+
         }
 
     }

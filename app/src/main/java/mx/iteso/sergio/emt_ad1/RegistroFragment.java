@@ -294,6 +294,7 @@ public class RegistroFragment extends Fragment {
                 p.setParam("Info", json);
 
                 //intento de registro
+                RegistroBand = true;
                 ApiConnector.getInstance().execute(p);
 
                 //esperar 3 segundos.
@@ -357,7 +358,7 @@ public class RegistroFragment extends Fragment {
         return view;
     }
 
-
+    public static boolean RegistroBand = false;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

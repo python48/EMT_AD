@@ -20,13 +20,15 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     EditText txtDate;
-    public DatePickerFragment(View view){
+    /*public DatePickerFragment(View view){
         txtDate = (EditText)view;
-    }
+    }*/
     public DatePickerFragment(){
     }
 
-
+    public void ponerleView(View view){
+        txtDate = (EditText)view;
+    }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
@@ -38,17 +40,19 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
-
-    int coun=0;
+    int coun = 0;
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        if (coun++>0)
+        if(coun++>0)
+        {
+            coun = 0;
             return;
+        }
         // Do something with the date chosen by the user
         String date = day + "-" + (++month) + "-" + year ;
         txtDate.setText(date);
         String msg = "Vas a agendar una visita el día: "+ date;
         MainActivity.levantarCita(msg,view, year, month, day);
-        if (coun>1)
-            coun=0;
+
+
     }
 }

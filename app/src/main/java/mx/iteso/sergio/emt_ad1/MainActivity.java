@@ -1,6 +1,7 @@
 package mx.iteso.sergio.emt_ad1;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
@@ -28,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -169,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
 
-
     }
 
     static int randData = 0;
@@ -253,11 +254,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    static int counLoginBtn = 0;
     // login prom button event.
     public void iniciarSesionClick1(View view) {
-        LoginProm.updatePass();
-        login(LoginProm.UserName, LoginProm.Secret);
+        if (counLoginBtn++<1)
+        {
+            LoginProm.updatePass();
+            login(LoginProm.UserName, LoginProm.Secret);
+            //botonInicioSesion.setVisibility(View.INVISIBLE);
+        }
     }
 
 
@@ -278,15 +283,8 @@ public class MainActivity extends AppCompatActivity {
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
         p.setUri(uri);
-        //p.setUri("http://requestb.in/1kp9q0p1");
 
-        //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
-        //String userName = "", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
-
-        //String userName="user1", pass="user1";
         String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", un, ps);
-
-        //String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
         p.setParam("Info", json);
         p.setParam("Junk", Integer.toString(randData++));
 
@@ -299,6 +297,8 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception e){
             toastThis("Error al iniciar sesión, inténtalo otra vez.");
             e.printStackTrace();
+            counLoginBtn=0;//para q vuelva a intentar.
+            //botonInicioSesion.setVisibility(View.VISIBLE);
         }
 
         final Handler handler = new Handler();
@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
                     r.setUri(uri);
                     r.setParam("Info", json);
 
-                    //Intento de Login.
+                    //Intento de obtener datos.
                     ApiConnector a = new ApiConnector();
                     a.execute(r);
 
@@ -322,8 +322,7 @@ public class MainActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Log.i("DELAYED MESSAGE:", "Hemos esperado por");
-                            //aqui hace el login correctamente y vuelve a cargar GUI. para cargar con el perfil en lugar de la ventana de login.
+                            //botonInicioSesion.setVisibility(View.VISIBLE);
                             refreshPage();
                         }
                     }, 2000);
@@ -333,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
                     printAlert("No se pudo iniciar la sesión, intenta de nuevo");
 
                 }
-
+                counLoginBtn=0;//para q pueda volver a intentar hacer login.
 
             }
         }, 2000);
@@ -445,15 +444,19 @@ public class MainActivity extends AppCompatActivity {
                     preguntarSiQuiereCancelarCita(view);
                 } else {
                     //// sino mostrar luego el dialogo de seleccion de fecha.
-                    DatePickerFragment dialog = new DatePickerFragment(view);
+                    //DatePickerFragment dialog = new DatePickerFragment(view);
+                    DatePickerFragment dialog =  new DatePickerFragment();
+                    dialog.ponerleView(view);
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     dialog.show(ft, "Selecciona la fecha");
                     //el datepickerfragment toma la respuesta en onDateSet.
                 }
-
+                //counDatePicker=false;
             }
         }, 3000);
     }
+
+
 
     public static void levantarCita(String msg, final View view, final int year,final  int month,final int day){
         //Pedir al usuario que asegure la cita.
@@ -508,6 +511,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     //ApiConnector.getInstance().setHaciendoCita(false);
                                 }
+
                             }
                         }, 2000);
 
@@ -531,8 +535,12 @@ public class MainActivity extends AppCompatActivity {
         message=value;
     }
 
+    public static boolean counDatePicker=false;
     //dialogo de fecha.
     public void showDatePickerDialog(final View view) {
+        /*if (counDatePicker)
+            return;
+        counDatePicker=true;*/
         //Checar que este logueado el usuario sino mandarlo a logearse.
         if (!ApiConnector.getInstance().isLoggedIn())
         {
@@ -542,6 +550,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // OK
+                            //counDatePicker=false;
                             refreshPage();
                         }
                     })
@@ -550,7 +559,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        ///// Si si esta logeado entonces ver si tiene ya citas.callback
+        ///// Si si esta logeado entonces ver si tiene ya citas.
         verSiHayCita(view);
 
         /*
