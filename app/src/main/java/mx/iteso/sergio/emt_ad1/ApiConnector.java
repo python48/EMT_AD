@@ -130,23 +130,24 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                         break;
                     case ACTUALIZA:
 
-                        if (key.equals("exito"))
-                        {
-                            token = value;
-                            UpdateSuccess = true;
-                            break;
-                        }
-                        else if (key.equals("parcial"))
-                        {
-                            Message = value;
-                            UpdateSuccess = false;
-                            break;
-                        }
-                        else if (key.equals("error"))
-                        {
-                            Message = value;
-                            UpdateSuccess = false;
-                            break;
+                        if (key.equals("respuesta")){
+                            if (value.equals("exito"))
+                            {
+                                UpdateSuccess = true;
+                                break;
+                            }
+                            else if (value.equals("parcial"))
+                            {
+                                Message = "Se actualizaron algunos datos";
+                                UpdateSuccess = true;
+                                break;
+                            }
+                            else if (value.equals("error"))
+                            {
+                                Message = "Error al guardar datos";
+                                UpdateSuccess = false;
+                                break;
+                            }
                         }
 
                         break;
@@ -369,11 +370,12 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         json = json.substring(0, json.length() - 1);
 
 
-        json += "]";
+        json += "]}";
 
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
         p.setUri(uri);
+        //p.setUri("http://requestb.in/1gugpgy1");
         p.setParam("Info", json);
         currentFunc = funcs.ACTUALIZA;
         execute(p);

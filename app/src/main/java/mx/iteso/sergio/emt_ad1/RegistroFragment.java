@@ -282,10 +282,11 @@ public class RegistroFragment extends Fragment {
                 Email = email.getText().toString();
                 email.requestFocus();
 
+                ApiConnector.UserData user = ApiConnector.getInstance().getActiveUser();
+
+                //final ApiConnector b = new ApiConnector();
                 ApiConnector a = new ApiConnector();
                 a.RegisterUser(Email, UserName, Secret, Name, LastName, LastName2);
-
-
                 //esperar 3 segundos.
                 //hay que avisarle al puto usuario porque va a pensar q no anda pasndo nada.. hay q investigar los indicadores de esperar.. esperemos q no funcionen con llamadas asincronas.
                 final Handler handler = new Handler();
@@ -295,6 +296,9 @@ public class RegistroFragment extends Fragment {
                         if (ApiConnector.RegisterSuccess)//si el registro fue exitoso.
                         {
                             printAlertConfirmed("Registro exitoso.");
+
+                            //b[0] = a;
+                            //b[0].Update("", "", "", Telefono, Sangre);
                         }
                         else
                         {
