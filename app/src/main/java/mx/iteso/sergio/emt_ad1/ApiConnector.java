@@ -1,13 +1,10 @@
 package mx.iteso.sergio.emt_ad1;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONObject;
 
 import java.util.Iterator;
-
-import javax.xml.parsers.FactoryConfigurationError;
 
 /**
  * Created by SergioAdán on 5/5/2016.
@@ -202,6 +199,29 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                     case ASIGNA_CITA:
                         break;
                     case VER_CITA:
+
+                        if (key.equals("respuesta"))
+                        {
+                            if (value.equals("exito"))
+                            {
+                                continue;
+                            }
+                        }
+                        else if (key.equals("mensaje"))
+                        {
+                            Message = value;
+                            if (value.equals("No hay cita agendada"))
+                                ViewAppointmentSuccessTheresAppointment = false;
+                            else
+                                ViewAppointmentSuccessTheresAppointment = true;
+                        }
+                        else if (key.equals("error"))
+                        {
+                            Message = value;
+                            ViewAppointmentSuccessTheresAppointment = false;
+                            break;
+                        }
+
                         break;
                     case CANCELAR:
                         break;
@@ -223,6 +243,8 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
     public static boolean LoginSuccess = false;
     public static boolean GetDataSuccess = false;
     public static boolean UpdateSuccess = false;
+    public static boolean ViewAppointmentSuccessTheresAppointment = false;
+    public static boolean MakeAppointmentSuccess = false;
     public void RegisterUser(String Email, String UserName, String Secret, String Name, String LastName, String LastName2){
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
@@ -318,6 +340,31 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         currentFunc = funcs.ACTUALIZA;
         execute(p);
     }
+    public void MakeAppointment(){
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        String json = String.format("{\"funcion\":\"obten\", \"codigo\":\"%s\"} ", token);
+        p.setParam("Info", json);
+        currentFunc = funcs.ASIGNA_CITA;
+        execute(p);
+    }
+    public void ViewAppointment(){
+        String json = String.format("{\"funcion\":\"ver_cita\", \"codigo\":\"%s\" } ", token);
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        p.setParam("Info", json);
+        currentFunc = funcs.VER_CITA;
+        execute(p);
+    }
+
+
+
+
+
+
+
 
     public static class UserData
     {

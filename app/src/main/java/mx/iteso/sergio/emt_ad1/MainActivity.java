@@ -1,7 +1,6 @@
 package mx.iteso.sergio.emt_ad1;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
@@ -28,9 +27,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,11 +34,9 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -371,21 +365,8 @@ public class MainActivity extends AppCompatActivity {
     public static boolean getHayCita(){return hayCita;}
 
     public void verSiHayCita(final View view){
-        hayCita = false;
-        String token = ApiConnector.getInstance().getToken();
-        //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas.
-        final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
-        //final String uri = "http://requestb.in/wyx8r2wy";
-        String json = String.format("{\"funcion\":\"ver_cita\", \"codigo\":\"%s\" } ", token);
-        RequestPackage p = new RequestPackage();
-        p.setMethod("POST");
-        p.setUri(uri);
-        p.setParam("Info", json);
-        //p.setParam("Junk", Integer.toString(randData++));
-
-        //Intento de ver una cita.
-        ApiConnector.getInstance().execute(p);
-        //this sheet is going to refresh the hayCita.
+        ApiConnector a = new ApiConnector();
+        a.ViewAppointment();
         //esperar poqiuto.
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -393,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 //Log.i("DELAYED MESSAGE:", message);
                 //printAlert(message);
-                if (hayCita) {
+                if (ApiConnector.ViewAppointmentSuccessTheresAppointment) {
                     //// si hay alguna cita preguntar si desea cancelarla.
                     preguntarSiQuiereCancelarCita(view);
                 } else {
@@ -407,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //counDatePicker=false;
             }
-        }, 3000);
+        }, 2000);
     }
 
 
@@ -499,7 +480,7 @@ public class MainActivity extends AppCompatActivity {
         if (!ApiConnector.getInstance().isLoggedIn())
         {
             new AlertDialog.Builder(this)
-                    .setTitle("Aviso")
+                    .setTitle("¿Quién eres?")
                     .setMessage("Necesitas iniciar sesión.")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

@@ -12,7 +12,6 @@
 
         <ImageView
             android:layout_width="match_parent"
-
             android:layout_height="187dp"
             android:id="@+id/imageView5"
             android:layout_row="0"
@@ -69,6 +68,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="editarPerfilClick"
+            android:visibility="invisible"
+            android:enabled="false"
             android:text="@string/edit_profile_button"
             android:id="@+id/edit_profile_button"
             android:layout_row="6"
