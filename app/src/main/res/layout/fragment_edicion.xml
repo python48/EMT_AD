@@ -1,0 +1,133 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/my_linear_layout"
+    tools:context="mx.iteso.sergio.emt_ad1.EdicionFragment" >
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/unknownperson"
+        android:id="@+id/imageView5"
+        android:scaleType="centerInside"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </ImageView>
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/buttonLoadPicture"
+        android:src="@drawable/camerita"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/imageView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="text"
+        android:id="@+id/UserNameNewReg"
+        android:enabled="false"
+        android:text="Nombre de usuario"
+        android:layout_below="@+id/imageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="text"
+        android:text="Nombre"
+        android:id="@+id/NameNewReg"
+        android:layout_below="@+id/UserNameNewReg"
+        android:layout_alignParentLeft="true" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="text"
+        android:text="Apellido paterno"
+        android:id="@+id/UserLastNameNewReg"
+        android:layout_below="@+id/NameNewReg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="text"
+        android:text="Apellido materno"
+        android:id="@+id/UserLastName2NewReg"
+        android:layout_below="@+id/UserLastNameNewReg"
+        android:layout_alignParentLeft="true" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="textEmailAddress"
+        android:text="Correo electrónico"
+        android:id="@+id/UserEmailNewRegReg2"
+        android:layout_below="@+id/UserLastName2NewReg"
+        android:layout_alignParentLeft="true"
+        android:editable="false"
+        android:enabled="false" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="secreto"
+        android:id="@+id/PassWordNewReg"
+        android:inputType="textPassword"
+        android:enabled="false"
+        android:layout_below="@+id/UserEmailNewRegReg2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="teléfono"
+        android:id="@+id/telefonoNewReg"
+        android:inputType="text"
+        android:layout_below="@+id/PassWordNewReg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="tipo de sangre: ej. a+"
+        android:id="@+id/sangreNewReg"
+        android:inputType="text"
+        android:enabled="false"
+        android:layout_below="@+id/telefonoNewReg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="@string/save_changes"
+        android:id="@+id/okButton"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/imageView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+
+</LinearLayout>

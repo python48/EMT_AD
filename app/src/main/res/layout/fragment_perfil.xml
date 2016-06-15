@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Nombre"
+            android:text="@string/loading"
             android:id="@+id/nameTV"
             android:layout_row="1"
             android:layout_column="0" />
@@ -40,7 +40,7 @@
             android:layout_width="179dp"
             android:layout_height="62dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="A+"
+            android:text=""
             android:textSize="40dp"
             android:id="@+id/tipo_sangreTV"
             android:layout_row="3"
@@ -60,9 +60,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="correo@gmail.com"
+            android:text="texto"
             android:id="@+id/correoTV"
             android:layout_row="5"
+            android:layout_column="0" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="editarPerfilClick"
+            android:text="@string/edit_profile_button"
+            android:id="@+id/edit_profile_button"
+            android:layout_row="6"
             android:layout_column="0" />
     </GridLayout>
 </FrameLayout>

@@ -7,33 +7,30 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class RegistroFragment extends Fragment {
+public class EdicionFragment extends Fragment {
 
     private static final int PICK_IMAGE = 1;
     private ImageView GlobalImageView;
 
 
-    public RegistroFragment() {
+    public EdicionFragment() {
     }
 
     private static EditText PassPr;
@@ -56,11 +53,11 @@ public class RegistroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        //return inflater.inflate(R.layout.fragment_registro, container, false);
-
-
-        final View view = inflater.inflate(R.layout.fragment_registro, container, false);
+        final View view = inflater.inflate(R.layout.fragment_edicion, container, false);
 
         final EditText name = (EditText) view.findViewById(R.id.NameNewReg);
+        Name = ApiConnector.getInstance().getActiveUser().get_nombre();
+        name.setText(Name);
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -89,135 +86,53 @@ public class RegistroFragment extends Fragment {
             }
         });
 
-        final EditText username = (EditText) view.findViewById(R.id.UserNameNewReg);
-        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = username.getText().toString();
-                if (hasFocus) {
-                    if (value.equals("Nombre de usuario"))
-                    {
-                        username.setText("");
-                    }
-                    else
-                    {
-                        username.setText(UserName);
-                    }
-
-                } else {
-                    if (value.length() < 1)
-                    {
-                        username.setText("Nombre de usuario");
-                    }
-                    UserName = value;
-                }
-            }
-        });
-
-        final EditText passprom = (EditText) view.findViewById(R.id.PassWordNewReg);
-        passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = passprom.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus.
-                    if (value.equals("secreto"))
-                    {
-                        passprom.setText("");
-                    }
-                    else
-                    {
-                        passprom.setText(Secret);
-                    }
-                }else {
-                    if (value.length() < 1)
-                    {
-                        passprom.setText("secreto");
-                    }
-                    Secret = value;
-                }
-            }
-        });
-
         final EditText lastname = (EditText) view.findViewById(R.id.UserLastNameNewReg);
+        LastName = ApiConnector.getInstance().getActiveUser().get_apellidopat();
+        lastname.setText(LastName);
         lastname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 value = lastname.getText().toString();
                 if (hasFocus) {
                     // code to execute when EditText loses focus.
-                    if (value.equals("Apellido paterno"))
-                    {
+                    if (value.equals("Apellido paterno")) {
                         lastname.setText("");
-                    }
-                    else
-                    {
+                    } else {
                         lastname.setText(LastName);
                     }
 
-                }else
-                    if (value.length() < 1)
-                    {
-                        lastname.setText("Apellido paterno");
-                    }
-                    LastName = value;
+                } else if (value.length() < 1) {
+                    lastname.setText("Apellido paterno");
+                }
+                LastName = value;
             }
         });
 
         final EditText lastname2 = (EditText) view.findViewById(R.id.UserLastName2NewReg);
+        LastName2 = ApiConnector.getInstance().getActiveUser().get_apellidomat();
+        lastname2.setText(LastName2);
         lastname2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 value = lastname2.getText().toString();
                 if (hasFocus) {
                     // code to execute when EditText loses focus
-                    if (value.equals("Apellido materno"))
-                    {
+                    if (value.equals("Apellido materno")) {
                         lastname2.setText("");
-                    }
-                    else
-                    {
+                    } else {
                         lastname2.setText(LastName2);
                     }
 
-                }else
-                    if (value.length() < 1)
-                    {
-                        lastname2.setText("Apellido materno");
-                    }
-                    LastName2 = value;
-            }
-        });
-
-
-        final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg2);
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = email.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    //Email = email.getText().toString();
-
-                    if (value.equals("Correo electrónico"))
-                    {
-                        email.setText("");
-                    }
-                    else
-                    {
-                        email.setText(Email);
-                    }
-
-                }else
-                if (value.length() < 1)
-                {
-                    email.setText("Correo electrónico");
+                } else if (value.length() < 1) {
+                    lastname2.setText("Apellido materno");
                 }
-                Email = value;
+                LastName2 = value;
             }
         });
 
         final EditText telefono = (EditText) view.findViewById(R.id.telefonoNewReg);
+        Telefono = ApiConnector.getInstance().getActiveUser().get_telefono();
+        telefono.setText(Telefono);
         telefono.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -226,82 +141,59 @@ public class RegistroFragment extends Fragment {
                     // code to execute when EditText loses focus
                     Telefono = telefono.getText().toString();
 
-                    if (value.equals("teléfono"))
-                    {
+                    if (value.equals("teléfono")) {
                         telefono.setText("");
-                    }
-                    else
-                    {
+                    } else {
                         telefono.setText(Telefono);
                     }
 
-                }else
-                if (value.length() < 1)
-                {
+                } else if (value.length() < 1) {
                     telefono.setText("teléfono");
                 }
                 Telefono = value;
             }
         });
 
+        final EditText userName = (EditText) view.findViewById(R.id.UserNameNewReg);
+        UserName = ApiConnector.getInstance().getActiveUser().get_usuario();
+        userName.setText(UserName);
+        final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg2);
+        Email = ApiConnector.getInstance().getActiveUser().getCorreo();
+        email.setText(Email);
         final EditText sangre = (EditText) view.findViewById(R.id.sangreNewReg);
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = sangre.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    Sangre = sangre.getText().toString();
-
-                    if (value.equals("tipo de sangre: ej. a+"))
-                    {
-                        sangre.setText("a+");
-                    }
-                    else
-                    {
-                        sangre.setText(Sangre);
-                    }
-
-                }else
-                if (value.length() < 1)
-                {
-                    sangre.setText("tipo de sangre: ej. a+");
-                }
-                Sangre = value;
-            }
-        });
-        PassPr = passprom;
+        Sangre = ApiConnector.getInstance().getActiveUser().get_tipo_sangre();
+        sangre.setText(Sangre);
 
         /// <summary>
-        /// El boton para registrar a un nuevo usuario.
+        /// El boton para guardar los cambios del usuario.
         /// </summary>
         final Button button = (Button) view.findViewById(R.id.okButton);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Email = email.getText().toString();
-                email.requestFocus();
+                Name = name.getText().toString();
+                name.requestFocus();
 
+                ApiConnector.UserData user = ApiConnector.getInstance().getActiveUser();
                 ApiConnector a = new ApiConnector();
-                a.RegisterUser(Email, UserName, Secret, Name, LastName, LastName2);
-
-
+                ApiConnector.getInstance().setActiveUser(user);
+                a.Update(Name, LastName, LastName2, Telefono, Sangre);
                 //esperar 3 segundos.
                 //hay que avisarle al puto usuario porque va a pensar q no anda pasndo nada.. hay q investigar los indicadores de esperar.. esperemos q no funcionen con llamadas asincronas.
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (ApiConnector.RegisterSuccess)//si el registro fue exitoso.
+                        if (ApiConnector.UpdateSuccess)//si la actualizacion fue exitosa.
                         {
-                            printAlertConfirmed("Registro exitoso.");
+                            printAlertConfirmed("Cambios guardados con éxito");
                         }
                         else
                         {
-                            //Aqui valio verg.... el registro por algun motivo que el mensaje del ApiConector guarda.
+                            //Aqui valio verga la actualizacion por algun motivo que el mensaje del ApiConector nos indica.
                             printAlert(ApiConnector.Message + ", intente de nuevo.");
                         }
-                        ApiConnector.RegisterSuccess = false;
+                        ApiConnector.UpdateSuccess = false;//para q pueda updatear mas adelante.
                     }
                 }, 3000);
 
