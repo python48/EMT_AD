@@ -16,8 +16,8 @@ import android.widget.TextView;
 public class TestAprobado extends Fragment {
 
 
-    public static String HeaderTitle = "Test Aprobado";
-    public static String ButtonTitle = "hacerlo de nuevo";
+    public static String HeaderTitle = "Test";
+    public static String ButtonTitle = "Realiza el test";
 
     public TestAprobado() {
         // Required empty public constructor

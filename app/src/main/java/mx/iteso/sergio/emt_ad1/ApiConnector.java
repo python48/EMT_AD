@@ -197,6 +197,28 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                     case RESETEA_CONTRASENA:
                         break;
                     case ASIGNA_CITA:
+
+                        if (key.equals("respuesta")){
+                            if (value.equals("SinCita"))
+                            {
+                                continue;/*
+                            Log.i("ApiConnector: ", value);
+                            MainActivity.setMessage(value);
+                            MainActivity.setHayCita(false);*/
+                                //isHaciendoCita=false;
+                            }
+                        }
+                        else if (key.equals("mensaje")) {
+                            if (value.equals("No hay cita agendada"))
+                            {
+                                Message=value;
+                                MakeAppointmentSuccess=false;
+                            }else{
+                                MakeAppointmentSuccess=true;
+                                Message=value;
+                            }
+                        }
+
                         break;
                     case VER_CITA:
 
@@ -224,6 +246,21 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
 
                         break;
                     case CANCELAR:
+
+
+                        if (key.equals("respuesta"))
+                        {
+                            if (value.equals("exito"))
+                            {
+                                Message = "Se ha cancelado tu cita";
+                                CancelAppointmentSuccess=true;
+                            }else if (key.equals("error"))
+                            {
+                                CancelAppointmentSuccess=false;
+                                Message = value;
+                            }
+                        }
+
                         break;
                 }
 
@@ -245,6 +282,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
     public static boolean UpdateSuccess = false;
     public static boolean ViewAppointmentSuccessTheresAppointment = false;
     public static boolean MakeAppointmentSuccess = false;
+    public static boolean CancelAppointmentSuccess = false;
     public void RegisterUser(String Email, String UserName, String Secret, String Name, String LastName, String LastName2){
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
@@ -340,11 +378,11 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         currentFunc = funcs.ACTUALIZA;
         execute(p);
     }
-    public void MakeAppointment(){
+    public void MakeAppointment(int year,int month,int day){
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
         p.setUri(uri);
-        String json = String.format("{\"funcion\":\"obten\", \"codigo\":\"%s\"} ", token);
+        String json = String.format("{\"funcion\":\"asigna_cita\", \"codigo\":\"%s\" , \"fecha\":\"%s\"} ", token, Integer.toString(year) + ((month < 10 ? "0" : "") + Integer.toString(month)) + ((day < 10 ? "0" : "") + Integer.toString(day)));
         p.setParam("Info", json);
         currentFunc = funcs.ASIGNA_CITA;
         execute(p);
@@ -358,6 +396,15 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         currentFunc = funcs.VER_CITA;
         execute(p);
     }
+    public void CancelAppointment(){
+        String json = String.format("{\"funcion\":\"cancelar_cita\", \"codigo\":\"%s\" } ", token);
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        p.setParam("Info", json);
+        currentFunc = funcs.CANCELAR;
+        execute(p);
+    }
 
 
 
@@ -366,6 +413,8 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
 
 
 
+
+//////NESTED CLASS.
     public static class UserData
     {
         public UserData(){

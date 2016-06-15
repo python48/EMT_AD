@@ -34,6 +34,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 
@@ -400,57 +401,30 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(msg)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // OK. Hacer cita nueva.
-                        //hacer el cagadero con el apiconector.
-                        String token = ApiConnector.getInstance().getToken();
-                        String json = String.format("{\"funcion\":\"asigna_cita\", \"codigo\":\"%s\" , \"fecha\":\"%s\"} ", token, Integer.toString(year) + ((month < 10 ? "0" : "") + Integer.toString(month)) + ((day < 10 ? "0" : "") + Integer.toString(day)));
-                        //{"funcion":"asignaCita", "codigo":"A000000001","fecha":"20160529"}
-                        //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas.
-                        final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
-                        //final String uri = "http://requestb.in/wyx8r2wy";
-                        RequestPackage p = new RequestPackage();
-                        p.setMethod("POST");
-                        p.setUri(uri);
-                        p.setParam("Info", json);
-                        //p.setParam("Junk", Integer.toString(randData++));
-
                         //Intento de levantar cita en el Server.
-                        ApiConnector ap = new ApiConnector();
-                        ap.setHaciendoCita(true);
-                        ap.execute(p);
-                        //hacer la mierda esta de esperar la respuesta.. ¬¬
+                        ApiConnector a = new ApiConnector();
+                        a.MakeAppointment(year,month,day);
+                        //hacer la mierda esa de esperar... ¬¬
                         final Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                if (message.equals("Cita Agendada")) {
+                                if (ApiConnector.MakeAppointmentSuccess) {
                                     new AlertDialog.Builder(view.getContext())
                                             .setTitle("Muy bien")
-                                            .setMessage(message)
+                                            .setMessage(ApiConnector.Message)
                                             .show();
                                     //ApiConnector.getInstance().setHaciendoCita(false);
                                 }
                                 else {
                                     new AlertDialog.Builder(view.getContext())
                                             .setTitle("Aviso")
-                                            .setMessage(message + " ¿Quiere cancelar esa cita?")
-                                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    // OK. cancelar la cita a la chingada.
-                                                    cancelarCita(view);
-                                                }
-                                            })
+                                            .setMessage(ApiConnector.Message)
                                             .setIcon(android.R.drawable.alert_dark_frame)
                                             .show();
-
-
-                                    //ApiConnector.getInstance().setHaciendoCita(false);
                                 }
-
                             }
                         }, 2000);
-
-
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -510,67 +484,48 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
+    ////Cancalar la cita a la verija.!
     private void preguntarSiQuiereCancelarCita(final View v) {
-        new AlertDialog.Builder(this).setTitle("Ya hay cita agendada");
-        new AlertDialog.Builder(this).setMessage("¿Quieres cancelar tu cita? " + message);
-        new AlertDialog.Builder(this).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // OK. quiere cancelar la cita a la chingada.
-                cancelarCita(v);
-            }
-        });
-        new AlertDialog.Builder(this).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // Cancel. no quiere cancelar la cita.
+        new AlertDialog.Builder(v.getContext())
+                .setTitle("Ya hay una cita agendada")
+                .setMessage("¿Quieres cancelar tu cita? " + ApiConnector.Message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // OK. quiere cancelar la cita a la chingada.
+                        cancelarCita(v);
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Cancel. no quiere cancelar la cita.
 
-            }
-        });
-        new AlertDialog.Builder(this).setIcon(android.R.drawable.alert_dark_frame);
-        new AlertDialog.Builder(this).show();
+                    }
+                })
+                .setIcon(android.R.drawable.alert_dark_frame)
+                .show();
     }
 
     private static void cancelarCita(final View view) {
-        cancelar = true;
-        String token = ApiConnector.getInstance().getToken();
-        String json = String.format("{\"funcion\":\"cancelar_cita\", \"codigo\":\"%s\" } ", token);
-        //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas
-        final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
-        //final String uri = "http://requestb.in/wyx8r2wy";
-        RequestPackage p = new RequestPackage();
-        p.setMethod("POST");
-        p.setUri(uri);
-        p.setParam("Info", json);
-        //p.setParam("Junk", Integer.toString(randData++));
-        //Intento de cancelar una cita.
-        ApiConnector ap = new ApiConnector();
-        ap.execute(p);
-
+        ApiConnector a = new ApiConnector();
+        a.CancelAppointment();
         //esperar la respuesta.
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.i("DELAYED MESSAGE:", message);
-                //printAlert(message);
                 new AlertDialog.Builder(view.getContext())
                         .setTitle("Espera")
-                        .setMessage(message)
+                        .setMessage(ApiConnector.Message)
                         .setIcon(android.R.drawable.alert_dark_frame)
                         .show();
-
-                if (message.equals("Cita cancelada")){
-                    hayCita = false;
+                if (ApiConnector.CancelAppointmentSuccess){
+                    ApiConnector.ViewAppointmentSuccessTheresAppointment=false;
                 }
             }
         }, 2000);
-
-
     }
-    public static boolean cancelar=false;
 
     private void goToTest() {
-
-        //showDatePickerDialog();
         Intent intent = new Intent(this, TestActivityN.class);
         startActivity(intent);
     }
