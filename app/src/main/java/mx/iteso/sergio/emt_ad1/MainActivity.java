@@ -169,35 +169,15 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-
-    }
-
-    static int randData = 0;
-    private void requestData(String uri) {
-
-        RequestPackage p = new RequestPackage();
-        p.setMethod("POST");
-        p.setUri(uri);
-        //p.setUri("http://requestb.in/1kp9q0p1");
-
-        //Name es el nombre. first name es el primer apellido, last name es el segundo. che jairo wey! me confundiste no mames!! xD.
-        String userName = "furfag2004", pass = "hola4", email = "user1@mail.com", name = "thomas" , firstName = "alba", lastName = "edison";
-
-        String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", userName, pass);
-
-        //String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", email, userName, pass, name, firstName, lastName);
-        p.setParam("Info", json);
-        p.setParam("Junk", Integer.toString(randData++));
-
-        ApiConnector.getInstance().execute(p);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (ApiConnector.LoginSuccess)
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_main2, menu);
+        else
+            getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -223,6 +203,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(this, AboutActivity.class);
                 startActivity(intent2);
                 return true;
+            case R.id.action_logout:
+                refreshPage();
+                ApiConnector a = new ApiConnector();
+                a.LogOut();
+                mibandera2=false;
+                refreshPage();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -234,22 +221,11 @@ public class MainActivity extends AppCompatActivity {
                                         //http://services.hanselandpetal.com/feeds/flowers.json      //http://services.hanselandpetal.com/restful.php
         if (isOnline()){
             //Aqui poner el cuadro de dialogo pidiendo las pinches putas credenciales!!!!. y luego que haga el login.
-            refreshPage();
             mibandera2 = true;
+            refreshPage();
         }
         else{
-            //Toast.makeText(MainActivity.this, "La red no está dispobible", Toast.LENGTH_SHORT).show();
-            new AlertDialog.Builder(this)
-                    .setTitle("Alerta")
-                    .setMessage("No hay conexión o la red no está disponible.")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // OK
-                        }
-                    })
-                    .setIcon(android.R.drawable.alert_dark_frame)
-                    .show();
-
+            printAlert("No hay conexión o la red no está disponible.");
         }
 
     }
@@ -261,10 +237,9 @@ public class MainActivity extends AppCompatActivity {
         {
             LoginProm.updatePass();
             login(LoginProm.UserName, LoginProm.Secret);
-            //botonInicioSesion.setVisibility(View.INVISIBLE);
+            //botonInicioSesion.setVisibility(View.INVISIBLE);//it threw an exception.
         }
     }
-
 
 /*
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -275,69 +250,48 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }*/
 
-    //aqui va a obtener el token. iniciar la sesion.
+
+    //iniciar la sesion.
     public void login(String un, String ps){
-        //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas
-        final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
-        //final String uri = "http://requestb.in/wyx8r2wy";
-        RequestPackage p = new RequestPackage();
-        p.setMethod("POST");
-        p.setUri(uri);
-
-        String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", un, ps);
-        p.setParam("Info", json);
-        p.setParam("Junk", Integer.toString(randData++));
-
-        try {
-            //ApiConnector.getInstance().execute(p);
-            ApiConnector apicon = new ApiConnector();
-            apicon.execute(p);
-
-            Log.i("MESSAGE:", "esperando al token..");
-        }catch (Exception e){
-            toastThis("Error al iniciar sesión, inténtalo otra vez.");
-            e.printStackTrace();
-            counLoginBtn=0;//para q vuelva a intentar.
-            //botonInicioSesion.setVisibility(View.VISIBLE);
-        }
-
+        final ApiConnector.UserData user;
+        final ApiConnector a = new ApiConnector();
+        final ApiConnector b = new ApiConnector();
+        a.Login(un, ps);
+        //botonInicioSesion.setVisibility(View.VISIBLE);//arrojaba una chingada excepcion.
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (mibandera) {
-                    Log.i("DELAYED MESSAGE:", "se debe ya haber recibido el token");
-                    String token = ApiConnector.getInstance().getToken();
-                    String json = String.format("{\"funcion\":\"obten\", \"codigo\":\"%s\"} ", token);
-                    RequestPackage r = new RequestPackage();
-                    r.setMethod("POST");
-                    r.setUri(uri);
-                    r.setParam("Info", json);
-
+                if (ApiConnector.LoginSuccess) {
                     //Intento de obtener datos.
-                    ApiConnector a = new ApiConnector();
-                    a.execute(r);
-
+                    b.GetUserData();
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //botonInicioSesion.setVisibility(View.VISIBLE);
-                            refreshPage();
+                            if(ApiConnector.GetDataSuccess)//cuando obtiene los datos bien hacer refresh pero cargando el fragmento de perfil en lugar del login prom.
+                            //botonInicioSesion.setVisibility(View.VISIBLE);//hacer algo para q el usuario no le vaya a picar COMO PUERCO y vaya a tronar el app.
+                            {
+                                refreshPage();//refrescara la pag.
+                            }
+
+                            //ApiConnector.GetDataSuccess=false;
                         }
                     }, 2000);
-
-                } else{
-                    //toastThis("No se pudo inicar la sesión :( ");
-                    printAlert("No se pudo iniciar la sesión, intenta de nuevo");
-
+                    //a.LoginSuccess=false;
+                }else
+                {
+                    printAlert(a.Message + ", intenta de nuevo");
                 }
                 counLoginBtn=0;//para q pueda volver a intentar hacer login.
-
             }
         }, 2000);
+    }
 
-
+    // login prom button event.
+    public void editarPerfilClick(View view) {
+        Intent intent1 = new Intent(this, EdicionActivity2.class);
+        startActivity(intent1);
     }
 
     private void printAlert(String message){
@@ -382,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
 
         new AlertDialog.Builder(this)
                 .setTitle("Espera")
-                .setMessage("Para hacer un registro nuevo es necesario hacer un test, ¿desas hacerlo ahora?")
+                .setMessage("Para hacer un registro nuevo es necesario hacer un test, ¿deseas hacerlo ahora?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
@@ -707,7 +661,7 @@ public class MainActivity extends AppCompatActivity {
             //return PlaceholderFragment.newInstance(position + 1);
             switch (position) {
                 case 0:
-                    if (!mibandera){
+                    if (!ApiConnector.getInstance().LoginSuccess){
                         if (mibandera2)
                             return new LoginProm();
                         else

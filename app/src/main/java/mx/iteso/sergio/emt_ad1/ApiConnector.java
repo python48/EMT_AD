@@ -7,11 +7,16 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import javax.xml.parsers.FactoryConfigurationError;
+
 /**
  * Created by SergioAdán on 5/5/2016.
  */
 public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
 
+    //final String uri = "http://srvcibergdl.redlab.com.mx/wshematixnet.asmx/accion";//pruebas.
+    final String uri = "http://cetsgdl.redlab.com.mx:8085/wshematixnet.asmx/accion";//produccion.
+    //String uri = "http://requestb.in/wyx8r2wy";
     private static String token;
     private boolean sinCita = false;
 
@@ -19,33 +24,24 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         return token;
     }
     //private static int randData;
-    private static UserData ActiveUser;
+    public static UserData ActiveUser;
     public UserData getActiveUser(){
             return ActiveUser;
         }
-    private void setActiveUser(UserData value){
+    public void setActiveUser(UserData value){
             ActiveUser = value;
         }
         //{ get; private set; }
-    public static ApiConnector Instance;
+    private static ApiConnector Instance = null;
     private static boolean loggedIn;
     public boolean isLoggedIn(){
-        return loggedIn;
+        if (getToken() != null && !getToken().isEmpty())
+            return true;
+        else
+            return false;
     }
 
     public ApiConnector(){
-        /*if (settings.Contains("loggedUser"))
-        {
-            String tToken = (String)settings["loggedUser"];
-            token = tToken;
-            loggedIn = true;
-        }
-        else
-        {
-            //return false;
-            loggedIn = false;
-            //throw;
-        }*/
         ActiveUser =  new UserData();
     }
 
@@ -55,35 +51,28 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
             Instance = new ApiConnector();
         }
         return Instance;
-
     }
 
     @Override
     protected void onPreExecute() {
-        System.out.println("Starting task...");
-        if(ActiveUser == null) {
+        /*if(ActiveUser == null) {
             ActiveUser = new UserData();
-        }
+        }*/
     }
 
     @Override
     protected String doInBackground(RequestPackage... params) {
-
         String content = HttpManager.getData(params[0]);
         return content;
-
-            /*for (int i = 0; i<params.length; i++){
-                publishProgress("Working with" + params[i]);
-            }
-            return "task completed";*/
     }
 
     @Override
     protected void onProgressUpdate(String... values) {
-        System.out.println("Working with dis sh!t --> " + values[0]);
+        //System.out.println("Working with dis sh!t --> " + values[0]);
     }
 
 
+    ///revisar estas pendejadas.
     private boolean isHaciendoCita = false;
     public boolean getHaciendoCita(){
         return isHaciendoCita;
@@ -91,218 +80,250 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
     public void setHaciendoCita(boolean value){
         isHaciendoCita = value;
     }
+    //hasta auqii...
     @Override
     protected void onPostExecute(String result) {
-
-        //System.out.println(result);
-
         String InJson = "", res = result;
         InJson = res.substring(res.indexOf(">{") + 1, res.indexOf("}<")+1);
 
         //JSONDeserializer
         String inputJSONString = InJson; // Your string JSON here
-        try {
+        try
+        {
             JSONObject jObject = new JSONObject(inputJSONString);
             Iterator<String> keys = jObject.keys();
-
-
-            while( keys.hasNext() ) {
+            while(keys.hasNext())
+            {
                 String key = keys.next();
                 String value = jObject.getString(key);
 
-                if (RegistroFragment.RegistroBand)
+                switch (currentFunc)
                 {
-                    if (key.equals("codigo"))
-                    {
-                        token = value;
-                        RegistroFragment.RegistroBand = false;
-                        RegistroFragment.setbandera(true);
-                        RegisterUserActivity.setbandera(true);
-                        MainActivity.setbandera(true);//para q cargue el perfil en lugar del login.
-                        break;
-                    }
-                    if (key.equals("error"))
-                    {
-                        RegistroFragment.setMessage(value);
-                        RegistroFragment.RegistroBand = false;
-                        break;
-                    }
-                continue;
-                }
+                    case REGISTRO:
 
-                if (MainActivity.cancelar){
-                    if (key.equals("mensaje"))
-                    {
-                        MainActivity.setMessage(value);
-                        MainActivity.cancelar = false;
-                        break;
-                    }
-                    if (key.equals("respuesta")){
-                        if (value.equals("exitoso"))
-                            ;
-                        else
-                            MainActivity.setMessage("No se pudo cancelar la cita");
+                        if (key.equals("codigo"))
+                        {
+                            token = value;
+                            RegisterSuccess = true;
                             break;
-                    }
-                }
-
-                if (isHaciendoCita){
-                    if (key.equals("respuesta")){
-                        if (value.equals("SinCita"))
-                        {
-                            continue;/*
-                            Log.i("ApiConnector: ", value);
-                            MainActivity.setMessage(value);
-                            MainActivity.setHayCita(false);*/
-                            //isHaciendoCita=false;
                         }
-                    }
-                    else if (key.equals("mensaje")) {
-                        if (value.equals("No hay cita agendada"))
+                        else if (key.equals("error"))
                         {
-                            Log.i("ApiConnector: ",value);
-                            MainActivity.setMessage(value);
-                            MainActivity.setHayCita(false);
-                            isHaciendoCita=false;
-                        }else{
-                            MainActivity.setHayCita(true);
-                            Log.i("ApiConnector: ",value);
-                            MainActivity.setMessage(value);
-                            isHaciendoCita=false;
+                            Message = value;
+                            RegisterSuccess = false;
+                            break;
                         }
-                    }
-                    continue;
-                }
 
-                if (MainActivity.getHayCita()){
-                    if (key.equals("mensaje")) {
-                        Log.i("ApiConnector: ", value);
-                        MainActivity.setMessage(value);
-                        //MainActivity.setHayCita(false);
-                        //token = JsonDe.codigo;
-                        //loggedIn = true;
-                        //SetLocalStorage()
-                    }
-                    continue;
-                }
+                        break;
+                    case INGRESO:
 
-                if (key.equals("error")) {
-                    System.out.println(value);
-                    MainActivity.setMessage(value);
-                    RegistroFragment.setMessage(value);
-                    //throw new Exception();
-                    //token = JsonDe.codigo;
-                    //loggedIn = true;
-                    //SetLocalStorage()
-                }if (key.equals("codigo")) {
-                    //login succesful.
-                    token = value;
-                    loggedIn = true;
-                    //Attempt to get user data.
-                    //GetUserData();
-                    //ApiConnector.getInstance().execute(p);
-                    RegistroFragment.setbandera(true);
-                    RegisterUserActivity.setbandera(true);
-                    MainActivity.setbandera(true);//para q cargue el perfil en lugar del login.
-                    //MainActivity.getInstance().goToPerfil();
-                    return;
-                    //SetLocalStorage()
-                }if (key.equals("tipo_sangre")) {
-                    ActiveUser.setTipo_sangre(value);
-                    continue;
-                }if (key.equals("nombre")) {
-                    ActiveUser.setNombre(value);
-                    continue;
-                }if (key.equals("apellidomat")) {
-                    ActiveUser.setApellidomat(value);
-                    continue;
-                }if (key.equals("usuario")) {
-                    ActiveUser.setUsuario(value);
-                    continue;
-                }if (key.equals("apellidopat")) {
-                    ActiveUser.setApellidopat(value);
-                    continue;
-                }if (key.equals("telefono")) {
-                    ActiveUser.setTelefono(value);
-                    continue;
-                }if (key.equals("correo")) {
-                    ActiveUser.setCorreo(value);
-                    continue;
-                }if (key.equals("respuesta")) {
-                   /* if (value.equals("SinCita")){
-                        sinCita=true;
-                        continue;
-                    }*/
+                        if (key.equals("codigo"))
+                        {
+                            token = value;
+                            LoginSuccess = true;
+                            break;
+                        }
+                        else if (key.equals("error"))
+                        {
+                            Message = value;
+                            LoginSuccess = false;
+                            break;
+                        }
 
-                    if (value.equals("0"))
-                        //login failed ;
-                        System.err.println("Login failed");
-                    if (value.equals("1"))
-                    {
-                        //token = JsonDe.codigo;
-                        //SetLocalStorage()
-                    }
-                    if (value.equals("error"))
-                    {
-                        //MainActivity.setMessage("Algo salió mal, intenta de nuevo");
-                        continue;
-                    }
+                        break;
+                    case ACTUALIZA:
 
-                    if (value.equals("exito")){
-                        //MainActivity.setMessage(value);
-                        //MainActivity.setHayCita(true);
-                        continue;
-                    }if (value.equals("exitoso")){
-                        MainActivity.setMessage(value);
-                    }else if (key.equals("mensaje")) {
-                        MainActivity.setMessage(value);
-                        RegistroFragment.setMessage(value);
-                    }
+                        if (key.equals("exito"))
+                        {
+                            token = value;
+                            UpdateSuccess = true;
+                            break;
+                        }
+                        else if (key.equals("parcial"))
+                        {
+                            Message = value;
+                            UpdateSuccess = false;
+                            break;
+                        }
+                        else if (key.equals("error"))
+                        {
+                            Message = value;
+                            UpdateSuccess = false;
+                            break;
+                        }
+
+                        break;
+                    case OBTEN_DATOS:
+
+                        if (key.equals("respuesta")) {
+                            if (value.equals("1"))
+                            {
+                                GetDataSuccess = true;
+                                continue;
+                            }else
+                                GetDataSuccess = false;
+                                break;
+                        }else if (key.equals("exito")) {
+                            GetDataSuccess = true;
+                            continue;
+                        }else if (key.equals("exitoso")) {
+                            GetDataSuccess = true;
+                            continue;
+                        }else if (key.equals("error")) {
+                            Message = value;
+                            GetDataSuccess = false;
+                            break;
+                        }if (key.equals("tipo_sangre")) {
+                            ActiveUser.setTipo_sangre(value);
+                            continue;
+                        }if (key.equals("nombre")) {
+                            ActiveUser.setNombre(value);
+                            continue;
+                        }if (key.equals("apellidomat")) {
+                            ActiveUser.setApellidomat(value);
+                            continue;
+                        }if (key.equals("usuario")) {
+                            ActiveUser.setUsuario(value);
+                            continue;
+                        }if (key.equals("apellidopat")) {
+                            ActiveUser.setApellidopat(value);
+                            continue;
+                        }if (key.equals("telefono")) {
+                            ActiveUser.setTelefono(value);
+                            continue;
+                        }if (key.equals("correo")) {
+                            ActiveUser.setCorreo(value);
+                            continue;
+                        }
+
+                        break;
+                    case RESETEA_CONTRASENA:
+                        break;
+                    case ASIGNA_CITA:
+                        break;
+                    case VER_CITA:
+                        break;
+                    case CANCELAR:
+                        break;
                 }
 
             }
-        }
-        catch (Exception e){
+        }catch (Exception e)
+        {
             e.printStackTrace();
-
         }
+
 
     }
 
-    public static void GetUserData() {
-        /*if (!loggedIn)
+    public static String Message = "";
+    enum funcs {REGISTRO, INGRESO, ACTUALIZA, OBTEN_DATOS, RESETEA_CONTRASENA, ASIGNA_CITA, VER_CITA, CANCELAR}
+    funcs currentFunc;
+    public static boolean RegisterSuccess = false;
+    public static boolean LoginSuccess = false;
+    public static boolean GetDataSuccess = false;
+    public static boolean UpdateSuccess = false;
+    public void RegisterUser(String Email, String UserName, String Secret, String Name, String LastName, String LastName2){
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        String json = String.format("{\"funcion\":\"registro\", \"correo\":\"%s\",\"usuario\":\"%s\",\"palabrasecreta\":\"%s\",\"nombre\":\"%s\",\"APELLIDOPAT\":\"%s\",\"APELLIDOMAT\":\"%s\"}", Email, UserName, Secret, Name, LastName, LastName2);
+        p.setParam("Info", json);
+        currentFunc = funcs.REGISTRO;
+        execute(p);
+    }
+    public void Login(String un, String ps){
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        String json = String.format("{\"funcion\":\"ingreso\", \"usuario\":\"%s\",\"palabrasecreta\":\"%s\"}", un, ps);
+        p.setParam("Info", json);
+        currentFunc = funcs.INGRESO;
+        execute(p);
+    }
+    public void LogOut() {
+        token = null;
+        GetDataSuccess = false;
+        LoginSuccess = false;
+        RegisterSuccess = false;
+        UpdateSuccess = false;
+    }
+    public void GetUserData(){
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        String json = String.format("{\"funcion\":\"obten\", \"codigo\":\"%s\"} ", token);
+        p.setParam("Info", json);
+        currentFunc = funcs.OBTEN_DATOS;
+        execute(p);
+    }
+    public void Update(String name, String lastName, String lastName2, String telefono, String sangre){
+
+
+        if (!ApiConnector.getInstance().getActiveUser().get_nombre().equals(name))
+            ApiConnector.getInstance().getActiveUser().setNombre(name);
+        if (!ApiConnector.getInstance().getActiveUser().get_apellidopat().equals(lastName))
+            ApiConnector.getInstance().getActiveUser().setApellidopat(lastName);
+        if (!ApiConnector.getInstance().getActiveUser().get_apellidomat().equals(lastName2))
+            ApiConnector.getInstance().getActiveUser().setApellidomat(lastName2);
+        if (!ApiConnector.getInstance().getActiveUser().get_telefono().equals(telefono))
+            ApiConnector.getInstance().getActiveUser().setTelefono(telefono);
+
+        String json = String.format("{\"funcion\":\"actualiza\", \"codigo\":\"%s\", data:[", token);
+        int chagdCount = 0;
+
+        if (ActiveUser.changedNombre)
         {
-            return null;
-        }*/
+            chagdCount++;
+            json +=
+                    "{\"campo\":\"nombre\",\"valor\":\"" + name + "\"},";
+        }
+        if (ActiveUser.changedTelefono)
+        {
+            chagdCount++;
+            json +=
+                    "{\"campo\":\"telefono\",\"valor\":\"" + telefono + "\"},";
+        }
+        if (ActiveUser.changedTipo_sangre)
+        {
+            chagdCount++;
+            json +=
+                    "{\"campo\":\"tipo_sangre\",\"valor\":\"" + sangre + "\"},";
+        }
+        if (ActiveUser.changedApellidopat)
+        {
+            chagdCount++;
+            json +=
+                    "{\"campo\":\"apellidopat\",\"valor\":\"" + lastName + "\"},";
+        }
+        if (ActiveUser.changedApellidomat)
+        {
+            chagdCount++;
+            json +=
+                    "{\"campo\":\"apellidomat\",\"valor\":\"" + lastName2 + "\"},";
+        }
+        if (chagdCount == 0)
+        {
+            return;
+        }
+        json = json.substring(0, json.length() - 1);
 
 
+        json += "]";
 
-        /*
-        var result = await client.ExecuteTaskAsync(r);
-
-
-
-
-        String InJson = "", res = result.Content;
-
-        InJson = res.substring(res.indexOf(">{") + 1, res.indexOf("}<") - res.indexOf(">{"));
-
-        var JsonDe = JsonConvert.DeserializeObject<UserDataRes>(InJson);
-
-
-        var User = new UserData(JsonDe);
-        ActiveUser = User;
-
-        return JsonDe;
-        */
-
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        p.setParam("Info", json);
+        currentFunc = funcs.ACTUALIZA;
+        execute(p);
     }
 
     public static class UserData
     {
         public UserData(){
-
         }
+        public String correo;
         public String getCorreo(){
             return _correo;
         }
@@ -321,9 +342,11 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         public void setUsuario(String value){
             _usuario = value;
         }
+        public String get_usuario() {
+            return _usuario;
+        }
 
         public String nombre;
-
         public String get_nombre() {
             return _nombre;
         }
