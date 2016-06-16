@@ -56,4 +56,15 @@
         android:layout_alignRight="@+id/PasswordProm"
         android:layout_alignEnd="@+id/PasswordProm" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:textColor="@color/azullink"
+        android:text="@string/forgot_password"
+        android:editable="false"
+        android:onClick="resetPasswordClick"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

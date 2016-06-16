@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -325,6 +326,14 @@ public class MainActivity extends AppCompatActivity {
         return Instance;
 
     }
+
+
+    public void resetPasswordClick(View view) {
+        Intent intent = new Intent(this, RecoveryActivity.class);
+        startActivity(intent);
+    }
+
+
 
     public void registroClick(View view) {
         //mandarlo a la ventana de hacer nuevo registro. main2 es el test activity.

@@ -195,8 +195,6 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                         }
 
                         break;
-                    case RESETEA_CONTRASENA:
-                        break;
                     case ASIGNA_CITA:
 
                         if (key.equals("respuesta")){
@@ -263,6 +261,32 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                         }
 
                         break;
+                    case CAMBIA_CONTRASENA:
+
+
+
+                        break;
+                    case RESETEA_CONTRASENA:
+
+                        if (key.equals("respuesta"))
+                        {
+                            if (!value.equals("No se encontro correo electronico proporcionado"))
+                            {
+                                ResetPasswordSuccess = true ;
+                                continue;
+                            }else if (key.equals("error"))
+                            {
+                                ResetPasswordSuccess = false ;
+                            }else
+                            {
+                                Message = value;
+                                ResetPasswordSuccess = false ;
+                            }
+                        }else if (key.equals("mensaje"))
+                        {
+                            Message = value ;
+                        }
+                        break ;
                 }
 
             }
@@ -275,7 +299,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
     }
 
     public static String Message = "";
-    enum funcs {REGISTRO, INGRESO, ACTUALIZA, OBTEN_DATOS, RESETEA_CONTRASENA, ASIGNA_CITA, VER_CITA, CANCELAR}
+    enum funcs {REGISTRO, INGRESO, ACTUALIZA, OBTEN_DATOS, RESETEA_CONTRASENA, ASIGNA_CITA, VER_CITA, CANCELAR, CAMBIA_CONTRASENA }
     funcs currentFunc;
     public static boolean RegisterSuccess = false;
     public static boolean LoginSuccess = false;
@@ -284,6 +308,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
     public static boolean ViewAppointmentSuccessTheresAppointment = false;
     public static boolean MakeAppointmentSuccess = false;
     public static boolean CancelAppointmentSuccess = false;
+    public static boolean ResetPasswordSuccess = false;
     public void RegisterUser(String Email, String UserName, String Secret, String Name, String LastName, String LastName2){
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
@@ -407,7 +432,15 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         currentFunc = funcs.CANCELAR;
         execute(p);
     }
-
+    public void ResetPasword(String email){
+        String json = String.format("{\"funcion\":\"recupera_contrasena\", \"correo\":\"%s\" } ", email);
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        p.setParam("Info", json);
+        currentFunc = funcs.RESETEA_CONTRASENA;
+        execute(p);
+    }
 
 
 
