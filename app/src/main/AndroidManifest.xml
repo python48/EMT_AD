@@ -134,6 +134,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mx.iteso.sergio.emt_ad1.MainActivity" />
         </activity>
+        <activity
+            android:name=".CalisLoginActivity"
+            android:label="@string/title_activity_calis_login"></activity>
     </application>
 
 </manifest>
