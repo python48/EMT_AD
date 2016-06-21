@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:textAlignment="center"
         android:textSize="30dp"
-        android:text="¡Has aproabado!"
+        android:text="¡Has aprobado!"
         android:id="@+id/textView6" />
 
     <ImageView
