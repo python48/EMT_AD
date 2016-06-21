@@ -59,217 +59,14 @@ public class RegistroFragment extends Fragment {
 
 
         final View view = inflater.inflate(R.layout.fragment_registro, container, false);
-
         final EditText name = (EditText) view.findViewById(R.id.NameNewReg);
-        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = name.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    //Name = name.getText().toString();
-                    if (value.equals("Nombre"))
-                    {
-                        name.setText("");
-                    }
-                    else
-                    {
-                        name.setText(Name);
-                    }
-
-                //aint got focus.
-                } else {
-                    //name.setText("");
-                    if (value.length() < 1)
-                    {
-                        name.setText("Nombre");
-                    }
-                    Name = value;
-                }
-            }
-        });
-
         final EditText username = (EditText) view.findViewById(R.id.UserNameNewReg);
-        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = username.getText().toString();
-                if (hasFocus) {
-                    if (value.equals("Nombre de usuario"))
-                    {
-                        username.setText("");
-                    }
-                    else
-                    {
-                        username.setText(UserName);
-                    }
-
-                } else {
-                    if (value.length() < 1)
-                    {
-                        username.setText("Nombre de usuario");
-                    }
-                    UserName = value;
-                }
-            }
-        });
-
         final EditText passprom = (EditText) view.findViewById(R.id.PassWordNewReg);
-        passprom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = passprom.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus.
-                    if (value.equals("secreto"))
-                    {
-                        passprom.setText("");
-                    }
-                    else
-                    {
-                        passprom.setText(Secret);
-                    }
-                }else {
-                    if (value.length() < 1)
-                    {
-                        passprom.setText("secreto");
-                    }
-                    Secret = value;
-                }
-            }
-        });
-
         final EditText lastname = (EditText) view.findViewById(R.id.UserLastNameNewReg);
-        lastname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = lastname.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus.
-                    if (value.equals("Apellido paterno"))
-                    {
-                        lastname.setText("");
-                    }
-                    else
-                    {
-                        lastname.setText(LastName);
-                    }
-
-                }else
-                    if (value.length() < 1)
-                    {
-                        lastname.setText("Apellido paterno");
-                    }
-                    LastName = value;
-            }
-        });
-
         final EditText lastname2 = (EditText) view.findViewById(R.id.UserLastName2NewReg);
-        lastname2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = lastname2.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    if (value.equals("Apellido materno"))
-                    {
-                        lastname2.setText("");
-                    }
-                    else
-                    {
-                        lastname2.setText(LastName2);
-                    }
-
-                }else
-                    if (value.length() < 1)
-                    {
-                        lastname2.setText("Apellido materno");
-                    }
-                    LastName2 = value;
-            }
-        });
-
-
         final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg2);
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = email.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    //Email = email.getText().toString();
-
-                    if (value.equals("Correo electrónico"))
-                    {
-                        email.setText("");
-                    }
-                    else
-                    {
-                        email.setText(Email);
-                    }
-
-                }else
-                if (value.length() < 1)
-                {
-                    email.setText("Correo electrónico");
-                }
-                Email = value;
-            }
-        });
-
         final EditText telefono = (EditText) view.findViewById(R.id.telefonoNewReg);
-        telefono.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = telefono.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    Telefono = telefono.getText().toString();
-
-                    if (value.equals("teléfono"))
-                    {
-                        telefono.setText("");
-                    }
-                    else
-                    {
-                        telefono.setText(Telefono);
-                    }
-
-                }else
-                if (value.length() < 1)
-                {
-                    telefono.setText("teléfono");
-                }
-                Telefono = value;
-            }
-        });
-
         final EditText sangre = (EditText) view.findViewById(R.id.sangreNewReg);
-        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = sangre.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    Sangre = sangre.getText().toString();
-
-                    if (value.equals("tipo de sangre: ej. a+"))
-                    {
-                        sangre.setText("a+");
-                    }
-                    else
-                    {
-                        sangre.setText(Sangre);
-                    }
-
-                }else
-                if (value.length() < 1)
-                {
-                    sangre.setText("tipo de sangre: ej. a+");
-                }
-                Sangre = value;
-            }
-        });
         PassPr = passprom;
 
         /// <summary>
@@ -279,8 +76,15 @@ public class RegistroFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+                Name = name.getText().toString();
+                UserName = username.getText().toString();
+                Secret = passprom.getText().toString();
+                LastName = lastname.getText().toString();
+                LastName2 = lastname2.getText().toString();
                 Email = email.getText().toString();
-                email.requestFocus();
+                Telefono = telefono.getText().toString();
+                Sangre = sangre.getText().toString();
 
                 ApiConnector.UserData user = ApiConnector.getInstance().getActiveUser();
 

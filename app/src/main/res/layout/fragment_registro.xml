@@ -48,7 +48,7 @@
         android:layout_height="50dp"
         android:inputType="text"
         android:id="@+id/UserNameNewReg"
-        android:text="Nombre de usuario"
+        android:hint="Nombre de usuario"
         android:layout_below="@+id/imageButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:inputType="text"
-        android:text="Nombre"
+        android:hint="Nombre"
         android:id="@+id/NameNewReg"
         android:layout_below="@+id/UserNameNewReg"
         android:layout_alignParentLeft="true" />
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:inputType="text"
-        android:text="Apellido paterno"
+        android:hint="Apellido paterno"
         android:id="@+id/UserLastNameNewReg"
         android:layout_below="@+id/NameNewReg"
         android:layout_alignParentLeft="true"
@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:inputType="text"
-        android:text="Apellido materno"
+        android:hint="Apellido materno"
         android:id="@+id/UserLastName2NewReg"
         android:layout_below="@+id/UserLastNameNewReg"
         android:layout_alignParentLeft="true" />
@@ -86,14 +86,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:inputType="textEmailAddress"
-        android:text="Correo electrónico"
+        android:hint="Correo electrónico"
         android:id="@+id/UserEmailNewRegReg2"
         android:layout_below="@+id/UserLastName2NewReg"
         android:layout_alignParentLeft="true" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="secreto"
+        android:hint="Contraseña"
         android:id="@+id/PassWordNewReg"
         android:inputType="textPassword"
         android:layout_below="@+id/UserEmailNewRegReg2"
@@ -102,7 +102,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="teléfono"
+        android:hint="teléfono"
         android:id="@+id/telefonoNewReg"
         android:inputType="text"
         android:layout_below="@+id/PassWordNewReg"
@@ -111,7 +111,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="tipo de sangre: ej. a+"
+        android:hint="tipo de sangre. ej. a+"
         android:id="@+id/sangreNewReg"
         android:inputType="text"
         android:layout_below="@+id/telefonoNewReg"
