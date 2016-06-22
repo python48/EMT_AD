@@ -52,7 +52,7 @@
         android:layout_below="@+id/textView5"
         android:layout_gravity="center_horizontal|bottom"
         android:adjustViewBounds="true"
-        android:background="@color/resFondo"
+        android:background="@color/benFondo"
         android:src="@drawable/img_ben7" />
 
 </RelativeLayout>

@@ -38,7 +38,7 @@ public class InfoProceso extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -101,14 +101,11 @@ public class InfoProceso extends AppCompatActivity {
                 case 0:
                     return new Proc1();
                 case 1:
-                    return new Proc2();
-                case 2:
                     return new Proc3();
-                case 3:
+                case 2:
                     return new Proc4();
-                case 4:
+                case 3:
                     return new Proc5();
-
                 default:
                     return new Proc1();
             }
@@ -118,7 +115,7 @@ public class InfoProceso extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 5;
+            return 4;
         }
 
         @Override

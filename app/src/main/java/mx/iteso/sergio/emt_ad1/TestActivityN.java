@@ -199,8 +199,8 @@ public class TestActivityN extends AppCompatActivity {
     private void goToTestApproved(){
         /*Intent intent = new Intent(this, TestAprobado.class);
         startActivity(intent);*/
-        TestAprobado.HeaderTitle = "Has Aprobado";
-        TestAprobado.ButtonTitle = "Hacer registro";
+        //TestAprobado.HeaderTitle = "Has Aprobado";
+        //TestAprobado.ButtonTitle = "Hacer registro";
         setContentView(R.layout.fragment_test_aprobado);
     }
 

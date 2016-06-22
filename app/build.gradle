@@ -8,8 +8,8 @@ android {
         applicationId "mx.iteso.sergio.emt_ad1"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 7
-        versionName "1.6"
+        versionCode 9
+        versionName "1.6.2"
     }
     buildTypes {
         release {

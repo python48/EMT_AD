@@ -59,6 +59,7 @@ public class RegistroFragment extends Fragment {
 
 
         final View view = inflater.inflate(R.layout.fragment_registro, container, false);
+
         final EditText name = (EditText) view.findViewById(R.id.NameNewReg);
         final EditText username = (EditText) view.findViewById(R.id.UserNameNewReg);
         final EditText passprom = (EditText) view.findViewById(R.id.PassWordNewReg);

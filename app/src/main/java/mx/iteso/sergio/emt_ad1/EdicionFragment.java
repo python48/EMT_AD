@@ -57,111 +57,37 @@ public class EdicionFragment extends Fragment {
 
         final EditText name = (EditText) view.findViewById(R.id.NameNewReg);
         Name = ApiConnector.getInstance().getActiveUser().get_nombre();
+        name.setHint("Nombre");
         name.setText(Name);
-        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = name.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    //Name = name.getText().toString();
-                    if (value.equals("Nombre"))
-                    {
-                        name.setText("");
-                    }
-                    else
-                    {
-                        name.setText(Name);
-                    }
-
-                //aint got focus.
-                } else {
-                    //name.setText("");
-                    if (value.length() < 1)
-                    {
-                        name.setText("Nombre");
-                    }
-                    Name = value;
-                }
-            }
-        });
 
         final EditText lastname = (EditText) view.findViewById(R.id.UserLastNameNewReg);
         LastName = ApiConnector.getInstance().getActiveUser().get_apellidopat();
+        lastname.setHint("Apellido paterno");
         lastname.setText(LastName);
-        lastname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = lastname.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus.
-                    if (value.equals("Apellido paterno")) {
-                        lastname.setText("");
-                    } else {
-                        lastname.setText(LastName);
-                    }
-
-                } else if (value.length() < 1) {
-                    lastname.setText("Apellido paterno");
-                }
-                LastName = value;
-            }
-        });
 
         final EditText lastname2 = (EditText) view.findViewById(R.id.UserLastName2NewReg);
         LastName2 = ApiConnector.getInstance().getActiveUser().get_apellidomat();
+        lastname2.setHint("Apellido materno");
         lastname2.setText(LastName2);
-        lastname2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = lastname2.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    if (value.equals("Apellido materno")) {
-                        lastname2.setText("");
-                    } else {
-                        lastname2.setText(LastName2);
-                    }
-
-                } else if (value.length() < 1) {
-                    lastname2.setText("Apellido materno");
-                }
-                LastName2 = value;
-            }
-        });
 
         final EditText telefono = (EditText) view.findViewById(R.id.telefonoNewReg);
         Telefono = ApiConnector.getInstance().getActiveUser().get_telefono();
+        telefono.setHint("Teléfono");
         telefono.setText(Telefono);
-        telefono.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                value = telefono.getText().toString();
-                if (hasFocus) {
-                    // code to execute when EditText loses focus
-                    Telefono = telefono.getText().toString();
-
-                    if (value.equals("teléfono")) {
-                        telefono.setText("");
-                    } else {
-                        telefono.setText(Telefono);
-                    }
-
-                } else if (value.length() < 1) {
-                    telefono.setText("teléfono");
-                }
-                Telefono = value;
-            }
-        });
 
         final EditText userName = (EditText) view.findViewById(R.id.UserNameNewReg);
         UserName = ApiConnector.getInstance().getActiveUser().get_usuario();
+        userName.setHint("Nombre de usuario (alias)");
         userName.setText(UserName);
+
         final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg2);
         Email = ApiConnector.getInstance().getActiveUser().getCorreo();
+        email.setText("Correo electrónico");
         email.setText(Email);
+
         final EditText sangre = (EditText) view.findViewById(R.id.sangreNewReg);
         Sangre = ApiConnector.getInstance().getActiveUser().get_tipo_sangre();
+        sangre.setHint("Tipo de sangre: "+ Sangre);
         sangre.setText(Sangre);
 
         /// <summary>
@@ -172,7 +98,9 @@ public class EdicionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Name = name.getText().toString();
-                name.requestFocus();
+                LastName = lastname.getText().toString();
+                LastName2 = lastname2.getText().toString();
+                Telefono = telefono.getText().toString();
 
                 ApiConnector.UserData user = ApiConnector.getInstance().getActiveUser();
                 ApiConnector a = new ApiConnector();
@@ -196,7 +124,6 @@ public class EdicionFragment extends Fragment {
                         ApiConnector.UpdateSuccess = false;//para q pueda updatear mas adelante.
                     }
                 }, 3000);
-
             }
         });
 
@@ -211,9 +138,7 @@ public class EdicionFragment extends Fragment {
                 startActivityForResult( i, PICK_IMAGE );
             }
         });
-
         GlobalImageView = (ImageView) view.findViewById(R.id.imageView5);
-
         return view;
     }
 

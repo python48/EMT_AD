@@ -6,12 +6,12 @@
 
     <color name="requsFondo">#afd3bd</color>
     <color name="requsTitulo">#3da661</color>
-    <color name="requsBody">#686a69</color>
+    <color name="requsBody">#ffffff</color>
 
     <color name="resFondo">#e9bcba</color>
     <color name="resTitulo">#c1361d</color>
 
-    <color name="benFondo">#e9bcba</color>
+    <color name="benFondo">#fa4484</color>
     <color name="benTitulo">#fa4484</color>
 
     <color name="procFondo">#c2d4ed</color>

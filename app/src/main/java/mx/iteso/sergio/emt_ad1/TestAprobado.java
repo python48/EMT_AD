@@ -17,12 +17,19 @@ public class TestAprobado extends Fragment {
 
 
     public static String HeaderTitle = "Test";
-    public static String ButtonTitle = "Realiza el test";
+    public static String ButtonTitle = "Aplicar test";
 
     public TestAprobado() {
         // Required empty public constructor
     }
-
+/*
+//i been unable to destroy shit since it is always needed at the main. .. i dont know wtf.
+    @Override
+    public void onDestroy() {
+        HeaderTitle = "Test";
+        ButtonTitle = "Aplicar Test";
+    }
+*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

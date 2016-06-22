@@ -15,17 +15,22 @@
         android:text="Iniciar Sesión"
         android:id="@+id/textView6" />-->
 
+    <!--cuadros de texto-->
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:text="Nombre de Usuario"
         android:ems="10"
         android:id="@+id/UserNameProm"
         android:layout_above="@+id/PasswordProm"
         android:layout_alignLeft="@+id/PasswordProm"
         android:layout_alignStart="@+id/PasswordProm"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp"
+        android:hint="Nombre de Usuario"/>
+<!--
+        android:text="testuser1"
+-->
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -36,9 +41,14 @@
         android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="39dp"
-        android:text="secreto" />
+        android:hint="Contraseña"
+        />
 
+    <!--
+        android:text="hola1"
+-->
 
+<!--botones-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

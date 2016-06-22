@@ -39,9 +39,7 @@
 
 
 
-        <!--
-        Text fields
-        -->
+        <!--Cuadros te texto. Text fields-->
 
     <EditText
         android:layout_width="match_parent"
@@ -118,9 +116,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+
+
+    <!--Botones y la madre-->
     <Button
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/blanco"
         android:text="Registrar"
         android:id="@+id/okButton"
         android:scaleType="fitCenter"
