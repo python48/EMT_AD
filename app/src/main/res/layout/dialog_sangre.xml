@@ -24,22 +24,6 @@
 
 
 
-    <android.support.v7.widget.ListViewCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
-
-        <android.support.v7.view.menu.ListMenuItemView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="holamundo"/>
-
-        </android.support.v7.view.menu.ListMenuItemView>
-
-    </android.support.v7.widget.ListViewCompat>
-
 </LinearLayout>
+
+
