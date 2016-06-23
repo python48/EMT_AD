@@ -87,7 +87,7 @@ public class EdicionFragment extends Fragment {
 
         final EditText sangre = (EditText) view.findViewById(R.id.sangreNewReg);
         Sangre = MainActivity.User.get_tipo_sangre();
-        sangre.setHint("Tipo de sangre: "+ Sangre);
+        sangre.setHint("Tipo de sangre: " + Sangre);
         sangre.setText(Sangre);
 
         /// <summary>
@@ -174,6 +174,8 @@ public class EdicionFragment extends Fragment {
         Intent intent = new Intent(getActivity(), Registro2.class);
         startActivity(intent);
     }
+
+
     private void printAlert(String message){
         new AlertDialog.Builder(getContext())
                 .setTitle("Atención")

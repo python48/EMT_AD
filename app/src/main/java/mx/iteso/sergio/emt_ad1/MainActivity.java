@@ -253,6 +253,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    public void goToSangreSelection(final View view) {
+
+    }
+
+
 
     static int counLoginBtn = 0;
     // login prom button event.
@@ -579,9 +584,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToSangreSelection() {
-        
-    }
+
 
     void aLaGoma(){
         Intent intent = new Intent(this, TestReprobado.class);

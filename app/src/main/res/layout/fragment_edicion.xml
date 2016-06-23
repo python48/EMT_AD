@@ -112,7 +112,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:onClick=""
+        android:onClick="goToSangreSelection"
         android:hint="tipo de sangre: ej. a+"
         android:id="@+id/sangreNewReg"
         android:inputType="text"

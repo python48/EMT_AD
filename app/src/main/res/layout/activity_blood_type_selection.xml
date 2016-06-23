@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".BloodTypeSelectionActivity">
+
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:background="@drawable/my_shape"
+        android:textColor="@color/colorPrimary"
+        android:onClick="buttonAClicked"
+        android:text="A"
+        android:textSize="40dp"
+        android:id="@+id/boton_sangre_a"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:background="@drawable/my_shape"
+        android:textColor="@color/colorPrimary"
+        android:text="+"
+        android:textSize="40dp"
+        android:id="@+id/boton_sangre_plus"
+        android:layout_marginRight="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:background="@drawable/my_shape"
+        android:textColor="@color/colorPrimary"
+        android:text="B"
+        android:textSize="40dp"
+        android:id="@+id/boton_sangre_b"
+        android:layout_below="@+id/boton_sangre_a"
+        android:layout_alignLeft="@+id/boton_sangre_a"
+        android:layout_alignStart="@+id/boton_sangre_a"
+        android:layout_marginTop="35dp" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:background="@drawable/my_shape"
+        android:textColor="@color/colorPrimary"
+        android:text="-"
+        android:textSize="40dp"
+        android:id="@+id/boton_sangre_minus"
+        android:layout_alignTop="@+id/boton_sangre_b"
+        android:layout_alignLeft="@+id/boton_sangre_plus"
+        android:layout_alignStart="@+id/boton_sangre_plus" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:background="@drawable/my_shape"
+        android:textColor="@color/colorPrimary"
+        android:text="AB"
+        android:textSize="40dp"
+        android:id="@+id/boton_sangre_ab"
+        android:layout_below="@+id/boton_sangre_b"
+        android:layout_alignLeft="@+id/boton_sangre_b"
+        android:layout_alignStart="@+id/boton_sangre_b"
+        android:layout_marginTop="29dp" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:background="@drawable/my_shape"
+        android:textColor="@color/colorPrimary"
+        android:text="O"
+        android:textSize="40dp"
+        android:id="@+id/boton_sangre_o"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/boton_sangre_ab"
+        android:layout_alignLeft="@+id/boton_sangre_ab"
+        android:layout_alignStart="@+id/boton_sangre_ab" />
+
+
+</RelativeLayout>

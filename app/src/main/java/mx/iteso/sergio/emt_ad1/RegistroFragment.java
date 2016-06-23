@@ -68,6 +68,17 @@ public class RegistroFragment extends Fragment {
         final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg2);
         final EditText telefono = (EditText) view.findViewById(R.id.telefonoNewReg);
         final EditText sangre = (EditText) view.findViewById(R.id.sangreNewReg);
+
+        sangre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Intent intent1 = new Intent(getContext(), BloodTypeSelectionActivity.class);
+                    startActivity(intent1);
+                }
+            }
+        });
+
         PassPr = passprom;
 
         /// <summary>
