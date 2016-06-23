@@ -27,8 +27,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -165,7 +167,33 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
+
+    public void sangreClick(View view) {
+        // create a Dialog component
+        final Dialog dialog = new Dialog(context);
+
+        //tell the Dialog to use the dialog.xml as it's layout description
+        dialog.setContentView(R.layout.dialog_sangre);
+        dialog.setTitle("Android Custom Dialog Box");
+
+        TextView txt = (TextView) dialog.findViewById(R.id.txt);
+        txt.setText("This is an Android custom Dialog Box Example! Enjoy!");
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButton);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    final Context context = this;
+    private Button button;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

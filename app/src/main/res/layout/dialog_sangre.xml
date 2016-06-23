@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="hola mundote"
+        android:layout_toRightOf="@+id/image"/>
+
+    <Button
+        android:id="@+id/dialogButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="picale"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/image"
+        />
+
+
+
+    <android.support.v7.widget.ListViewCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <android.support.v7.view.menu.ListMenuItemView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="holamundo"/>
+
+        </android.support.v7.view.menu.ListMenuItemView>
+
+    </android.support.v7.widget.ListViewCompat>
+
+</LinearLayout>
