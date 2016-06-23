@@ -56,37 +56,37 @@ public class EdicionFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_edicion, container, false);
 
         final EditText name = (EditText) view.findViewById(R.id.NameNewReg);
-        Name = ApiConnector.getInstance().getActiveUser().get_nombre();
+        Name = MainActivity.User.get_nombre();
         name.setHint("Nombre");
         name.setText(Name);
 
         final EditText lastname = (EditText) view.findViewById(R.id.UserLastNameNewReg);
-        LastName = ApiConnector.getInstance().getActiveUser().get_apellidopat();
+        LastName = MainActivity.User.get_apellidopat();
         lastname.setHint("Apellido paterno");
         lastname.setText(LastName);
 
         final EditText lastname2 = (EditText) view.findViewById(R.id.UserLastName2NewReg);
-        LastName2 = ApiConnector.getInstance().getActiveUser().get_apellidomat();
+        LastName2 = MainActivity.User.get_apellidomat();
         lastname2.setHint("Apellido materno");
         lastname2.setText(LastName2);
 
         final EditText telefono = (EditText) view.findViewById(R.id.telefonoNewReg);
-        Telefono = ApiConnector.getInstance().getActiveUser().get_telefono();
+        Telefono = MainActivity.User.get_telefono();
         telefono.setHint("Teléfono");
         telefono.setText(Telefono);
 
         final EditText userName = (EditText) view.findViewById(R.id.UserNameNewReg);
-        UserName = ApiConnector.getInstance().getActiveUser().get_usuario();
+        UserName = MainActivity.User.get_usuario();
         userName.setHint("Nombre de usuario (alias)");
         userName.setText(UserName);
 
         final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg2);
-        Email = ApiConnector.getInstance().getActiveUser().getCorreo();
+        Email = MainActivity.User.getCorreo();
         email.setText("Correo electrónico");
         email.setText(Email);
 
         final EditText sangre = (EditText) view.findViewById(R.id.sangreNewReg);
-        Sangre = ApiConnector.getInstance().getActiveUser().get_tipo_sangre();
+        Sangre = MainActivity.User.get_tipo_sangre();
         sangre.setHint("Tipo de sangre: "+ Sangre);
         sangre.setText(Sangre);
 
@@ -102,7 +102,7 @@ public class EdicionFragment extends Fragment {
                 LastName2 = lastname2.getText().toString();
                 Telefono = telefono.getText().toString();
 
-                ApiConnector.UserData user = ApiConnector.getInstance().getActiveUser();
+                ApiConnector.UserData user = MainActivity.User;
                 ApiConnector a = new ApiConnector();
                 ApiConnector.getInstance().setActiveUser(user);
                 a.Update(Name, LastName, LastName2, Telefono, Sangre);

@@ -566,8 +566,8 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage(ApiConnector.Message)
                         .setIcon(android.R.drawable.alert_dark_frame)
                         .show();
-                if (ApiConnector.CancelAppointmentSuccess){
-                    ApiConnector.ViewAppointmentSuccessTheresAppointment=false;
+                if (ApiConnector.CancelAppointmentSuccess) {
+                    ApiConnector.ViewAppointmentSuccessTheresAppointment = false;
                     Analisis.updateText();
                 }
             }
@@ -577,6 +577,10 @@ public class MainActivity extends AppCompatActivity {
     private void goToTest() {
         Intent intent = new Intent(this, TestActivityN.class);
         startActivity(intent);
+    }
+
+    private void goToSangreSelection() {
+        
     }
 
     void aLaGoma(){
