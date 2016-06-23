@@ -21,7 +21,7 @@ import java.util.Calendar;
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    EditText txtDate;
+    Button txtDate;
     /*public DatePickerFragment(View view){
         txtDate = (EditText)view;
     }*/
@@ -29,7 +29,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void ponerleView(View view){
-        txtDate = (EditText)view;
+        txtDate = (Button)view;
     }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -51,8 +51,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         }
         // Do something with the date chosen by the user
         String date = day + "-" + (++month) + "-" + year ;
-        txtDate.setText(date);
-        txtDate.setHint("!Agenda una visita¡");
+        //txtDate.setText("");
+        //txtDate.setText(date);
+        //txtDate.setHint("!Agenda una visita¡");
 
         String msg = "Vas a agendar una visita el día: "+ date;
         MainActivity.levantarCita(msg,view, year, month, day);

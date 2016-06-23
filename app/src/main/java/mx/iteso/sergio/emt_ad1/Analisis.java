@@ -40,16 +40,30 @@ public class Analisis extends Fragment {
     private static final int  DATE_DIALOG_ID = 0;
     private View GlobalView;
 
+    public static Button citaButton ;
+    public static TextView citaHeader ;
+    public static String citaButtonTxt = "Cargando...";
+    public static String citaHeaderTxt = "Cargando...";
+
     public Analisis() {
         // Required empty public constructor
     }
 
+    public static void updateText()
+    {
+        citaHeader.setText(citaHeaderTxt);
+        citaButton.setText(citaButtonTxt);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         GlobalView = inflater.inflate(R.layout.fragment_analisis, container, false);
+        citaHeader = (TextView) GlobalView.findViewById(R.id.citaHeader);
+        citaButton = (Button) GlobalView.findViewById(R.id.txtdate);
+        citaHeader.setText(citaHeaderTxt);
+        citaButton.setText(citaButtonTxt);
 
         //populateListView();
         /*///// Date Dialog
@@ -67,6 +81,9 @@ public class Analisis extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_analisis, container, false);
     }
+
+
+
 /*
 
     private void populateListView() {

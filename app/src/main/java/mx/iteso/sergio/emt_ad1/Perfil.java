@@ -29,8 +29,9 @@ public class Perfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ApiConnector connector = ApiConnector.getInstance();
-        ApiConnector.UserData user = connector.getActiveUser();
+        //ApiConnector connector = ApiConnector.getInstance();
+        //ApiConnector.UserData user = connector.getActiveUser();
+        ApiConnector.UserData user = MainActivity.User;
 
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
 

@@ -275,11 +275,13 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
 
+    public static ApiConnector.UserData User;
     //iniciar la sesion.
     public void login(String un, String ps){
-        final ApiConnector.UserData user;
+        //final ApiConnector.UserData user;
         final ApiConnector a = new ApiConnector();
         final ApiConnector b = new ApiConnector();
+        final ApiConnector c = new ApiConnector();
         a.Login(un, ps);
         //botonInicioSesion.setVisibility(View.VISIBLE);//arrojaba una chingada excepcion.
         final Handler handler = new Handler();
@@ -297,6 +299,8 @@ public class MainActivity extends AppCompatActivity {
                             //botonInicioSesion.setVisibility(View.VISIBLE);//hacer algo para q el usuario no le vaya a picar COMO PUERCO y vaya a tronar el app.
                             {
                                 refreshPage();//refrescara la pag.
+                                c.ViewAppointment();
+                                User = ApiConnector.getInstance().getActiveUser();
                             }
 
                             //ApiConnector.GetDataSuccess=false;
@@ -482,11 +486,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static boolean counDatePicker=false;
+    public static boolean countShit=false;
     //dialogo de fecha.
     public void showDatePickerDialog(final View view) {
         /*if (counDatePicker)
             return;
         counDatePicker=true;*/
+        /*if (countShit)
+        {
+            countShit=false;
+            return;
+        }*/
         //Checar que este logueado el usuario sino mandarlo a logearse.
         if (!ApiConnector.getInstance().isLoggedIn())
         {
@@ -526,16 +536,17 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(v.getContext())
                 .setTitle("Ya hay una cita agendada")
                 .setMessage("¿Quieres cancelar tu cita? " + ApiConnector.Message)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ahuevo, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // OK. quiere cancelar la cita a la chingada.
                         cancelarCita(v);
+                        Analisis.updateText();
                     }
                 })
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.nimadres, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Cancel. no quiere cancelar la cita.
-
+                        Analisis.updateText();
                     }
                 })
                 .setIcon(android.R.drawable.alert_dark_frame)
@@ -557,6 +568,7 @@ public class MainActivity extends AppCompatActivity {
                         .show();
                 if (ApiConnector.CancelAppointmentSuccess){
                     ApiConnector.ViewAppointmentSuccessTheresAppointment=false;
+                    Analisis.updateText();
                 }
             }
         }, 2000);

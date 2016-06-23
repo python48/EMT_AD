@@ -215,6 +215,9 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                             }else{
                                 MakeAppointmentSuccess=true;
                                 Message=value;
+                                Analisis.citaHeaderTxt = value;
+                                Analisis.citaButtonTxt = "Cancelar visita";
+                                Analisis.updateText();
                             }
                         }
 
@@ -232,9 +235,21 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                         {
                             Message = value;
                             if (value.equals("No hay cita agendada"))
+                            {
                                 ViewAppointmentSuccessTheresAppointment = false;
+                                Analisis.citaButtonTxt = "¡Agenda una visita!";
+                                Analisis.citaHeaderTxt = value;
+                                Analisis.updateText();
+                                //Analisis.citaButton.performClick();
+                            }
                             else
+                            {
                                 ViewAppointmentSuccessTheresAppointment = true;
+                                Analisis.citaHeaderTxt = "Ya tienes una visita agendada el día " + value;
+                                Analisis.citaButtonTxt = "Cancelar visita";
+                                Analisis.updateText();
+                                //Analisis.citaButton.performClick();
+                            }
                         }
                         else if (key.equals("error"))
                         {
@@ -253,6 +268,9 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                             {
                                 Message = "Se ha cancelado tu cita";
                                 CancelAppointmentSuccess=true;
+                                Analisis.citaButtonTxt = "¡Agenda una visita!";
+                                Analisis.citaHeaderTxt = "No hay cita agendada";
+                                Analisis.updateText();
                             }else if (key.equals("error"))
                             {
                                 CancelAppointmentSuccess=false;
