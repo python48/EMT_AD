@@ -109,7 +109,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Tipo de sangre. ej. a+"
+        android:hint="Tipo de sangre"
         android:id="@+id/sangreNewReg"
         android:inputType="text"
         android:layout_below="@+id/telefonoNewReg"

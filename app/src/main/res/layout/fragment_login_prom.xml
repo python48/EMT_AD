@@ -26,7 +26,7 @@
         android:layout_alignLeft="@+id/PasswordProm"
         android:layout_alignStart="@+id/PasswordProm"
         android:layout_marginBottom="30dp"
-        android:text="testuser1"
+
         android:hint="Nombre de Usuario"/>
 <!--
         android:text="testuser1"
@@ -43,7 +43,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="39dp"
         android:hint="Contraseña"
-        android:text="hola1"
+
         />
 
     <!--
