@@ -80,6 +80,8 @@ public class BloodTypeSelectionActivity extends AppCompatActivity {
     public void buttonPlusClicked(View view)
     {
         String letter = selection.substring(0,selection.length()-1);
+        if (letter.equals("C"))
+            letter = "AB";
         selection = letter + "+";
         sangreSeleccionada = (TextView) findViewById(R.id.textViewSangre);
         sangreSeleccionada.setText(selection);
@@ -87,6 +89,8 @@ public class BloodTypeSelectionActivity extends AppCompatActivity {
     public void buttonMinusClicked(View view)
     {
         String letter = selection.substring(0,selection.length()-1);
+        if (letter.equals("C"))
+            letter = "AB";
         selection = letter + "-";
         sangreSeleccionada = (TextView) findViewById(R.id.textViewSangre);
         sangreSeleccionada.setText(selection);
@@ -96,7 +100,7 @@ public class BloodTypeSelectionActivity extends AppCompatActivity {
     public void guardarCambioClicked(View view)
     {
         sangreSeleccionada = (TextView) findViewById(R.id.textViewSangre);
-        String sangre = selection;
+        String sangre = selection ;
         if (sangre.length()<=1)
         {
             new AlertDialog.Builder(view.getContext())

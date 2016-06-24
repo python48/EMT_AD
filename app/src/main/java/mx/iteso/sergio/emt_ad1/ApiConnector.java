@@ -389,6 +389,13 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         }
         if (ActiveUser.changedTipo_sangre)
         {
+            //%2B
+            String sign = sangre.substring(sangre.length()-1,sangre.length());
+            if (sign.equals("+"))
+                sign = "%2B";
+            else if(sign.equals("-"))
+                sign = "%2D";
+            sangre = sangre.substring(0,sangre.length()-1) + sign;
             chagdCount++;
             json +=
                     "{\"campo\":\"tipo_sangre\",\"valor\":\"" + sangre + "\"},";
