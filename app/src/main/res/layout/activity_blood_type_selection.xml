@@ -13,7 +13,7 @@
     <Button
         android:layout_width="80dp"
         android:layout_height="60dp"
-        android:background="@drawable/my_shape"
+        android:background="@drawable/button_alternation"
         android:textColor="@color/colorPrimary"
         android:onClick="buttonAClicked"
         android:text="A"
@@ -27,9 +27,10 @@
     <Button
         android:layout_width="80dp"
         android:layout_height="60dp"
-        android:background="@drawable/my_shape"
+        android:background="@drawable/button_alternation"
         android:textColor="@color/colorPrimary"
         android:text="+"
+        android:onClick="buttonPlusClicked"
         android:textSize="40dp"
         android:id="@+id/boton_sangre_plus"
         android:layout_marginRight="50dp"
@@ -56,6 +57,7 @@
         android:background="@drawable/my_shape"
         android:textColor="@color/colorPrimary"
         android:text="-"
+        android:onClick="buttonMinusClicked"
         android:textSize="40dp"
         android:id="@+id/boton_sangre_minus"
         android:layout_alignTop="@+id/boton_sangre_b"
@@ -87,6 +89,33 @@
         android:layout_below="@+id/boton_sangre_ab"
         android:layout_alignLeft="@+id/boton_sangre_ab"
         android:layout_alignStart="@+id/boton_sangre_ab" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/textViewSangre"
+        android:text="N/D"
+        android:layout_alignTop="@+id/boton_sangre_o"
+        android:layout_alignLeft="@+id/boton_sangre_minus"
+        android:layout_alignStart="@+id/boton_sangre_minus" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar cambio"
+        android:id="@+id/sangre_guardar_cambios"
+        android:textColor="@color/blanco"
+        android:background="@color/colorPrimary"
+        android:onClick="guardarCambioClicked"
+        android:layout_alignLeft="@+id/boton_sangre_o"
+        android:layout_alignStart="@+id/boton_sangre_o"
+        android:layout_marginTop="32dp"
+        android:layout_alignRight="@+id/textViewSangre"
+        android:layout_alignEnd="@+id/textViewSangre"
+        android:layout_below="@+id/boton_sangre_o" />
 
 
 </RelativeLayout>
