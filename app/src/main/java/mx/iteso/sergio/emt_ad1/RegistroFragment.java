@@ -24,6 +24,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.common.api.Api;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -61,18 +63,34 @@ public class RegistroFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_registro, container, false);
 
         final EditText name = (EditText) view.findViewById(R.id.NameNewReg);
+        name.setText(Name);
         final EditText username = (EditText) view.findViewById(R.id.UserNameNewReg);
+        username.setText(UserName);
         final EditText passprom = (EditText) view.findViewById(R.id.PassWordNewReg);
+        passprom.setText(Secret);
         final EditText lastname = (EditText) view.findViewById(R.id.UserLastNameNewReg);
+        lastname.setText(LastName);
         final EditText lastname2 = (EditText) view.findViewById(R.id.UserLastName2NewReg);
+        lastname2.setText(LastName2);
         final EditText email = (EditText) view.findViewById(R.id.UserEmailNewRegReg2);
+        email.setText(Email);
         final EditText telefono = (EditText) view.findViewById(R.id.telefonoNewReg);
+        telefono.setText(Telefono);
         final EditText sangre = (EditText) view.findViewById(R.id.sangreNewReg);
+        sangre.setText(Sangre);
 
         sangre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
+                    Name = name.getText().toString();
+                    UserName = username.getText().toString();
+                    Secret = passprom.getText().toString();
+                    LastName = lastname.getText().toString();
+                    LastName2 = lastname2.getText().toString();
+                    Email = email.getText().toString();
+                    Telefono = telefono.getText().toString();
+
                     Intent intent1 = new Intent(getContext(), BloodTypeSelectionActivity.class);
                     startActivity(intent1);
                 }
@@ -98,9 +116,7 @@ public class RegistroFragment extends Fragment {
                 Telefono = telefono.getText().toString();
                 Sangre = sangre.getText().toString();
 
-                ApiConnector.UserData user = ApiConnector.getInstance().getActiveUser();
-
-                //final ApiConnector b = new ApiConnector();
+                final ApiConnector b = new ApiConnector();
                 ApiConnector a = new ApiConnector();
                 a.RegisterUser(Email, UserName, Secret, Name, LastName, LastName2);
                 //esperar 3 segundos.
@@ -111,7 +127,26 @@ public class RegistroFragment extends Fragment {
                     public void run() {
                         if (ApiConnector.RegisterSuccess)//si el registro fue exitoso.
                         {
-                            printAlertConfirmed("Registro exitoso.");
+                            ApiConnector.getInstance().getActiveUser().setNombre(Name);
+                            ApiConnector.getInstance().getActiveUser().setApellidopat(LastName);
+                            ApiConnector.getInstance().getActiveUser().setApellidomat(LastName2);
+                            ApiConnector.getInstance().getActiveUser().setSecreto(Secret);
+                            ApiConnector.getInstance().getActiveUser().setUsuario(UserName);
+                            ApiConnector.getInstance().getActiveUser().setTelefono(Telefono);
+                            ApiConnector.getInstance().getActiveUser().changedTipo_sangre=true;
+                            ApiConnector.getInstance().getActiveUser().changedTelefono=true;
+
+                            b.Update(Name, LastName, LastName2, Telefono, Sangre);
+
+                            final Handler handler2 = new Handler();
+                            handler2.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //se hizo o no el update.
+                                    printAlertConfirmed("Registro exitoso.");
+
+                                }
+                            },2000);
 
                             //b[0] = a;
                             //b[0].Update("", "", "", Telefono, Sangre);
@@ -145,6 +180,9 @@ public class RegistroFragment extends Fragment {
         return view;
     }
 
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -169,6 +207,9 @@ public class RegistroFragment extends Fragment {
 
         }
     }
+
+
+
 
     private void goToMain() {
         Intent intent = new Intent(getActivity(), MainActivity.class);

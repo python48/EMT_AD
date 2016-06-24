@@ -97,11 +97,11 @@ public class BloodTypeSelectionActivity extends AppCompatActivity {
     {
         sangreSeleccionada = (TextView) findViewById(R.id.textViewSangre);
         String sangre = selection;
-        if (sangre.length()<=2)
+        if (sangre.length()<=1)
         {
             new AlertDialog.Builder(view.getContext())
                     .setTitle("Alerta")
-                    .setMessage("El tipo de sangre no quedo bien definido")
+                    .setMessage("El tipo de sangre no quedo definido")
                     .show();
             RegistroFragment.Sangre = "N/D";
         }

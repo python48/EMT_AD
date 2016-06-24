@@ -113,9 +113,9 @@
         android:layout_alignLeft="@+id/boton_sangre_o"
         android:layout_alignStart="@+id/boton_sangre_o"
         android:layout_marginTop="32dp"
-        android:layout_alignRight="@+id/textViewSangre"
-        android:layout_alignEnd="@+id/textViewSangre"
-        android:layout_below="@+id/boton_sangre_o" />
+        android:layout_below="@+id/boton_sangre_o"
+        android:layout_alignRight="@+id/boton_sangre_minus"
+        android:layout_alignEnd="@+id/boton_sangre_minus" />
 
 
 </RelativeLayout>

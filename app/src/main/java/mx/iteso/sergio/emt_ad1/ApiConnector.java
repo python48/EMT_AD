@@ -363,7 +363,6 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
     }
     public void Update(String name, String lastName, String lastName2, String telefono, String sangre){
 
-
         if (!ApiConnector.getInstance().getActiveUser().get_nombre().equals(name))
             ApiConnector.getInstance().getActiveUser().setNombre(name);
         if (!ApiConnector.getInstance().getActiveUser().get_apellidopat().equals(lastName))
