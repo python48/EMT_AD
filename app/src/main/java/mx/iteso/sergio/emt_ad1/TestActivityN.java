@@ -9,8 +9,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.Api;
+
 public class TestActivityN extends AppCompatActivity {
 
+    public static String ButtonTitle = "Regresar";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,13 +22,27 @@ public class TestActivityN extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //Iniciar la maquina de estados.
         currentState = states.INITIAL;
+
+        //Button button = (Button) findViewById(R.id.button);
+
     }
 
     states currentState;
 
     public void chingaTuMadre(View view) {
-        Intent intent1 = new Intent(this, Registro2.class);
-        startActivity(intent1);
+
+        ApiConnector.getInstance().setActiveUser(MainActivity.User);
+        if (ApiConnector.getInstance().isLoggedIn())
+        {
+            Intent intent1 = new Intent(this, MainActivity.class);
+            startActivity(intent1);
+        }
+        else
+        {
+            Intent intent1 = new Intent(this, Registro2.class);
+            startActivity(intent1);
+        }
+
     }
 
 
