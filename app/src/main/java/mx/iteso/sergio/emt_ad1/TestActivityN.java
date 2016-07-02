@@ -218,7 +218,11 @@ public class TestActivityN extends AppCompatActivity {
         startActivity(intent);*/
         //TestAprobado.HeaderTitle = "Has Aprobado";
         //TestAprobado.ButtonTitle = "Hacer registro";
-        setContentView(R.layout.fragment_test_aprobado);
+        ApiConnector.getInstance().setActiveUser(MainActivity.User);
+        if (ApiConnector.getInstance().isLoggedIn())
+            setContentView(R.layout.fragment_test_aprobado2);
+        else
+            setContentView(R.layout.fragment_test_aprobado);
     }
 
     public void res_click(View view) {
