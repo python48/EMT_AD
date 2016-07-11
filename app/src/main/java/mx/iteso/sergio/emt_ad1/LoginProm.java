@@ -39,8 +39,18 @@ public class LoginProm extends Fragment {
     }
 
     public static void updatePass(){
-        UserName = username.getText().toString();
-        Secret = passprom.getText().toString();
+        try {
+            Secret = passprom.getText().toString();
+        }catch (Exception ex)
+        {
+            Secret = "";
+        }try {
+            UserName = username.getText().toString();
+        }catch (Exception ex)
+        {
+            UserName = "";
+        }
+
     }
 
     /*
