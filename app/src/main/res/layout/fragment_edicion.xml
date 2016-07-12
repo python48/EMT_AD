@@ -90,16 +90,7 @@
         android:layout_alignParentLeft="true"
         android:editable="false"
         android:enabled="false" />
-    <!--<EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint=""
-        android:id="@+id/PassWordNewReg"
-        android:inputType="textPassword"
-        android:enabled="false"
-        android:layout_below="@+id/UserEmailNewRegReg2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />-->
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -121,6 +112,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Cambio de contraseña"
+        android:id="@+id/PassWordNewReg"
+        android:inputType="textPassword"
+        android:enabled="false"
+        android:layout_below="@+id/sangreNewReg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <!-- Botones -->
     <Button
@@ -134,6 +135,7 @@
         android:layout_below="@+id/imageView5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
 
 
 

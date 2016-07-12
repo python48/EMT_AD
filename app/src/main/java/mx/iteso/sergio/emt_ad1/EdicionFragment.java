@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -90,6 +91,18 @@ public class EdicionFragment extends Fragment {
         sangre.setHint("Tipo de sangre: " + Sangre);
         sangre.setText(Sangre);
 
+        final EditText passbox = (EditText) view.findViewById(R.id.PassWordNewReg);
+        passbox.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    //ir a la pagina de cambiar la contrasena.
+                    getActivity().setContentView(R.layout.fragment_cambio_contra);
+                }
+            }
+        });
+
+        
         /// <summary>
         /// El boton para guardar los cambios del usuario.
         /// </summary>
@@ -115,9 +128,7 @@ public class EdicionFragment extends Fragment {
                         if (ApiConnector.UpdateSuccess)//si la actualizacion fue exitosa.
                         {
                             printAlertConfirmed("Cambios guardados con éxito");
-                        }
-                        else
-                        {
+                        } else {
                             //Aqui valio verga la actualizacion por algun motivo que el mensaje del ApiConector nos indica.
                             printAlert(ApiConnector.Message + ", intente de nuevo.");
                         }
@@ -138,6 +149,9 @@ public class EdicionFragment extends Fragment {
                 startActivityForResult( i, PICK_IMAGE );
             }
         });
+
+
+
         GlobalImageView = (ImageView) view.findViewById(R.id.imageView5);
         return view;
     }
@@ -211,5 +225,6 @@ public class EdicionFragment extends Fragment {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
 
 }

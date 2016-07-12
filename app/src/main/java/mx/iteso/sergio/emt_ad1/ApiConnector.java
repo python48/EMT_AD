@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import org.json.JSONObject;
 
+import java.util.IllegalFormatCodePointException;
 import java.util.Iterator;
 
 /**
@@ -281,7 +282,24 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
                         break;
                     case CAMBIA_CONTRASENA:
 
-
+                        if (key.equals("respuesta"))
+                        {
+                            if (value.equals("exito"))
+                            {
+                                ChangePasswordSuccess = true;
+                                continue;
+                            }else if (key.equals("error"))
+                            {
+                                ChangePasswordSuccess = false;
+                            }else
+                            {
+                                ChangePasswordSuccess = false;
+                                Message = value;
+                            }
+                        }else if (key.equals("mensaje"))
+                        {
+                            Message = value ;
+                        }
 
                         break;
                     case RESETEA_CONTRASENA:
@@ -327,6 +345,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
     public static boolean MakeAppointmentSuccess = false;
     public static boolean CancelAppointmentSuccess = false;
     public static boolean ResetPasswordSuccess = false;
+    public static boolean ChangePasswordSuccess = false;
     public void RegisterUser(String Email, String UserName, String Secret, String Name, String LastName, String LastName2){
         RequestPackage p = new RequestPackage();
         p.setMethod("POST");
@@ -465,6 +484,19 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
         currentFunc = funcs.RESETEA_CONTRASENA;
         execute(p);
     }
+    public void ChangePasword(String newSecret){
+        if (!loggedIn)
+        {
+            return;
+        }
+        String json = String.format("{\"funcion\":\"cambia_contrasena\", \"codigo\":\"%s\", \"palabrasecreta\":\"%s\" } ", token, newSecret);
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        p.setParam("Info", json);
+        currentFunc = funcs.CAMBIA_CONTRASENA;
+        execute(p);
+    }
 
 
 
@@ -473,7 +505,7 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
 
 
 
-//////NESTED CLASS.
+    //////NESTED CLASS.
     public static class UserData
     {
         public UserData(){

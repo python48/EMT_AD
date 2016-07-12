@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginProm">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--<TextView
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:text="Iniciar Sesión"
+        android:id="@+id/textView6" />-->
+
+    <!--cuadros de texto-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textVisiblePassword"
+        android:ems="10"
+        android:id="@+id/NewSecret"
+        android:layout_above="@+id/ConfirmSecret"
+        android:layout_alignLeft="@+id/ConfirmSecret"
+        android:layout_alignStart="@+id/ConfirmSecret"
+        android:layout_marginBottom="30dp"
+        android:hint="Nueva contraseña"/>
+<!--
+        android:text="testuser1"
+-->
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/ConfirmSecret"
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp"
+        android:hint="Confirma contraseña"
+
+        />
+
+    <!--
+        android:text="hola1"
+-->
+
+<!--botones-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar"
+        android:id="@+id/button2"
+        android:layout_x="77dp"
+        android:layout_y="364dp"
+        android:nestedScrollingEnabled="false"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/PasswordProm"
+        android:layout_alignStart="@+id/PasswordProm"
+        android:background="#f14949"
+        android:textColor="#ffffff"
+        android:layout_alignRight="@+id/PasswordProm"
+        android:layout_alignEnd="@+id/PasswordProm" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:textColor="@color/azullink"
+        android:text="@string/forgot_password"
+        android:editable="false"
+        android:onClick="resetPasswordClick"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
