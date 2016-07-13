@@ -96,13 +96,13 @@ public class EdicionFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    //ir a la pagina de cambiar la contrasena.
+                    //Poner la pagina de cambiar la contrasena.
                     getActivity().setContentView(R.layout.fragment_cambio_contra);
                 }
             }
         });
 
-        
+
         /// <summary>
         /// El boton para guardar los cambios del usuario.
         /// </summary>
@@ -130,7 +130,7 @@ public class EdicionFragment extends Fragment {
                             printAlertConfirmed("Cambios guardados con éxito");
                         } else {
                             //Aqui valio verga la actualizacion por algun motivo que el mensaje del ApiConector nos indica.
-                            printAlert(ApiConnector.Message + ", intente de nuevo.");
+                            printAlert(ApiConnector.Message + ", intenta más tarde");
                         }
                         ApiConnector.UpdateSuccess = false;//para q pueda updatear mas adelante.
                     }
@@ -146,15 +146,14 @@ public class EdicionFragment extends Fragment {
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 //intent.setType("image/*");
                 //intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult( i, PICK_IMAGE );
+                startActivityForResult(i, PICK_IMAGE);
             }
         });
-
-
 
         GlobalImageView = (ImageView) view.findViewById(R.id.imageView5);
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -184,11 +183,7 @@ public class EdicionFragment extends Fragment {
     private void goToMain() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
-    }private void refresh() {
-        Intent intent = new Intent(getActivity(), Registro2.class);
-        startActivity(intent);
     }
-
 
     private void printAlert(String message){
         new AlertDialog.Builder(getContext())
@@ -225,6 +220,8 @@ public class EdicionFragment extends Fragment {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+
 
 
 }

@@ -16,6 +16,14 @@
         android:id="@+id/textView6" />-->
 
     <!--cuadros de texto-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textVisiblePassword"
+        android:ems="10"
+        android:layout_above="@+id/NewSecret"
+        android:layout_centerHorizontal="true" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +46,7 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/ConfirmSecret"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/confirmarButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="39dp"
         android:hint="Confirma contraseña"
@@ -53,28 +61,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar"
-        android:id="@+id/button2"
+        android:text="Confirmar cambio"
+        android:onClick=""
+        android:id="@+id/confirmarButton"
         android:layout_x="77dp"
         android:layout_y="364dp"
         android:nestedScrollingEnabled="false"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/PasswordProm"
-        android:layout_alignStart="@+id/PasswordProm"
         android:background="#f14949"
         android:textColor="#ffffff"
-        android:layout_alignRight="@+id/PasswordProm"
-        android:layout_alignEnd="@+id/PasswordProm" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:textColor="@color/azullink"
-        android:text="@string/forgot_password"
-        android:editable="false"
-        android:onClick="resetPasswordClick"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/ConfirmSecret"
+        android:layout_alignStart="@+id/ConfirmSecret"
+        android:layout_alignRight="@+id/ConfirmSecret"
+        android:layout_alignEnd="@+id/ConfirmSecret" />
 
 </RelativeLayout>

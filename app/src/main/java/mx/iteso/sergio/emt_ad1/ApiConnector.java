@@ -502,9 +502,6 @@ public class ApiConnector extends AsyncTask<RequestPackage, String, String>    {
 
 
 
-
-
-
     //////NESTED CLASS.
     public static class UserData
     {
